@@ -5,7 +5,7 @@ kind: SPECIALIST
 category: launch-experience
 visual: VISUAL
 engine: ">=0.1.0 <1.0.0"
-purpose: "Adds footer links only to legal pages that exist. Use when those pages are real. Do not link to a 404. Do not use it outside that situation."
+purpose: "Adds footer links only to legal pages that exist. Use when those pages are real. Do not use links to missing pages."
 activation:
   any:
     - capability: HAS_PUBLIC_CONTENT

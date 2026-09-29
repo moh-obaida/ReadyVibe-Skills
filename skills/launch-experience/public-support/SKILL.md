@@ -1,6 +1,6 @@
 ---
 name: public-support
-description: Checks that support and privacy contacts exist and are consistent. Use when publishing legal pages. Do not invent an email address. Do not use it outside that situation.
+description: Checks that support and privacy contacts exist and are consistent. Use when publishing legal pages. Do not use an invented email address.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # public-support
 
-Checks that support and privacy contacts exist and are consistent. Use when publishing legal pages. Do not invent an email address. Do not use it outside that situation.
+Checks that support and privacy contacts exist and are consistent. Use when publishing legal pages. Do not use an invented email address.
 
 ## When to use
 

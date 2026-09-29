@@ -5,7 +5,7 @@ kind: SPECIALIST
 category: discoverability
 visual: NON_VISUAL
 engine: ">=0.1.0 <1.0.0"
-purpose: "Checks crawlability, indexability, canonicals, robots, and sitemaps. Use when public pages you want found. Do not promise that a page will be indexed. Do not use it outside that situation."
+purpose: "Checks crawlability, indexability, canonicals, robots, and sitemaps. Use when public pages should be findable. Do not use this to promise that a page will be indexed."
 activation:
   any:
     - capability: HAS_PUBLIC_CONTENT

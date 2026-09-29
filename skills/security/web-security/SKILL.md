@@ -1,6 +1,6 @@
 ---
 name: web-security
-description: Checks secrets, sessions, and authorization clues against OWASP-style baseline controls. Use when a public launch. Do not treat a hidden admin link as authorization. Do not use it outside that situation.
+description: Checks secrets, sessions, and authorization clues against OWASP-style baseline controls. Use when preparing a public launch. Do not use a hidden admin link as authorization.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # web-security
 
-Checks secrets, sessions, and authorization clues against OWASP-style baseline controls. Use when a public launch. Do not treat a hidden admin link as authorization. Do not use it outside that situation.
+Checks secrets, sessions, and authorization clues against OWASP-style baseline controls. Use when preparing a public launch. Do not use a hidden admin link as authorization.
 
 ## When to use
 

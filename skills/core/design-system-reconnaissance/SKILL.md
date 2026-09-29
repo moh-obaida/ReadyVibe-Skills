@@ -1,6 +1,6 @@
 ---
 name: design-system-reconnaissance
-description: Records tokens, components, and layout conventions already in the project. Use when creating any visible launch or admin UI. Do not use to invent a new visual style.
+description: Records tokens, components, and layout conventions already in the project. Use when you are about to create visible launch or admin UI. Do not use to invent a new visual style.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # design-system-reconnaissance
 
-Records tokens, components, and layout conventions already in the project. Use when creating any visible launch or admin UI. Do not use to invent a new visual style.
+Records tokens, components, and layout conventions already in the project. Use when you are about to create visible launch or admin UI. Do not use to invent a new visual style.
 
 ## When to use
 

@@ -1,6 +1,6 @@
 ---
 name: security-headers
-description: Inspects response headers and proposes CSP from observed origins. Use when the vendor list is known. Do not paste a generic script-src 'self' policy. Do not use it outside that situation.
+description: Inspects response headers and proposes CSP from observed origins. Use when the vendor list is known. Do not use a generic script-src 'self' policy.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # security-headers
 
-Inspects response headers and proposes CSP from observed origins. Use when the vendor list is known. Do not paste a generic script-src 'self' policy. Do not use it outside that situation.
+Inspects response headers and proposes CSP from observed origins. Use when the vendor list is known. Do not use a generic script-src 'self' policy.
 
 ## When to use
 

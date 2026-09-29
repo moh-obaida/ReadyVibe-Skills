@@ -1,6 +1,6 @@
 ---
 name: compliance-all
-description: Selects the compliance profile. Use when privacy, consent, rights, and policy consistency. Do not force a cookie banner onto a site that does not track people. Do not use it outside that situation.
+description: Selects the compliance profile. Use when you want privacy, consent, rights, and policy consistency checked. Do not use this to force a cookie banner onto a site that does not track people.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # compliance-all
 
-Selects the compliance profile. Use when privacy, consent, rights, and policy consistency. Do not force a cookie banner onto a site that does not track people. Do not use it outside that situation.
+Selects the compliance profile. Use when you want privacy, consent, rights, and policy consistency checked. Do not use this to force a cookie banner onto a site that does not track people.
 
 ## When to use
 

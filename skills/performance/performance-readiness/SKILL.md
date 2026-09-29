@@ -1,6 +1,6 @@
 ---
 name: performance-readiness
-description: Records lab loading risks for LCP, INP, and CLS. Use when public pages. Do not promise a perfect score or invent field data. Do not use it outside that situation.
+description: Records lab loading risks for LCP, INP, and CLS. Use when checking public pages. Do not use this to promise a perfect score or invent field data.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # performance-readiness
 
-Records lab loading risks for LCP, INP, and CLS. Use when public pages. Do not promise a perfect score or invent field data. Do not use it outside that situation.
+Records lab loading risks for LCP, INP, and CLS. Use when checking public pages. Do not use this to promise a perfect score or invent field data.
 
 ## When to use
 

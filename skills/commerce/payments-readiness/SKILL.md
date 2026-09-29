@@ -1,6 +1,6 @@
 ---
 name: payments-readiness
-description: Checks payment integration mode, secrets, and webhook clues. Use when a payment provider is present. Do not store card numbers. Do not use it outside that situation.
+description: Checks payment integration mode, secrets, and webhook clues. Use when a payment provider is present. Do not use this skill to store card numbers.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # payments-readiness
 
-Checks payment integration mode, secrets, and webhook clues. Use when a payment provider is present. Do not store card numbers. Do not use it outside that situation.
+Checks payment integration mode, secrets, and webhook clues. Use when a payment provider is present. Do not use this skill to store card numbers.
 
 ## When to use
 

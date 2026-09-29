@@ -1,6 +1,6 @@
 ---
 name: data-flow-mapping
-description: Lists personal-data fields, forms, and likely recipients found in the project. Use when writing a privacy notice or a deletion flow. Do not use to decide a legal basis.
+description: Lists personal-data fields, forms, and likely recipients found in the project. Use when you are about to write a privacy notice or a deletion flow. Do not use to decide a legal basis.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # data-flow-mapping
 
-Lists personal-data fields, forms, and likely recipients found in the project. Use when writing a privacy notice or a deletion flow. Do not use to decide a legal basis.
+Lists personal-data fields, forms, and likely recipients found in the project. Use when you are about to write a privacy notice or a deletion flow. Do not use to decide a legal basis.
 
 ## When to use
 

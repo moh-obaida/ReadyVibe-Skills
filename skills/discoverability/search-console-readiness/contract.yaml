@@ -5,7 +5,7 @@ kind: SPECIALIST
 category: discoverability
 visual: NON_VISUAL
 engine: ">=0.1.0 <1.0.0"
-purpose: "Prepares verification and sitemap steps an owner must authorize. Use when public URLs exist. Do not claim a page is indexed without Search Console data. Do not use it outside that situation."
+purpose: "Prepares verification and sitemap steps an owner must authorize. Use when public URLs already exist. Do not use this to claim a page is indexed without Search Console data."
 activation:
   any:
     - capability: HAS_PUBLIC_CONTENT

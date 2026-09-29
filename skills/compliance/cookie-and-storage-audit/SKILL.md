@@ -1,6 +1,6 @@
 ---
 name: cookie-and-storage-audit
-description: Inventories cookies and other client storage and refuses to treat unknown items as essential. Use when adding or removing a consent UI. Do not use to write the privacy policy.
+description: Inventories cookies and other client storage and refuses to treat unknown items as essential. Use when you are about to add or remove a consent UI. Do not use to write the privacy policy.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # cookie-and-storage-audit
 
-Inventories cookies and other client storage and refuses to treat unknown items as essential. Use when adding or removing a consent UI. Do not use to write the privacy policy.
+Inventories cookies and other client storage and refuses to treat unknown items as essential. Use when you are about to add or remove a consent UI. Do not use to write the privacy policy.
 
 ## When to use
 

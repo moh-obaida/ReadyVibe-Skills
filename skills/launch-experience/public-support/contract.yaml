@@ -5,7 +5,7 @@ kind: SPECIALIST
 category: launch-experience
 visual: VISUAL
 engine: ">=0.1.0 <1.0.0"
-purpose: "Checks that support and privacy contacts exist and are consistent. Use when publishing legal pages. Do not invent an email address. Do not use it outside that situation."
+purpose: "Checks that support and privacy contacts exist and are consistent. Use when publishing legal pages. Do not use an invented email address."
 activation:
   any:
     - capability: HAS_PUBLIC_CONTENT

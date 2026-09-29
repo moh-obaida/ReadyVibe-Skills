@@ -1,6 +1,6 @@
 ---
 name: legal-navigation
-description: Adds footer links only to legal pages that exist. Use when those pages are real. Do not link to a 404. Do not use it outside that situation.
+description: Adds footer links only to legal pages that exist. Use when those pages are real. Do not use links to missing pages.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # legal-navigation
 
-Adds footer links only to legal pages that exist. Use when those pages are real. Do not link to a 404. Do not use it outside that situation.
+Adds footer links only to legal pages that exist. Use when those pages are real. Do not use links to missing pages.
 
 ## When to use
 

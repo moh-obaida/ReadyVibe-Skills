@@ -1,6 +1,6 @@
 ---
 name: compliance-diff
-description: Compares two reality models and lists new vendors, data elements, and routes with their launch implications. Use when a pull request or before release. Do not use as a substitute for a full recon.
+description: Compares two reality models and lists new vendors, data elements, and routes with their launch implications. Use when reviewing a pull request or a release. Do not use as a substitute for a full recon.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # compliance-diff
 
-Compares two reality models and lists new vendors, data elements, and routes with their launch implications. Use when a pull request or before release. Do not use as a substitute for a full recon.
+Compares two reality models and lists new vendors, data elements, and routes with their launch implications. Use when reviewing a pull request or a release. Do not use as a substitute for a full recon.
 
 ## When to use
 

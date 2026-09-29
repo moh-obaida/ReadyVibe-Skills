@@ -5,7 +5,7 @@ kind: SPECIALIST
 category: commerce
 visual: NON_VISUAL
 engine: ">=0.1.0 <1.0.0"
-purpose: "Checks payment integration mode, secrets, and webhook clues. Use when a payment provider is present. Do not store card numbers. Do not use it outside that situation."
+purpose: "Checks payment integration mode, secrets, and webhook clues. Use when a payment provider is present. Do not use this skill to store card numbers."
 activation:
   any:
     - capability: HAS_PUBLIC_CONTENT

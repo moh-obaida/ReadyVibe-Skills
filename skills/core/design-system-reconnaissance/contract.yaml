@@ -5,7 +5,7 @@ kind: FOUNDATION
 category: core
 visual: NON_VISUAL
 engine: ">=0.1.0 <1.0.0"
-purpose: "Records tokens, components, and layout conventions already in the project. Use when creating any visible launch or admin UI. Do not use to invent a new visual style."
+purpose: "Records tokens, components, and layout conventions already in the project. Use when you are about to create visible launch or admin UI. Do not use to invent a new visual style."
 activation:
   any:
     - capability: HAS_PUBLIC_CONTENT

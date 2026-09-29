@@ -1,6 +1,6 @@
 ---
 name: error-pages
-description: Checks that unknown URLs return a real 404 and use the product's design. Use when launch. Do not accept a pretty page served with status 200. Do not use it outside that situation.
+description: Checks that unknown URLs return a real 404 and use the product's design. Use when preparing a launch. Do not use a pretty page served with status 200 as a pass.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # error-pages
 
-Checks that unknown URLs return a real 404 and use the product's design. Use when launch. Do not accept a pretty page served with status 200. Do not use it outside that situation.
+Checks that unknown URLs return a real 404 and use the product's design. Use when preparing a launch. Do not use a pretty page served with status 200 as a pass.
 
 ## When to use
 

@@ -1,6 +1,6 @@
 ---
 name: social-sharing
-description: Checks Open Graph and share images in the raw HTML. Use when a public launch or campaign. Do not use localhost or a placeholder image.
+description: Checks Open Graph and share images in the raw HTML. Use when preparing a public launch or campaign. Do not use localhost or a placeholder image.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # social-sharing
 
-Checks Open Graph and share images in the raw HTML. Use when a public launch or campaign. Do not use localhost or a placeholder image.
+Checks Open Graph and share images in the raw HTML. Use when preparing a public launch or campaign. Do not use localhost or a placeholder image.
 
 ## When to use
 

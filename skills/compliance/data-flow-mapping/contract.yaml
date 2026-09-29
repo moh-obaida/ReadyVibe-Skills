@@ -5,7 +5,7 @@ kind: FOUNDATION
 category: compliance
 visual: NON_VISUAL
 engine: ">=0.1.0 <1.0.0"
-purpose: "Lists personal-data fields, forms, and likely recipients found in the project. Use when writing a privacy notice or a deletion flow. Do not use to decide a legal basis."
+purpose: "Lists personal-data fields, forms, and likely recipients found in the project. Use when you are about to write a privacy notice or a deletion flow. Do not use to decide a legal basis."
 activation:
   any:
     - capability: HAS_PUBLIC_CONTENT

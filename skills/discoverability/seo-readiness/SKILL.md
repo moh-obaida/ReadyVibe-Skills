@@ -1,6 +1,6 @@
 ---
 name: seo-readiness
-description: Checks crawlability, indexability, canonicals, robots, and sitemaps. Use when public pages you want found. Do not promise that a page will be indexed. Do not use it outside that situation.
+description: Checks crawlability, indexability, canonicals, robots, and sitemaps. Use when public pages should be findable. Do not use this to promise that a page will be indexed.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # seo-readiness
 
-Checks crawlability, indexability, canonicals, robots, and sitemaps. Use when public pages you want found. Do not promise that a page will be indexed. Do not use it outside that situation.
+Checks crawlability, indexability, canonicals, robots, and sitemaps. Use when public pages should be findable. Do not use this to promise that a page will be indexed.
 
 ## When to use
 

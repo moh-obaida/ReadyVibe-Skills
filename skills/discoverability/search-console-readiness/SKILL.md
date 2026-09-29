@@ -1,6 +1,6 @@
 ---
 name: search-console-readiness
-description: Prepares verification and sitemap steps an owner must authorize. Use when public URLs exist. Do not claim a page is indexed without Search Console data. Do not use it outside that situation.
+description: Prepares verification and sitemap steps an owner must authorize. Use when public URLs already exist. Do not use this to claim a page is indexed without Search Console data.
 license: Apache-2.0
 metadata:
   package: readyvibe
@@ -11,7 +11,7 @@ metadata:
 
 # search-console-readiness
 
-Prepares verification and sitemap steps an owner must authorize. Use when public URLs exist. Do not claim a page is indexed without Search Console data. Do not use it outside that situation.
+Prepares verification and sitemap steps an owner must authorize. Use when public URLs already exist. Do not use this to claim a page is indexed without Search Console data.
 
 ## When to use
 
