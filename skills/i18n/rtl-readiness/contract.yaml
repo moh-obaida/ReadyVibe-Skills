@@ -1,0 +1,27 @@
+name: rtl-readiness
+version: 0.1.0
+contract: 1
+kind: SPECIALIST
+category: i18n
+visual: VISUAL
+engine: ">=0.1.0 <1.0.0"
+purpose: "Checks dir, logical CSS, and Arabic layout. Use when an RTL locale is served. Do not mirror non-directional icons. Do not use it outside that situation."
+activation:
+  any:
+    - capability: HAS_PUBLIC_CONTENT
+consumes: [model.routes]
+produces: [findings]
+controlsOwned: []
+mutation:
+  mayCreate: []
+  mayModify: []
+  mustNotModify: []
+questions: []
+verification:
+  personas: [first-visit]
+  probes: [recon]
+failure:
+  onVerificationFail: report-only
+  onMissingInputs: report-unknown
+legalReviewTriggers: []
+bundles: []

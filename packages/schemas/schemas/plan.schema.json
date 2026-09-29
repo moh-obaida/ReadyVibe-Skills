@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile", "selected", "skipped"],
+  "properties": {
+    "profile": { "type": "string" },
+    "selected": { "type": "array" },
+    "skipped": { "type": "array" },
+    "waves": { "type": "array" }
+  }
+}

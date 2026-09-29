@@ -1,0 +1,81 @@
+{
+  "$id": "https://readyvibe.dev/schemas/findings.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["findings"],
+  "properties": {
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "fingerprint",
+          "controlId",
+          "controlVersion",
+          "ownerSkill",
+          "title",
+          "domain",
+          "status",
+          "severity",
+          "confidence",
+          "category",
+          "summary",
+          "whyItMatters",
+          "evidence",
+          "remediation",
+          "tags"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "fingerprint": { "type": "string" },
+          "controlId": { "type": "string" },
+          "controlVersion": { "type": "integer" },
+          "ownerSkill": { "type": "string" },
+          "title": { "type": "string" },
+          "domain": { "type": "string" },
+          "status": {
+            "enum": ["PASS", "FAIL", "WARNING", "NOT_APPLICABLE", "LEGAL_REVIEW_REQUIRED", "UNKNOWN"]
+          },
+          "severity": { "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW", "INFO"] },
+          "confidence": { "enum": ["CONFIRMED", "HIGH", "MEDIUM", "LOW", "UNKNOWN"] },
+          "category": { "type": "string" },
+          "summary": { "type": "string" },
+          "whyItMatters": { "type": "string" },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id"],
+              "properties": { "id": { "type": "string" } }
+            }
+          },
+          "remediation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "plan"],
+            "properties": {
+              "type": {
+                "enum": [
+                  "AUTOMATIC_SAFE_FIX",
+                  "AUTOMATIC_WITH_VERIFICATION",
+                  "OWNER_INPUT_REQUIRED",
+                  "LEGAL_REVIEW_REQUIRED",
+                  "MANUAL_ENGINEERING_REQUIRED"
+                ]
+              },
+              "plan": { "type": "string" }
+            }
+          },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "obligations": { "type": "array" },
+          "legalReview": { "type": "object" },
+          "unknown": { "type": "object" },
+          "caveats": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+name: data-flow-mapping
+version: 0.1.0
+contract: 1
+kind: FOUNDATION
+category: compliance
+visual: NON_VISUAL
+engine: ">=0.1.0 <1.0.0"
+purpose: "Lists personal-data fields, forms, and likely recipients found in the project. Use when writing a privacy notice or a deletion flow. Do not use to decide a legal basis."
+activation:
+  any:
+    - capability: HAS_PUBLIC_CONTENT
+consumes: [model.routes]
+produces: [findings]
+controlsOwned: []
+mutation:
+  mayCreate: []
+  mayModify: []
+  mustNotModify: []
+questions: []
+verification:
+  personas: [first-visit]
+  probes: [recon]
+failure:
+  onVerificationFail: report-only
+  onMissingInputs: report-unknown
+legalReviewTriggers: []
+bundles: []

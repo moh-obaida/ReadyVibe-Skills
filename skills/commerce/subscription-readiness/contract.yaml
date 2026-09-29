@@ -1,0 +1,27 @@
+name: subscription-readiness
+version: 0.1.0
+contract: 1
+kind: SPECIALIST
+category: commerce
+visual: NON_VISUAL
+engine: ">=0.1.0 <1.0.0"
+purpose: "Checks renewal disclosure and cancellation path. Use when billing recurs. Do not apply this to a site that does not sell subscriptions. Do not use it outside that situation."
+activation:
+  any:
+    - capability: HAS_PUBLIC_CONTENT
+consumes: [model.routes]
+produces: [findings]
+controlsOwned: []
+mutation:
+  mayCreate: []
+  mayModify: []
+  mustNotModify: []
+questions: []
+verification:
+  personas: [first-visit]
+  probes: [recon]
+failure:
+  onVerificationFail: report-only
+  onMissingInputs: report-unknown
+legalReviewTriggers: []
+bundles: []

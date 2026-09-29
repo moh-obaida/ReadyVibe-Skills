@@ -1,0 +1,24 @@
+id: EU-EPRIVACY.ART5_3.STORAGE_ACCESS_CONSENT
+pack: eu-eprivacy
+category: LEGAL_REQUIREMENT
+title: Device storage or access needs consent unless strictly necessary
+requirement: >
+  Paraphrase only. Read Article 5(3) of Directive 2002/58/EC from the official source record.
+  This obligation stays PROVISIONAL until a review record covers its version and source snapshot.
+authorities:
+  - source: eu.dir-2002-58
+    provision: document
+    kind: STATUTE
+temporal:
+  effectiveFrom: null
+  basis:
+    - source: eu.dir-2002-58
+      provision: document
+  sourceAsOf: "2026-09-29"
+specialistAreas: []
+version: 1
+nextReviewBy: "2027-03-01"
+family: consent.device-storage
+satisfiedBy:
+  - control: CONSENT.PRE_CONSENT_NONESSENTIAL
+    expect: PASS

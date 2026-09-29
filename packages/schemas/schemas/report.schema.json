@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["launchState", "counts", "findings", "evaluatedAsOf"],
+  "properties": {
+    "launchState": {
+      "enum": ["BLOCKED", "CONDITIONALLY_READY", "READY_WITH_REVIEW_ITEMS", "TECHNICALLY_READY"]
+    },
+    "launchStateConditions": { "type": "array", "items": { "type": "string" } },
+    "counts": { "type": "object" },
+    "findings": { "type": "array" },
+    "evaluatedAsOf": { "type": "string" },
+    "questions": { "type": "array" },
+    "notChecked": { "type": "array" },
+    "degraded": { "type": "boolean" },
+    "markdown": { "type": "string" }
+  }
+}

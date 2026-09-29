@@ -1,0 +1,27 @@
+name: performance-readiness
+version: 0.1.0
+contract: 1
+kind: SPECIALIST
+category: performance
+visual: NON_VISUAL
+engine: ">=0.1.0 <1.0.0"
+purpose: "Records lab loading risks for LCP, INP, and CLS. Use when public pages. Do not promise a perfect score or invent field data. Do not use it outside that situation."
+activation:
+  any:
+    - capability: HAS_PUBLIC_CONTENT
+consumes: [model.routes]
+produces: [findings]
+controlsOwned: []
+mutation:
+  mayCreate: []
+  mayModify: []
+  mustNotModify: []
+questions: []
+verification:
+  personas: [first-visit]
+  probes: [recon]
+failure:
+  onVerificationFail: report-only
+  onMissingInputs: report-unknown
+legalReviewTriggers: []
+bundles: []

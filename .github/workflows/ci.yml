@@ -1,0 +1,21 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm -r --filter @readyvibe/schemas --filter @readyvibe/engine --filter @readyvibe/cli --filter @readyvibe/skill-lint exec tsc -p tsconfig.json --noEmit
+      - run: pnpm test
+      - run: pnpm --filter @readyvibe/skill-lint exec tsc -p tsconfig.json
+      - run: node tools/skill-lint/dist/cli.js .

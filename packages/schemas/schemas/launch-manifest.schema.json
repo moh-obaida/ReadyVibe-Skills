@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "verification", "packs"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "project": { "type": "object" },
+    "verification": { "type": "object" },
+    "packs": { "type": "array" },
+    "languages": { "type": "array" },
+    "vendors": { "type": "array" },
+    "consent": { "type": "object" }
+  }
+}

@@ -1,0 +1,14 @@
+ReadyVibe
+Copyright 2026 ReadyVibe contributors
+
+This product is licensed under the Apache License, Version 2.0, except for
+original templates and catalog-style data under CC0-1.0 (see LICENSES/CC0-1.0.txt)
+when those directories exist:
+
+- skills/**/assets/clauses/**
+- skills/**/assets/templates/**
+- vendor-catalog/**
+
+Statutes, regulations, regulator guidance, and standards are not relicensed.
+They are cited from official sources. Short excerpts, if any, stay in
+Apache-licensed rule files and are not part of the CC0 grant.

@@ -1,0 +1,27 @@
+name: security-headers
+version: 0.1.0
+contract: 1
+kind: SPECIALIST
+category: security
+visual: NON_VISUAL
+engine: ">=0.1.0 <1.0.0"
+purpose: "Inspects response headers and proposes CSP from observed origins. Use when the vendor list is known. Do not paste a generic script-src 'self' policy. Do not use it outside that situation."
+activation:
+  any:
+    - capability: HAS_PUBLIC_CONTENT
+consumes: [model.routes]
+produces: [findings]
+controlsOwned: []
+mutation:
+  mayCreate: []
+  mayModify: []
+  mustNotModify: []
+questions: []
+verification:
+  personas: [first-visit]
+  probes: [recon]
+failure:
+  onVerificationFail: report-only
+  onMissingInputs: report-unknown
+legalReviewTriggers: []
+bundles: []

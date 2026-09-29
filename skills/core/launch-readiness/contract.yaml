@@ -1,0 +1,27 @@
+name: launch-readiness
+version: 0.1.0
+contract: 1
+kind: ORCHESTRATOR
+category: core
+visual: NON_VISUAL
+engine: ">=0.1.0 <1.0.0"
+purpose: "Plans a launch-readiness run, selects applicable specialists, and writes the engine report. Use when you want one coordinated pass before a public launch. Do not use to perform a single specialist's work; install that skill instead."
+activation:
+  any:
+    - capability: HAS_PUBLIC_CONTENT
+consumes: [model.routes]
+produces: [findings]
+controlsOwned: []
+mutation:
+  mayCreate: []
+  mayModify: []
+  mustNotModify: []
+questions: []
+verification:
+  personas: [first-visit]
+  probes: [recon]
+failure:
+  onVerificationFail: report-only
+  onMissingInputs: report-unknown
+legalReviewTriggers: []
+bundles: []

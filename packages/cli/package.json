@@ -1,0 +1,23 @@
+{
+  "name": "@readyvibe/cli",
+  "version": "0.1.0",
+  "description": "Command-line interface for the ReadyVibe launch-readiness engine.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "bin": { "readyvibe": "./dist/cli.js" },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@readyvibe/engine": "workspace:*",
+    "@readyvibe/schemas": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

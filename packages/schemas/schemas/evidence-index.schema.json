@@ -1,0 +1,6 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["evidence"],
+  "properties": { "evidence": { "type": "array" } }
+}

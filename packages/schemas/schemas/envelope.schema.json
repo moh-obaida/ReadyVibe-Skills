@@ -1,0 +1,38 @@
+{
+  "$id": "https://readyvibe.dev/schemas/envelope.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "kind", "producer", "runId", "createdAt", "contentHash", "data"],
+  "properties": {
+    "schemaVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "kind": {
+      "enum": [
+        "reality-model",
+        "evidence-index",
+        "findings",
+        "plan",
+        "questions",
+        "ledger",
+        "report",
+        "launch-manifest",
+        "baseline",
+        "config"
+      ]
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "type"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "type": { "enum": ["ENGINE", "SKILL", "OWNER"] }
+      }
+    },
+    "runId": { "type": ["string", "null"] },
+    "createdAt": { "type": "string", "minLength": 10 },
+    "contentHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "data": {},
+    "extensions": { "type": "object" }
+  }
+}

@@ -1,0 +1,13 @@
+id: eu.dir-2002-58
+kind: STATUTE
+title: Directive 2002/58/EC on privacy and electronic communications
+publisher: EUR-Lex
+officialUrl: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32002L0058
+identifiers:
+  celex: "32002L0058"
+legalStatus: IN_FORCE
+granularity: DOCUMENT
+excerptPolicy:
+  allowed: true
+  maxCharsPerExcerpt: 300
+  attribution: "Source: EUR-Lex"

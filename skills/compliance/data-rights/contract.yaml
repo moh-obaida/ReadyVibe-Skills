@@ -1,0 +1,27 @@
+name: data-rights
+version: 0.1.0
+contract: 1
+kind: SPECIALIST
+category: compliance
+visual: NON_VISUAL
+engine: ">=0.1.0 <1.0.0"
+purpose: "Traces deletion, export, and other rights against stored data. Use when accounts or a policy promise those rights. Do not describe active=false as permanent deletion. Do not use it outside that situation."
+activation:
+  any:
+    - capability: HAS_PUBLIC_CONTENT
+consumes: [model.routes]
+produces: [findings]
+controlsOwned: []
+mutation:
+  mayCreate: []
+  mayModify: []
+  mustNotModify: []
+questions: []
+verification:
+  personas: [first-visit]
+  probes: [recon]
+failure:
+  onVerificationFail: report-only
+  onMissingInputs: report-unknown
+legalReviewTriggers: []
+bundles: []

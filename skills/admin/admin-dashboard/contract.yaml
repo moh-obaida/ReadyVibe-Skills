@@ -1,0 +1,27 @@
+name: admin-dashboard
+version: 0.1.0
+contract: 1
+kind: SPECIALIST
+category: admin
+visual: VISUAL
+engine: ">=0.1.0 <1.0.0"
+purpose: "Builds admin screens from real models and operations, reusing the current design system. Use when operators need to manage users, content, or requests. Do not invent metrics or charts. Do not use it outside that situation."
+activation:
+  any:
+    - capability: HAS_PUBLIC_CONTENT
+consumes: [model.routes]
+produces: [findings]
+controlsOwned: []
+mutation:
+  mayCreate: []
+  mayModify: []
+  mustNotModify: []
+questions: []
+verification:
+  personas: [first-visit]
+  probes: [recon]
+failure:
+  onVerificationFail: report-only
+  onMissingInputs: report-unknown
+legalReviewTriggers: []
+bundles: []

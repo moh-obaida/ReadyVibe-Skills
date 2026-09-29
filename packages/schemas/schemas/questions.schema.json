@@ -1,0 +1,27 @@
+{
+  "$id": "https://readyvibe.dev/schemas/questions.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["questions"],
+  "properties": {
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "configKey", "text", "why", "kind", "allowUnsure", "blocking", "group", "askedBy"],
+        "properties": {
+          "id": { "type": "string" },
+          "configKey": { "type": "string" },
+          "text": { "type": "string" },
+          "why": { "type": "string" },
+          "kind": { "enum": ["TEXT", "EMAIL", "BOOLEAN", "CHOICE", "NUMBER"] },
+          "allowUnsure": { "const": true },
+          "blocking": { "type": "boolean" },
+          "group": { "type": "string" },
+          "askedBy": { "type": "string" }
+        }
+      }
+    }
+  }
+}
