@@ -4,6 +4,7 @@ description: "Use when a product stores or processes personal data and you need 
 license: Apache-2.0
 metadata:
   kind: specialist
+  helpers: "observe-runtime"
   launch-checks: "1,7"
   compliance-domains: "2,6"
   references: "official-sources"
@@ -33,7 +34,7 @@ Companions: `data-flow-mapping`.
 3. **Access control on the data.** Row-level security or authorization checks on reads/writes of personal data; per-user scoping of queries; admin views (`admin-authorization`).
 4. **Retention signals.** Cleanup jobs, TTLs, soft-delete flags never purged, backups, logs. "We keep data for X" claims vs code (`policy-consistency`). If nothing removes data, the honest state is "indefinite by default".
 5. **Secrets and tokens** stored in user-visible places (`web-security`).
-6. **Runtime spot-check** on staging: create a test account, submit planted data (`observe-runtime --canary`), and look for it in URLs, third-party requests, and API responses.
+6. **Runtime spot-check** on staging: create a test account, submit planted data (`node scripts/observe-runtime.mjs --url <staging-url> --canary --steps form.json`, path relative to this skill's folder), and look for it in URLs, third-party requests, and API responses.
 
 ## Evidence that counts
 

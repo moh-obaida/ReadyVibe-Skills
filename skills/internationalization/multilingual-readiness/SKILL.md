@@ -7,6 +7,7 @@ metadata:
   compliance-domains: "1,12"
   launch-checks: "18,9"
   helpers: "inspect-metadata"
+  companions: "design-system-reconnaissance"
 ---
 
 # multilingual-readiness
@@ -18,6 +19,12 @@ A language switcher that leads to half-translated pages, or a privacy policy onl
 - The site has a language/locale switcher, locale-prefixed routes, translation files (i18n libs), or `hreflang`.
 - Markets are being expanded (also update `jurisdiction-applicability`).
 - Not for single-language sites (say so).
+
+## Working alone
+
+This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
+
+Companions: `design-system-reconnaissance`.
 
 ## Inspect
 
@@ -37,6 +44,8 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - Translation *quality* needs a fluent speaker: UNKNOWN unless the owner confirms.
 
 ## May change
+
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
 Set `lang`/`dir`, `hreflang`, per-locale canonicals and sitemap entries; fix switcher behavior and fallbacks; expose missing-key strings for the owner; link the legal pages that exist per language. Do not machine-translate legal pages or marketing copy into production without the owner's approval; mark drafts clearly if requested.
 

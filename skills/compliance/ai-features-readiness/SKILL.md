@@ -8,6 +8,7 @@ metadata:
   launch-checks: "38"
   helpers: "scan-secrets"
   references: "official-sources"
+  companions: "design-system-reconnaissance"
 ---
 
 # ai-features-readiness
@@ -18,6 +19,12 @@ AI features fail launch in predictable ways: an API key in the browser bundle, u
 
 - Source calls a model API (OpenAI, Anthropic, Gemini, Mistral, Replicate, Hugging Face, Vercel AI SDK, LangChain, etc.), embeds an AI widget, or the copy mentions AI/assistant/copilot/generated.
 - Not when there is no AI feature (say so and stop).
+
+## Working alone
+
+This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
+
+Companions: `design-system-reconnaissance`.
 
 ## Inspect
 
@@ -39,6 +46,8 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
+
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
 Move the provider call to a server route; read the key from server env; add basic auth/rate limiting and max-token caps where the project has a pattern; escape/sanitize rendered output; add a user-visible "AI-generated" note and a human contact route the owner has; correct disclosure to name the provider and data sent. Never rotate or use a key; never add a generic "AI may be wrong" banner where no user-facing AI exists.
 

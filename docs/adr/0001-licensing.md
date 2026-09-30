@@ -1,17 +1,19 @@
 # ADR 0001: Licensing
 
-Status: accepted (2026-09-28), restated for the current model (2026-09-30)
+Status: accepted (2026-09-28), simplified for v1.0.0 (2026-09-30)
 
 ## Decision
 
+**Everything in this repository is Apache-2.0** (`LICENSE`): the skills (`SKILL.md`, `references/`), helper scripts, tools, tests, fixtures, and documentation. Apache-2.0 gives users an explicit patent grant and lets them use and adapt the skills freely.
+
 | Material | License |
 | --- | --- |
-| Skills (`SKILL.md`, `references/`), helper scripts, tools, tests, fixtures, and documentation | **Apache-2.0** (explicit patent grant) |
-| Original reusable templates or clause text, if any are added under `skills/**/assets/templates/**` or `skills/**/assets/clauses/**`, so users can publish generated pages without attribution | **CC0-1.0** (`LICENSES/CC0-1.0.txt`) |
-| Outputs a skill generates inside a user's project | No rights claimed by ReadyVibe |
-| Statutes, regulations, regulator guidance, and standards | **Not relicensed and not stored.** Skills point to official sources and the running agent reads the current text there (`docs/references/official-sources.md`) |
+| Skills, helpers, tools, tests, fixtures, docs | Apache-2.0 |
+| Content a skill generates inside a user's project | No rights claimed by ReadyVibe |
+| Statutes, regulations, regulator guidance, standards | Not copied, not stored, not relicensed. Skills cite official sources and the running agent reads the current text there (`docs/references/official-sources.md`) |
 
 ## Consequences
 
-- CC0 paths must contain no excerpts of authoritative material.
+- No separate license applies to any part of the repository. (An earlier plan for CC0 templates was dropped because no such templates exist.)
 - Nothing is published to npm, so there is no package license to manage (see ADR 0002).
+- Skills must not embed quoted statutory or standards text beyond a short excerpt needed to explain a point.

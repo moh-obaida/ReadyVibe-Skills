@@ -32,7 +32,17 @@ Companions: `cookie-and-storage-audit`, `design-system-reconnaissance`.
 1. **Inventory and timing.** Use the inventory from `cookie-and-storage-audit`; if none exists, run `node scripts/observe-runtime.mjs --url <site>` and read the `initial` snapshot (paths relative to this skill's folder).
 2. **Applicability.** Read `.readyvibe/context.md` if present. If a rule decides whether gating is needed, look up the current requirement at an official source while you run (`references/official-sources.md`), cite it with the access date, and treat whether it applies to this business as REVIEW REQUIRED. Record: markets (DECLARED/INFERRED/UNKNOWN), the source you read and what it says about these technologies. **If you could not consult a source, applicability stays UNKNOWN / REVIEW REQUIRED**; do not supply it from memory. You can still verify behavior.
 3. **The control, if one exists.** Read the implementation: where the choice is stored, what reads it, which scripts are gated and how (conditional loading vs. only hiding UI), whether default state is "off" for optional technologies, whether reject is as easy as accept (same screen, similar prominence, no pre-ticked boxes), whether the choice can be revisited.
-4. **Behavior, in a fresh browser context per path** (see `cookie-and-storage-audit` for step files):
+4. **Behavior, in a fresh browser context per path.** Write a steps file (a JSON array) and run `node scripts/observe-runtime.mjs --url <site> --steps consent-reject.json --settle 2000`. Use the button labels the first run printed ("Consent-like UI detected: ... buttons [...]"):
+
+   ```json
+   [
+     {"do":"click","text":"Reject"},
+     {"do":"snapshot","label":"after-reject","expect":"no-new-nonessential"},
+     {"do":"reload"},
+     {"do":"snapshot","label":"after-reject-reload","expect":"no-new-nonessential"}
+   ]
+   ```
+   Each run starts from a clean browser, so one choice does not contaminate another. Add `--block-third-party` to see what the page *attempts* without sending real traffic to vendors (omit it on a staging origin when follow-on behavior matters, such as a tag manager loading more tags). The paths:
    - **Before choice:** what fired at load? (`initial` snapshot)
    - **Reject:** click reject; `snapshot` with `"expect":"no-new-nonessential"`; `reload`; snapshot again. The choice must persist and stay effective.
    - **Accept:** click accept; `snapshot` with `"expect":"some-tracking"`. Accepting should actually enable the intended behavior. A broken Accept is also a defect.

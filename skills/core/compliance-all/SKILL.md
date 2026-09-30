@@ -4,6 +4,7 @@ description: "Use when a site or app needs a privacy, consent, communications, a
 license: Apache-2.0
 metadata:
   kind: bundle
+  helpers: "observe-runtime,inventory-data-model"
   launch-checks: "1-8"
   compliance-domains: "1-12"
   references: "official-sources"
@@ -35,7 +36,7 @@ Start with domain 1, because it gates everything else.
 
 1. **Establish context** (reuse `.readyvibe/context.md` if present; otherwise `site-reconnaissance`): what personal data flows, what loads, who the audience is, what markets are *documented*.
 2. **Run `jurisdiction-applicability`** to record markets as DECLARED / INFERRED / UNKNOWN, and which official sources apply to look up (`references/official-sources.md`). A source you could not consult means UNKNOWN / REVIEW REQUIRED; technical checks still proceed.
-3. **Take an inventory** with a single runtime pass where possible: `observe-runtime` via `cookie-and-storage-audit`, and static `data-flow-mapping` for forms and recipients. Every later domain reuses this inventory.
+3. **Take an inventory once.** Runtime: `node scripts/observe-runtime.mjs --url <site> --block-third-party` (paths relative to this skill's folder) records cookies, storage, and third parties before any interaction; extend it with a steps file for reject/accept (this is the `cookie-and-storage-audit` method). Static: `node scripts/inventory-data-model.mjs --root .` lists stored personal data, and the forms and recipients you find complete the `data-flow-mapping` picture. Every later domain reuses this inventory.
 4. **Select domains** from the table. Activate a domain only when its "Applies when" evidence is present, and record the reason for every domain you do not activate.
 
 | Domain | Specialist(s) | Skip when (record the observed reason) |
@@ -52,7 +53,7 @@ Start with domain 1, because it gates everything else.
 | 10 Security / production | web-security, security-headers, deployment-cleanup | never skipped once deployed |
 | 11 Regulated-domain triggers | regulated-domain-triggers (plus ai-features-readiness when models are called) | product language, fields, and features touch no regulated domain |
 | 12 Legal identity / IP / notices | legal-identity-notices, public-support, legal-navigation | never skipped for a public product |
-| 1-8 launch pages | privacy-policy, terms-of-service | see each skill's "No change is valid" section |
+| Legal pages (launch checks 1 and 2) | privacy-policy, terms-of-service | privacy notice: nothing personal is collected, stored, or sent; terms: no accounts, user content, purchases, or commitments (see each skill's "No change is valid" section) |
 
 Do not invoke a specialist merely to find out that nothing exists. If recon already shows the surface is absent, record "not currently applicable, because …, recheck if …".
 

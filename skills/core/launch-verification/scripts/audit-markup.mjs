@@ -9,7 +9,7 @@
 import { parseArgs } from "node:util";
 import { emit, finding, usageError } from "./lib/report.mjs";
 import { accessibleName, closest, findAll, findFirst, metaContent, parseHtml, textOf } from "./lib/html.mjs";
-import { loadSite } from "./lib/pages.mjs";
+import { loadSite, siteNotRead } from "./lib/pages.mjs";
 
 const { values: args } = parseArgs({
   options: {
@@ -27,6 +27,8 @@ if (!args.url && !args.dir) usageError("Usage: audit-markup.mjs --url <site> | -
 const site = await loadSite({ url: args.url, dir: args.dir, render: args.render, maxPages: Number(args["max-pages"]), timeoutMs: Number(args.timeout), chromePath: args["chrome-path"] }).catch((e) => usageError(e.message));
 const findings = [];
 const notes = [...site.notes, "Static/rendered markup scan only. It does not prove WCAG conformance, keyboard access, contrast, focus behavior, or responsive layout."];
+const unread = siteNotRead(site);
+if (unread) findings.push(unread);
 const GENERIC_LINK = /^(click here|here|read more|learn more|more|link|this|details|continue)$/i;
 const FILENAME_ALT = /^(img|image|photo|picture|screenshot|dsc|untitled)?[\s_-]*\d*\.?(png|jpe?g|gif|webp|svg|avif)?$|\.(png|jpe?g|gif|webp|svg|avif)$/i;
 const PLACEHOLDER_TEXT = [

@@ -27,7 +27,7 @@ Do forms actually deliver, does unsubscribe work and suppress, are secrets or st
 Read `package.json`, framework config, routes, environment templates, and dependencies for auth, payments, email, analytics, forms, user content, and third parties. Record audience and markets only when documented. Label evidence; ask the owner only for facts that change the outcome, at most three at once.
 
 ### design-system-reconnaissance
-Find the project's tokens (CSS variables, Tailwind config, theme files), reusable components, layout shell, type scale, spacing, dark mode, and voice. View rendered pages at desktop and 375px. Build new UI from these; never introduce a new style or UI kit.
+Find the project's tokens (CSS variables, Tailwind config, theme files), reusable components, layout shell, type scale, spacing, dark mode, and voice. View rendered pages at desktop and 375px. Build new UI by the component ladder: reuse an existing component; compose existing components; extend an existing primitive; only then create a new component that matches its neighbors. Match behavior patterns (dialogs, validation, empty states, dark mode, RTL) as well as looks. Never introduce a new style, UI kit, or icon set.
 
 ### launch-verification
 Re-run the original check that exposed each problem, under the same conditions, plus one adjacent regression check. A fix without a re-check is unverified. Report a scoped verdict (not ready / ready with caveats / no blockers found in the areas verified), never a bare "ready".

@@ -55,7 +55,7 @@ Only `.readyvibe/context.md` (Markets section). If the owner states markets, rec
 
 ## Verify
 
-Check that every specialist that used a jurisdiction-dependent decision cites the market record and its limits. Check the record was updated after any market-related change (new locale, currency, region).
+Confirm every official source you cite was actually opened during this run (name, URL, access date) and that you separated what it says from your interpretation of it. Check that every specialist that used a jurisdiction-dependent decision cites the market record and its limits. Check the record was updated after any market-related change (new locale, currency, region).
 
 ## Escalate
 

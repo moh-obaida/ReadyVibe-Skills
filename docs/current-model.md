@@ -25,11 +25,13 @@ skills/<category>/<name>/SKILL.md      the product: one self-contained folder pe
 scripts/                canonical helper scripts (inspect-metadata, check-links, audit-markup,
                         audit-assets, scan-secrets, observe-runtime, inventory-data-model)
                         and their small lib/
-docs/references/        canonical shared reference docs (official-sources)
-tools/                  sync-skills.mjs (vendoring) and lint-skills.mjs (quality checks)
+docs/references/        canonical shared references (official-sources, companion-methods)
+tools/                  sync-skills.mjs (vendoring and generation), lint-skills.mjs (quality checks),
+                        verify-public-install.mjs (checks the real GitHub remote and release tags)
 tests/                  helper tests, lint tests, installability tests
 fixtures/               synthetic sites and projects with planted defects
-docs/                   this document, skill-layout.md, ADRs, archive/
+docs/                   this document, skill-layout.md, release-checklist.md, releases/, ADRs, archive/
+CHANGELOG.md            what changed in each release (SemVer; the repository tag is the version)
 ```
 
 Categories: `core` (entry bundles and foundations), `compliance`, `accessibility`, `discoverability`, `quality`, `security`, `admin`, `internationalization`, `commerce`.
@@ -63,8 +65,12 @@ Small, zero-dependency Node scripts that exist only because they make a specific
 
 **Rule of thumb:** if a 150-line script makes a skill better, keep it. If we are building thousands of lines of infrastructure so a script can call an engine, stop.
 
+## Releases
+
+The repository is the distributed product. A release is an annotated SemVer tag (`vX.Y.Z`) plus a GitHub Release, and users can pin installs with `npx skills add moh-obaida/ReadyVibe-Skills#vX.Y.Z`. [`docs/release-checklist.md`](release-checklist.md) is the procedure; patch, minor, and major mean what `CONTRIBUTING.md` says. Nothing is published to npm.
+
 ## Checks
 
-`pnpm check` runs: vendored copies in sync, skill lint (structure, sections, evidence vocabulary, no platform dependency, design-first, official sources, helper declarations, 40/12 coverage, no package/platform creep), helper tests (fixtures, local servers, real headless Chromium, no model calls), and installability tests (`npx skills add` discovery, install, and running installed helpers alone).
+`pnpm check` runs: vendored and generated copies in sync; skill lint (structure, sections, evidence vocabulary, companions, helpers named, carried, and called with real flags, cited finding codes, design-first, official sources, 40/12 coverage, secrets, and a no-package/no-platform guard); helper tests (fixtures, local servers, real headless Chromium, no model calls); and installability tests (`npx skills add` discovery, isolated installs of individual skills, and running installed helpers alone). In CI the Skills CLI and browser tests are mandatory, and after every push a job installs from the real GitHub ref with `tools/verify-public-install.mjs`.
 
 Behavior of a real coding agent following the skills is **not** tested here; that needs a model-consuming evaluation, which is outside these automated checks.

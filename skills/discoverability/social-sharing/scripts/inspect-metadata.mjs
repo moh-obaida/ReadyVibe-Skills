@@ -10,7 +10,7 @@
 import { parseArgs } from "node:util";
 import { emit, finding, usageError } from "./lib/report.mjs";
 import { findAll, findFirst, metaContent, parseHtml, textOf } from "./lib/html.mjs";
-import { extractLocs, fetchWithRetry, loadSite, normalizePath } from "./lib/pages.mjs";
+import { extractLocs, fetchWithRetry, loadSite, normalizePath, siteNotRead } from "./lib/pages.mjs";
 
 const { values: args } = parseArgs({
   options: {
@@ -47,6 +47,8 @@ const site = await loadSite({
 
 const findings = [];
 const notes = [...site.notes];
+const unread = siteNotRead(site);
+if (unread) findings.push(unread);
 const add = (code, severity, evidence, message, extra) => findings.push(finding(code, severity, evidence, message, extra));
 const pages = site.pages.filter((p) => p.status === 200 && p.html);
 if (pages.length === 0) notes.push("No HTML pages could be read. Check the URL/directory, or use --render for client-rendered sites.");

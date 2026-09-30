@@ -7,6 +7,7 @@ metadata:
   compliance-domains: "7"
   launch-checks: "2,35"
   references: "official-sources"
+  companions: "design-system-reconnaissance"
 ---
 
 # subscription-readiness
@@ -17,6 +18,12 @@ Recurring billing is where good products lose trust: a free trial that quietly c
 
 - Plans renew, trials convert, seats/usage are billed periodically, or "cancel anytime" appears in copy.
 - Not for one-time purchases (`payments-readiness`), and not for wording requirements (`consumer-protection-readiness` escalates those).
+
+## Working alone
+
+This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
+
+Companions: `design-system-reconnaissance`.
 
 ## Inspect
 
@@ -38,6 +45,8 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
+
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
 Make displayed renewal/trial/price statements match the real configuration; surface cancellation and renewal info near the buy button and in confirmation emails/receipts using **owner-provided** wording; fix a broken cancel route or portal link; sync subscription state from webhooks; add renewal/trial reminders only if the owner wants them. Do not create plans/prices in the provider, invent refund or cancellation windows, or hide the cancel path.
 

@@ -9,7 +9,7 @@ These entries are the essentials, not the full skills. Every entry shares the sa
 This file contains only the entries for this skill's declared companions: `design-system-reconnaissance`, `admin-authorization`, `admin-audit-log`, `data-rights`, `wcag-readiness`, `forms-readiness`, `mobile-readiness`, `failure-resilience`.
 
 ### design-system-reconnaissance
-Find the project's tokens (CSS variables, Tailwind config, theme files), reusable components, layout shell, type scale, spacing, dark mode, and voice. View rendered pages at desktop and 375px. Build new UI from these; never introduce a new style or UI kit.
+Find the project's tokens (CSS variables, Tailwind config, theme files), reusable components, layout shell, type scale, spacing, dark mode, and voice. View rendered pages at desktop and 375px. Build new UI by the component ladder: reuse an existing component; compose existing components; extend an existing primitive; only then create a new component that matches its neighbors. Match behavior patterns (dialogs, validation, empty states, dark mode, RTL) as well as looks. Never introduce a new style, UI kit, or icon set.
 
 ### data-rights
 Trace "delete account" from the UI to the database, auth provider, storage, and vendors. Soft delete (`active=false`, `deleted_at`) is retention, not deletion. Verify with a test account that no personal data remains except documented retained records. Check export and opt-out too.

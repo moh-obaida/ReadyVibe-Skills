@@ -5,7 +5,7 @@ license: Apache-2.0
 metadata:
   kind: specialist
   launch-checks: "30,35,23"
-  helpers: "audit-markup,observe-runtime"
+  helpers: "audit-markup,observe-runtime,check-links"
   companions: "design-system-reconnaissance,wcag-readiness"
 ---
 
@@ -28,7 +28,7 @@ Companions: `design-system-reconnaissance`, `wcag-readiness`.
 
 **Safety gate first.** Identify the origin. Exercise submissions on **localhost or a staging/test backend** only. If only production exists, do a read-only review (markup, endpoints, validation code) and mark submission behavior UNVERIFIED unless the owner authorizes a specific test with data they can delete. Never enter real payment details; use a provider's test mode and published test values on local/staging only.
 
-1. **Static pass:** `node scripts/audit-markup.mjs --url <site> --render` (paths relative to this skill's folder). Read: `CONTROL_NO_LABEL`, `PLACEHOLDER_ONLY_LABEL`, `FORM_NO_SUBMIT`, `FORM_GET_WITH_PASSWORD` (HIGH), `FORM_EMAIL_TYPE`, `FORM_TEL_TYPE`, `FORM_PASSWORD_AUTOCOMPLETE`, `FORM_ACTION_HTTP`, and `check-links` results for placeholder/dev form actions.
+1. **Static pass:** `node scripts/audit-markup.mjs --url <site> --render` (paths relative to this skill's folder). Read: `CONTROL_NO_LABEL`, `PLACEHOLDER_ONLY_LABEL`, `FORM_NO_SUBMIT`, `FORM_GET_WITH_PASSWORD` (HIGH), `FORM_EMAIL_TYPE`, `FORM_TEL_TYPE`, `FORM_PASSWORD_AUTOCOMPLETE`, `FORM_ACTION_HTTP`, and `node scripts/check-links.mjs --url <site> --render` for placeholder or dev form actions (`LINK_PLACEHOLDER_TARGET`, `LINK_DEV_HOST`).
 2. **Where does it go?** Read the submit handler: endpoint/action (own API route, server action, Formspree/Getform/Netlify Forms, email service), placeholders like `YOUR_FORM_ID`, env-var-driven endpoints that are unset in production, CORS-blocked endpoints, `localhost` targets.
 3. **Runtime exercise** with a planted identity (paths relative to this skill's folder):
 
@@ -58,7 +58,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 ## May change
 
-**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components. Never impose a ReadyVibe look on the user's site.
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
 Add labels and associations, correct input types/autocomplete, add required/format validation client- and server-side where the project has a pattern, add loading/disabled-while-submitting state, add success and error messages in the existing design, preserve input on failure, replace placeholder endpoints with **owner-provided** ones, fix env var wiring. Do not stand up a new backend, choose a third-party form vendor, or route submissions to an invented email address.
 

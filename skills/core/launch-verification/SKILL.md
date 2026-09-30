@@ -4,7 +4,7 @@ description: "Use when a fix or a finding needs proof: re-checking behavior afte
 license: Apache-2.0
 metadata:
   kind: auditor
-  helpers: "inspect-metadata,check-links,audit-markup,scan-secrets,observe-runtime"
+  helpers: "inspect-metadata,check-links,audit-markup,scan-secrets,observe-runtime,audit-assets"
 ---
 
 # launch-verification
@@ -39,7 +39,7 @@ Re-run it in the same conditions (same viewport, same starting state, same origi
 | secrets/env | `scan-secrets` | build output rebuilt, not the old `dist/` |
 | assets/performance | `audit-assets` | page still renders correctly |
 
-Helpers live in this skill's `scripts/` folder. If a needed helper cannot run (no server, no Playwright), the item is UNVERIFIED, not passed.
+Helpers live in this skill's `scripts/` folder. If a needed helper cannot run (no server, no Playwright) or reports `SITE_NOT_READ`, the item is UNVERIFIED, not passed.
 
 ## Evidence that counts
 

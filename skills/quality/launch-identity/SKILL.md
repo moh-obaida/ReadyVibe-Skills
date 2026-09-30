@@ -43,7 +43,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 ## May change
 
-**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components. Never impose a ReadyVibe look on the user's site.
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
 Replace starter titles/descriptions with product-specific values derived from owner-provided identity and visible content; swap the favicon and icons for the owner's logo (resize/convert existing brand assets; do not redraw); add missing `apple-touch-icon` and manifest icons; fix names in metadata, manifest, package fields; update copyright name to the owner-supplied one. If no logo exists, a neutral text-monogram icon in the brand color (clearly a placeholder) is acceptable only if the owner agrees; otherwise ask.
 

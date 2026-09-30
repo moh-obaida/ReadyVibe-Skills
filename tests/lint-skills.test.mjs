@@ -178,6 +178,65 @@ describe("skill quality", () => {
   });
 });
 
+describe("helper usage is checked against the real helpers", () => {
+  const helperSrc = 'import { parseArgs } from "node:util";\nparseArgs({ options: { url: { type: "string" }, json: { type: "boolean" } } });\nconst codes = ["LINK_BROKEN", "LINK_SOFT_404"];\n';
+  function withHelper(root) {
+    mkdirSync(join(root, "scripts"), { recursive: true });
+    writeFileSync(join(root, "scripts", "check-links.mjs"), helperSrc);
+  }
+  function carrying(root, name, extra) {
+    const dir = skill(root, name, `${specialist(name)}\n  helpers: "check-links"`, full(extra));
+    mkdirSync(join(dir, "scripts"), { recursive: true });
+    writeFileSync(join(dir, "scripts", "check-links.mjs"), helperSrc);
+  }
+
+  test("a helper named in prose but not declared is rejected (the skill could not run it)", () => {
+    const root = repo();
+    withHelper(root);
+    skill(root, "names-helper", specialist("names-helper"), full("Then re-run `check-links` to confirm."));
+    assert.ok(codes(root).includes("SKILL_HELPER_UNDECLARED"));
+  });
+
+  test("flags in a command must be accepted by that helper", () => {
+    const bad = repo();
+    withHelper(bad);
+    carrying(bad, "bad-flag", "Run `node scripts/check-links.mjs --url <site> --bogus`.");
+    assert.ok(codes(bad).includes("SKILL_HELPER_FLAG"));
+    const good = repo();
+    withHelper(good);
+    carrying(good, "good-flag", "Run `node scripts/check-links.mjs --url <site> --json`.");
+    assert.deepEqual(lintRepository(good), []);
+  });
+
+  test("a cited finding code must be emitted by a helper", () => {
+    const bad = repo();
+    withHelper(bad);
+    carrying(bad, "made-up-code", "Look for `LINK_MADE_UP` findings from `check-links`.");
+    assert.ok(codes(bad).includes("SKILL_FINDING_CODE"));
+    const good = repo();
+    withHelper(good);
+    carrying(good, "real-code", "Look for `LINK_BROKEN` and `LINK_SOFT_404` findings from `check-links`. Set `NODE_ENV` first.");
+    assert.deepEqual(lintRepository(good), []);
+  });
+});
+
+describe("repository secrets", () => {
+  test("realistic credentials anywhere in the repository are rejected (test secrets are built at runtime)", () => {
+    const aws = ["AKIA", "IOSFODNN7EXAMPLE"].join("");
+    const gh = ["ghp", "_", "a".repeat(36)].join("");
+    for (const secret of [aws, gh, `-----BEGIN ${"RSA"} PRIVATE KEY-----`, ["sk", "live", "abcdefghijklmnop"].join("_")]) {
+      const root = repo();
+      mkdirSync(join(root, "docs"), { recursive: true });
+      writeFileSync(join(root, "docs", "note.md"), `token: ${secret}\n`);
+      assert.ok(codes(root).includes("SECRET"), secret.slice(0, 8));
+    }
+    const clean = repo();
+    mkdirSync(join(clean, "docs"), { recursive: true });
+    writeFileSync(join(clean, "docs", "note.md"), "Use pk_test keys and a placeholder like YOUR_API_KEY in examples.\n");
+    assert.deepEqual(lintRepository(clean), []);
+  });
+});
+
 describe("companions are declared, not detected", () => {
   test("mentioning another skill for routing, escalation, or reference is not a dependency", () => {
     const root = repo();

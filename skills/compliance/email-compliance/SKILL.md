@@ -4,6 +4,7 @@ description: "Use when a product sends email or collects addresses for newslette
 license: Apache-2.0
 metadata:
   kind: specialist
+  helpers: "observe-runtime,check-links"
   launch-checks: "36,37"
   compliance-domains: "4"
   references: "official-sources"
@@ -32,13 +33,13 @@ Companions: `design-system-reconnaissance`.
 3. **Sender identity.** From name/address, reply-to that receives replies, physical/business identification in the footer where relevant, no misleading subject or headers, custom-domain authentication config (SPF/DKIM/DMARC) if visible in DNS docs or provider config (report as SOURCE-INDICATED).
 4. **Unsubscribe, end to end:**
    - **Link exists** in every marketing template, is not `#` or a placeholder, and points at a real route.
-   - **Route works** (`observe-runtime` or manual, on staging with a test address): resolves without login, one step or one confirm, no dark patterns, clear confirmation.
+   - **Route works** (on staging with a test address: `node scripts/observe-runtime.mjs --url <staging-url> --steps unsubscribe.json` with `goto`, `click`, and `snapshot` steps, or by hand; paths relative to this skill's folder): resolves without login, one step or one confirm, no dark patterns, clear confirmation.
    - **`List-Unsubscribe` / `List-Unsubscribe-Post` headers** present on marketing sends if the provider sends them (provider config or code).
    - **State changes:** find the code that handles it. Does it set a suppression flag / delete the subscription / call the provider's suppression API? Is it keyed by the *address* (case-normalized) as well as by the user, so the same address on another list or account is covered?
    - **Send path honors it:** locate every place marketing is sent (cron, campaign job, provider automation, admin "send to all"). Does each query exclude suppressed addresses **before** sending? A single unfiltered path is a bug.
    - **Provider vs app state:** if the provider holds the list, does the app sync unsubscribes back? Do bounces and complaints suppress?
 5. **Preference controls** where implemented: do categories save, and are they enforced in the send path?
-6. **Links in emails**: unsubscribe, view-in-browser, and CTAs resolve; no localhost or staging hosts (`check-links` on the template preview).
+6. **Links in emails**: unsubscribe, view-in-browser, and CTAs resolve; no localhost or staging hosts (`node scripts/check-links.mjs --url <template-preview-url>`).
 7. **Do not send** to real addresses. Use provider sandboxes, a local mail catcher, or preview rendering. On a staging backend use a `@example.test` address.
 
 ## Evidence that counts
@@ -52,7 +53,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 ## May change
 
-**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components. Never impose a ReadyVibe look on the user's site.
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
 - Fix a placeholder/dead unsubscribe link; wire an existing unsubscribe route to the real suppression mechanism; add the suppression filter to send queries; add `List-Unsubscribe` headers through the existing provider integration; fix localhost/staging URLs in templates; add an honest signup line near the form describing what will be sent ("Product updates, about monthly").
 - Separate a marketing block out of a transactional email **only** with the owner's decision.

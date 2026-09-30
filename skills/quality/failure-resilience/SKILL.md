@@ -64,7 +64,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 ## May change
 
-**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components. Never impose a ReadyVibe look on the user's site.
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
 Add or fix loading, empty, error, and success states in the existing design system; add `finally` resets; add error boundaries and route-level error pages; preserve form input on failure; add retry affordances; add timeouts where the pattern exists. Do not add global fake success, hide errors, or over-engineer retry/backoff frameworks.
 

@@ -7,7 +7,7 @@ metadata:
   compliance-domains: "7"
   launch-checks: "2,25"
   references: "official-sources"
-  companions: "subscription-readiness,payments-readiness"
+  companions: "design-system-reconnaissance,subscription-readiness,payments-readiness"
 ---
 
 # consumer-protection-readiness
@@ -19,11 +19,12 @@ People feel cheated by *inconsistency and surprise*: a price that changes at che
 - Prices, plans, checkout, invoices, trials, subscriptions, auto-renewal, discounts, refunds, returns, shipping, or digital delivery exist.
 - Not for a free product with no offers (record "not applicable"). Integration security of the payment provider is `payments-readiness`. Recurring mechanics in depth are `subscription-readiness`.
 
+
 ## Working alone
 
 This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
 
-Companions: `subscription-readiness`, `payments-readiness`.
+Companions: `design-system-reconnaissance`, `subscription-readiness`, `payments-readiness`.
 
 ## Inspect
 
@@ -46,6 +47,8 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
+
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
 Make displayed prices, totals, currency, and renewal/trial information **consistent** with what the backend actually charges; surface existing terms near the purchase button; fix a broken cancellation route; align FAQ/checkout copy with the owner's real policy; remove fake timers or misleading struck prices. Do not invent refund periods, cancellation windows, warranty language, tax statements, or business identity.
 

@@ -19,5 +19,5 @@ The first implementation built a CLI, a deterministic engine, JSON schemas, and 
 
 - The old `packages/` (CLI, engine, schemas) and `rules/` were removed; they remain in git history at `64405be`. The 13 architecture documents and 3 platform-specific ADRs moved to `docs/archive/` marked historical.
 - `.readyvibe/` is at most an optional working-notes folder that skills may write and none require.
-- Vendored helper copies cost about 2 MB of repository size in exchange for skills that work after a plain `npx skills add`.
+- Vendored helper, reference, and companion copies cost a few MB of repository size in exchange for skills that work after a plain `npx skills add`.
 - Real-agent behavior is not covered by the automated checks; it needs a separate model-consuming evaluation.

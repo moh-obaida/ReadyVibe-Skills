@@ -4,6 +4,7 @@ description: "Use when reviewing a pull request, branch, or release for launch a
 license: Apache-2.0
 metadata:
   kind: auditor
+  helpers: "observe-runtime"
 ---
 
 # compliance-diff
@@ -44,7 +45,7 @@ Also look for *deletions* that reduce protection: removed consent gating, remove
 Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REVIEW REQUIRED. UNKNOWN is never a pass and never a failure.
 
 - A diff shows SOURCE-INDICATED behavior. "This adds PostHog" is fact; "PostHog loads before consent" is unproven until the change is run.
-- If you can run the branch, do a targeted `observe-runtime` pass on the affected routes rather than guessing.
+- If you can run the branch, do a targeted runtime pass on the affected routes rather than guessing: `node scripts/observe-runtime.mjs --url <local-url>/<route> --block-third-party` (path relative to this skill's folder).
 
 ## May change
 

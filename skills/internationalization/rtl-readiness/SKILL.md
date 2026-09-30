@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "33,28"
   helpers: "observe-runtime"
+  companions: "design-system-reconnaissance"
 ---
 
 # rtl-readiness
@@ -16,6 +17,12 @@ RTL is not "flip the page". Direction, layout, and reading order change; icons, 
 
 - An RTL locale is offered or planned; content includes RTL text; users report backwards layouts.
 - Not for LTR-only sites.
+
+## Working alone
+
+This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
+
+Companions: `design-system-reconnaissance`.
 
 ## Inspect
 
@@ -36,6 +43,8 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - Language and translation quality need a native reader: UNKNOWN unless one reviewed it.
 
 ## May change
+
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
 Set `dir`/`lang`; convert physical CSS to logical properties or add `rtl:` variants; mirror directional icons; fix flex/grid ordering; wrap mixed-direction strings; adjust typography for the script; fix RTL-specific overflow. Preserve the design system; do not rewrite styles wholesale. Do not mirror logos or media controls, and do not machine-translate copy.
 

@@ -1,6 +1,6 @@
 ---
 name: content-trust
-description: "Use when a site should make its purpose and next step clear and its content should be real: primary call to action, dead-end pages, placeholder or lorem text, fake or unverifiable metrics, testimonials and logos, misleading claims, unfinished UI, and whether an FAQ would help. It removes or flags fakes and verifies controls work. Do not use it to invent testimonials, metrics, or customers, to force an FAQ or a giant CTA onto every page, or to write marketing copy the owner has not approved."
+description: "Use when a site should make its purpose and next step clear and its content should be real: primary call to action, dead-end pages, placeholder or lorem text, fake or unverifiable metrics, testimonials and logos, misleading claims, unfinished UI. It removes or flags fakes and verifies controls work. Do not use it to build an FAQ (use faq-readiness), to invent testimonials, metrics, or customers, to force a giant CTA onto every page, or to write marketing copy the owner has not approved."
 license: Apache-2.0
 metadata:
   kind: specialist
@@ -49,7 +49,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 ## May change
 
-**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components. Never impose a ReadyVibe look on the user's site.
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
 - Remove or hide clearly fake elements (timers, random viewer counts, template testimonials, logo strips with no owner confirmation) or replace with an honest neutral element.
 - Replace placeholders with **owner-supplied** content; where none exists, remove the empty section rather than shipping filler.
@@ -72,4 +72,4 @@ Financial, health, security, or performance claims (revenue, "guaranteed", medic
 
 ## No change is valid when
 
-The primary action is clear and works, no placeholders remain, claims are sourced or absent, and no high-friction questions go unanswered. Do not add an FAQ or extra CTAs to fill a checklist.
+The primary action is clear and works, no placeholders remain, claims are sourced or absent, and no fakes remain. Do not add extra CTAs or trust strips to fill a checklist, and do not write an FAQ here (that is `faq-readiness`).

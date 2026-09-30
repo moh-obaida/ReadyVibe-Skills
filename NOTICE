@@ -1,11 +1,16 @@
 ReadyVibe-Skills
 Copyright 2026 ReadyVibe contributors
 
-This product is licensed under the Apache License, Version 2.0.
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+Everything in this repository, including the skills, the bundled helper scripts,
+the tools, the tests, and the documentation, is under that license.
 
-Original reusable templates, if any are added under skills/**/assets/templates/**
-or skills/**/assets/clauses/**, are dedicated to the public domain under CC0-1.0
-(see LICENSES/CC0-1.0.txt).
+Statutes, regulations, regulator guidance, and standards are not copied or
+relicensed here. Skills point to official sources (docs/references/official-sources.md)
+and ask the running agent to read the current text there.
 
-Statutes, regulations, regulator guidance, and standards are not relicensed. Skills
-point to official sources and ask the running agent to read the current text there.
+The bundled helper scripts are original and have no third-party runtime
+dependencies. Development and test tooling (the "yaml" and "playwright-core"
+packages) is used only in this repository's tests and is not distributed inside
+any skill. Playwright is used by observe-runtime.mjs only if it is already
+available in the project being inspected.

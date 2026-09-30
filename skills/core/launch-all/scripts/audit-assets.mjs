@@ -12,7 +12,7 @@ import { parseArgs } from "node:util";
 import { emit, finding, usageError } from "./lib/report.mjs";
 import { classifyUrl } from "./lib/trackers.mjs";
 import { closest, findAll, parseHtml } from "./lib/html.mjs";
-import { fetchOnce, loadSite } from "./lib/pages.mjs";
+import { fetchOnce, loadSite, siteNotRead } from "./lib/pages.mjs";
 
 const { values: args } = parseArgs({
   options: { url: { type: "string" }, dir: { type: "string" }, render: { type: "boolean", default: false }, "max-pages": { type: "string", default: "15" }, timeout: { type: "string", default: "10000" }, "chrome-path": { type: "string" }, json: { type: "boolean", default: false } },
@@ -24,6 +24,8 @@ const KB = 1024;
 const LIMITS = { image: 300 * KB, heroImage: 500 * KB, js: 250 * KB, css: 100 * KB, font: 150 * KB };
 const findings = [];
 const notes = [...site.notes];
+const unread = siteNotRead(site);
+if (unread) findings.push(unread);
 const sizeCache = new Map();
 
 async function sizeOf(pagePath, ref) {

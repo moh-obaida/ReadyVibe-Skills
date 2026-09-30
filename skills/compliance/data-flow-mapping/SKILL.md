@@ -6,7 +6,7 @@ metadata:
   kind: foundation
   launch-checks: "1,7"
   compliance-domains: "2,9"
-  helpers: "inventory-data-model"
+  helpers: "inventory-data-model,observe-runtime"
   companions: "cookie-and-storage-audit"
 ---
 
@@ -33,7 +33,7 @@ Companions: `cookie-and-storage-audit`.
 3. **Flows out.** Server-side calls to email, payment, CRM, support, AI, analytics, storage APIs; client-side third-party requests (with `cookie-and-storage-audit`). Record what fields go to which recipient.
 4. **Identifiers.** User IDs in URLs, cookies, localStorage, analytics distinct IDs; whether they are linkable to a person.
 5. **Sensitive signals.** Health, finance, biometrics, precise location, children, government IDs, credentials, free-text fields that may contain any of these. Flag for `regulated-domain-triggers`.
-6. **Verify a sample at runtime** on a local/staging build: submit a form with `observe-runtime --canary` and see which hosts receive the planted values.
+6. **Verify a sample at runtime** on a local/staging build: submit a form with `node scripts/observe-runtime.mjs --url <local-or-staging-url> --canary --steps form.json` (path relative to this skill's folder) and see which hosts receive the planted values.
 
 Deliver a compact table: **field → collected where → stored where → sent to whom → deletable how (or "unknown")**, each row with an evidence label.
 
@@ -55,7 +55,7 @@ That the map is complete. Say what you covered: files searched, routes exercised
 
 ## Verify
 
-Pick three fields at random and trace end to end (form → storage → recipient); the map should predict what you observe. Check every form in the crawl is in the map (`audit-markup` lists forms if useful).
+Pick three fields at random and trace end to end (form → storage → recipient); the map should predict what you observe. Check that every form you found while crawling the site is in the map.
 
 ## Escalate
 

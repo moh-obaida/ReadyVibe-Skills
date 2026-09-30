@@ -8,7 +8,7 @@
 import { parseArgs } from "node:util";
 import { emit, finding, usageError } from "./lib/report.mjs";
 import { accessibleName, closest, findAll, findFirst, parseHtml, textOf } from "./lib/html.mjs";
-import { extractLocs, fetchWithRetry, isAssetPath, loadSite, normalizePath } from "./lib/pages.mjs";
+import { extractLocs, fetchWithRetry, isAssetPath, loadSite, normalizePath, siteNotRead } from "./lib/pages.mjs";
 
 const { values: args } = parseArgs({
   options: {
@@ -53,6 +53,8 @@ const site = await loadSite({
 
 const findings = [];
 const notes = [...site.notes];
+const unread = siteNotRead(site);
+if (unread) findings.push(unread);
 const hasSpa = site.pages.some((p) => p.spaShell);
 const targetCache = new Map(); // key -> Promise<result>
 const occurrences = new Map(); // `${code}|${target}` -> { finding, pages:Set }

@@ -23,7 +23,7 @@ function run(script, args) {
   return new Promise((resolve, reject) => {
     execFile(process.execPath, [join(scripts, script), ...args, "--json"], { encoding: "utf8", timeout: 120000, maxBuffer: 20_000_000 }, (error, stdout, stderr) => {
       if (!stdout) return reject(new Error(`${script} produced no output. stderr: ${stderr}`));
-      resolve({ json: JSON.parse(stdout), raw: stdout });
+      resolve({ json: JSON.parse(stdout), raw: stdout, code: error ? error.code : 0 });
     });
   });
 }
@@ -83,6 +83,21 @@ describe("live-submit guard", () => {
     for (const h of ["localhost", "127.0.0.1", "app.localhost", "shop.test", "[::1]"]) assert.ok(isLocalHost(h), h);
     for (const h of ["example.org", "ledgerly.app", "staging.ledgerly.app", "localhost.evil.com", "test.com"]) assert.ok(!isLocalHost(h), h);
   });
+});
+
+describe("a scan that read nothing is never a pass", () => {
+  for (const helper of ["check-links", "inspect-metadata", "audit-markup", "audit-assets"]) {
+    test(`${helper}: an unreachable URL and an empty directory report SITE_NOT_READ (UNKNOWN, HIGH) and exit 3`, async () => {
+      const down = await run(`${helper}.mjs`, ["--url", "http://127.0.0.1:1"]);
+      const dead = down.json.findings.find((f) => f.code === "SITE_NOT_READ");
+      assert.ok(dead, "expected SITE_NOT_READ for an unreachable server");
+      assert.equal(dead.evidence, "UNKNOWN");
+      assert.equal(dead.severity, "HIGH");
+      assert.equal(down.code, 3);
+      const empty = await run(`${helper}.mjs`, ["--dir", mkdtempSync(join(tmpdir(), "rv-empty-"))]);
+      assert.ok(codes(empty.json).has("SITE_NOT_READ"));
+    });
+  }
 });
 
 describe("inspect-metadata", () => {
@@ -282,6 +297,21 @@ describe("observe-runtime (real headless browser, local pages only)", async () =
       server.close();
     }
   });
+  test("token-shaped storage values are never printed, while a consent choice is shown", { skip }, async () => {
+    const dir = mkdtempSync(join(tmpdir(), "rv-token-"));
+    const token = ["a1b2c3d4", "e5f60718", "29a0b1c2", "d3e4f506"].join("");
+    writeFileSync(join(dir, "index.html"), `<!doctype html><html lang="en"><head><title>t</title></head><body><h1>t</h1><script>localStorage.setItem("session", "${token}"); localStorage.setItem("consent", "rejected");</script></body></html>`);
+    const { server, url } = await serve(dir);
+    try {
+      const out = await run("observe-runtime.mjs", ["--url", url, "--settle", "300"]);
+      assert.ok(!out.raw.includes(token), "a token-shaped value leaked into the report");
+      const keys = out.json.snapshots[0].localStorage;
+      assert.equal(keys.find((k) => k.key === "session").value, null);
+      assert.equal(keys.find((k) => k.key === "consent").value, "rejected");
+    } finally {
+      server.close();
+    }
+  });
   test("forced API failure and delay are applied and reported so error states can be observed", { skip }, async () => {
     const { server, url } = await serve(join(fixtures, "states"), { overrides: { "/api/items": (res) => (res.writeHead(200, { "content-type": "application/json" }), res.end("[]")) } });
     try {
@@ -290,6 +320,28 @@ describe("observe-runtime (real headless browser, local pages only)", async () =
       assert.match(failed.findings.find((f) => f.code === "REQUEST_FAILURES").message, /500/);
       const healthy = (await run("observe-runtime.mjs", ["--url", url, "--settle", "300"])).json;
       assert.ok(!codes(healthy).has("REQUEST_FAILURES"));
+    } finally {
+      server.close();
+    }
+  });
+  test("form submission on a non-local origin is refused (zero requests reach the server) unless explicitly authorized", { skip }, async () => {
+    // An IPv4-mapped IPv6 loopback address is deliberately NOT treated as local by the helper, and it still
+    // reaches this test server, so this exercises the real refusal path end to end.
+    let posts = 0;
+    const server = createServer((req, res) => {
+      if (req.method === "POST") posts++;
+      res.writeHead(200, { "content-type": "text/html" });
+      res.end(readFileSync(join(fixtures, "consent-good", "index.html")));
+    });
+    await new Promise((resolve) => server.listen(0, "::", resolve));
+    try {
+      const url = `http://[::ffff:127.0.0.1]:${server.address().port}/`;
+      const args = ["--url", url, "--settle", "300", "--canary", "--steps", join(steps, "form-canary.json")];
+      const refused = (await run("observe-runtime.mjs", args)).json;
+      assert.match(refused.steps.find((s) => s.step.do === "submit").skipped, /Refused/);
+      assert.equal(posts, 0, "a refused submit must send nothing");
+      await run("observe-runtime.mjs", [...args, "--allow-live-submit"]);
+      assert.ok(posts >= 1, "--allow-live-submit must actually submit");
     } finally {
       server.close();
     }

@@ -15,7 +15,7 @@ metadata:
 
 **Consider broadly. Activate selectively. Verify deeply.**
 
-The canonical scope is the 40-check launch model in [references/launch-model.md](references/launch-model.md), plus the 12 conditional compliance domains handled through `compliance-all`. Read the model once at the start. Every check gets a disposition; not every check gets work.
+The canonical scope is the 40-check launch model in [references/launch-model.md](references/launch-model.md), plus the 12 conditional compliance domains handled through `compliance-all`. Read the model once at the start. Every check gets a disposition; not every check gets work. **It never runs all 55 skills.** A typical run is recon, one shared sweep, and only the handful of lanes that apply and show a real concern; everything else is recorded as not applicable (with the reason) or unknown.
 
 ## Activate when
 
@@ -62,7 +62,7 @@ For each of the 40 checks record one of:
 | Disposition | Meaning |
 |---|---|
 | APPLIES | Evidence shows the surface exists (a form, a tracker, a public route) |
-| NOT APPLICABLE | Evidence shows it does not (with the observed reason) |
+| NOT APPLICABLE | Evidence shows it does not, with a reason a reviewer can check ("no `<form>` in 12 crawled pages and none in `src/`"). "I did not look" is UNKNOWN, not not-applicable |
 | UNKNOWN | Could not be determined; say what would resolve it |
 
 Recheck triggers matter: "no marketing email" is valid only until an email vendor or newsletter form appears.
@@ -82,7 +82,7 @@ node scripts/observe-runtime.mjs  --url <site> --block-third-party   # cookies, 
 
 If only source exists and no server can be started, run `scan-secrets` and the `--dir` mode against a build directory, and mark runtime-dependent checks UNKNOWN. If Playwright is unavailable, `observe-runtime` will say so; do not pretend it ran.
 
-Helper output is evidence, not a verdict. Read the findings, discard the ones the context explains, and route the rest.
+Helper output is evidence, not a verdict. Read the findings, discard the ones the context explains, and route the rest. If a helper reports `SITE_NOT_READ`, it read nothing (server down, wrong URL, empty build): that is UNKNOWN, never a clean result. Fix the URL or start the server and run it again.
 
 ### 4. Route: selective activation
 
@@ -95,12 +95,12 @@ Activate a specialist when **both** hold: its check applies, and the sweep or re
 | CTA, placeholders, fake proof, dead controls, 404, contact path, states | `trust-all` |
 | Alt text, headings, keyboard, contrast, motion, mobile layout | `quality-all` |
 | Forms, unsubscribe, secrets, headers, staging artifacts, performance | `production-all` |
-| Money changes hands | `consumer-protection-readiness`, `payments-readiness`, `subscription-readiness` (via `compliance-all`) |
+| Money changes hands (prices, checkout, subscriptions) | `compliance-all` (its consumer-protection domain runs `consumer-protection-readiness`, `payments-readiness`, and `subscription-readiness` as they apply) |
 | Admin or operator routes exist | `admin-authorization` (and `admin-audit-log` if destructive actions exist) |
 | Operators have tasks nobody can perform (submissions, privacy requests, moderation, users, refunds) and the owner wants an admin | `admin-dashboard` (builds or improves one from the real app) |
 | Health, finance, education, minors, legal, crypto, gambling, AI features | `regulated-domain-triggers` first; it may stop ordinary work |
 
-Prefer the family bundles over invoking many specialists yourself. A bundle already knows how to select within its family.
+Prefer the family bundles over invoking many specialists yourself: a bundle runs one shared sweep for its family and selects within it. **Installed skills are preferred over inline fallbacks**, because they are deeper.
 
 **If a bundle or specialist is not installed, do not stop and do not skip the lane.** Every skill has a minimum method in [references/companion-methods.md](references/companion-methods.md). Follow that entry, use the helpers in this skill's `scripts/`, and label the lane *inline, reduced depth* in the report. A launch review with only `launch-all` installed is real but shallower than one with the specialists: say which lanes ran inline, and suggest installing the full set (`npx skills add moh-obaida/ReadyVibe-Skills --all`) when depth matters (privacy, consent, admin, accessibility).
 

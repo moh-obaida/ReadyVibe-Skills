@@ -124,7 +124,9 @@ async function captureState(label, expect) {
         for (let i = 0; i < s.length; i++) {
           const k = s.key(i);
           const v = s.getItem(k) ?? "";
-          out.push({ key: k, length: v.length, value: v.length <= 40 && !/@|eyJ/.test(v) ? v : null });
+          // Show only clearly non-secret values (a consent choice like "accepted"); anything token-shaped is redacted.
+          const tokenLike = /^[A-Za-z0-9_\-+/=.:]{16,}$/.test(v) || /@|eyJ/.test(v);
+          out.push({ key: k, length: v.length, value: v.length <= 40 && !tokenLike ? v : null });
         }
       } catch {
         /* storage blocked */

@@ -4,6 +4,7 @@ description: "Use when a public product needs to show who operates it and carry 
 license: Apache-2.0
 metadata:
   kind: specialist
+  helpers: "check-links"
   compliance-domains: "12"
   launch-checks: "8,25"
   references: "official-sources"
@@ -51,7 +52,7 @@ Replace placeholder copyright text with **owner-supplied** identity; make the na
 
 ## Verify
 
-Search rendered pages and legal pages for placeholder patterns ("Your Company", "Lorem", "© 20XX", template author names) and confirm zero; confirm operator name and contact are identical in footer, terms, privacy, and checkout; confirm credit/license pages resolve (`check-links`).
+Search rendered pages and legal pages for placeholder patterns ("Your Company", "Lorem", "© 20XX", template author names) and confirm zero; confirm operator name and contact are identical in footer, terms, privacy, and checkout; confirm credit/license pages resolve (`node scripts/check-links.mjs --url <site> --render`, path relative to this skill's folder).
 
 ## Escalate
 

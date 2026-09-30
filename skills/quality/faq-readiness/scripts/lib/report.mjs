@@ -44,6 +44,7 @@ export function collapse(findings, threshold = 3) {
 
 export function emit(name, result, json) {
   const findings = sortFindings(collapse(result.findings ?? []));
+  if (findings.some((f) => f.code === "SITE_NOT_READ")) process.exitCode = 3; // nothing was read: never a silent success
   const output = { tool: name, ...result, findings, summary: summarize(findings) };
   if (json) {
     process.stdout.write(`${JSON.stringify(output, null, 2)}\n`);

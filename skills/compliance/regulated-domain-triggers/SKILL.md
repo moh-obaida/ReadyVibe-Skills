@@ -55,7 +55,7 @@ Only `.readyvibe/context.md` ("Regulated-domain flags"). Do not change product c
 
 ## Verify
 
-Each flag cites its signal and the pages or files where it appears. Re-run when features change. Ensure other specialists are told: legal-page drafting (`privacy-policy`, `terms-of-service`), analytics/replay (`analytics-privacy`), and `consumer-protection-readiness` must treat this surface as REVIEW REQUIRED.
+Search a second way before concluding: read the routes and schema, the visible copy and metadata, the dependencies and integrations, and the forms; a flag or a "none found" should survive all four. Each flag must cite its signal (file, route, or copy) so the owner can check it, and the report must say which places were searched. Re-run when features change. Ensure the relevant lanes are told: legal-page drafting (`privacy-policy`, `terms-of-service`), analytics/replay (`analytics-privacy`), and `consumer-protection-readiness` must treat this surface as REVIEW REQUIRED.
 
 ## Escalate
 

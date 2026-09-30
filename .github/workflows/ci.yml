@@ -1,10 +1,51 @@
 name: ci
+
 on:
   push:
+    branches: [main]
+    tags: ["v*"]
   pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
+    name: check (node ${{ matrix.node }})
     runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright-core install --with-deps chromium
+      # Generated and vendored files (helpers, shared references, companion fallbacks) must match their canonical sources.
+      - run: pnpm sync:check
+      # Skill quality, 40/12 ownership coverage, companions, secrets, and no-platform guards.
+      - run: pnpm lint
+      # Helper, lint, browser, and Skills CLI install tests. CI=true makes the CLI and browser tests mandatory (never skipped).
+      - run: pnpm test
+
+  public-install:
+    name: install from the public GitHub repository
+    needs: check
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -15,5 +56,6 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright-core install --with-deps chromium
-      - run: pnpm check
+      # Use the real Skills CLI against the real GitHub ref that triggered this run (the pushed commit, or the release tag).
+      - name: Verify installation at this exact commit or tag
+        run: node tools/verify-public-install.mjs "${{ github.repository }}#${{ github.ref_type == 'tag' && github.ref_name || github.sha }}" --all --no-compare-local

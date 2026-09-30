@@ -53,7 +53,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 ## May change
 
-**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components. Never impose a ReadyVibe look on the user's site.
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
 Low-risk fixes with the owner's agreement: extend an existing deletion to cover missed tables/objects; make soft-delete followed by a purge job; delete the auth-provider record; add an export that gathers existing fields; correct UI/notice copy to describe what deletion actually does. Test destructive code against **test data only**. Never delete real user data, run migrations against production, or invent timelines and deadlines.
 

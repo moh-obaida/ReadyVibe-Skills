@@ -13,6 +13,16 @@ import { buildCompanionFile, parseCompanionLibrary } from "./lib/companions.mjs"
 
 const CATEGORIES = new Set(["core", "compliance", "accessibility", "discoverability", "quality", "security", "admin", "internationalization", "commerce"]);
 const KINDS = new Set(["specialist", "foundation", "auditor", "bundle"]);
+const SECRET_PATTERNS = [
+  /\b(?:sk|rk)_live_[A-Za-z0-9]{8,}\b/,
+  /-----BEGIN (?:RSA |EC |DSA |OPENSSH |PGP )?PRIVATE KEY(?: BLOCK)?-----/,
+  /\b(?:AKIA|ASIA)[0-9A-Z]{16}\b/,
+  /\b(?:ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{30,}\b|\bgithub_pat_[A-Za-z0-9_]{40,}\b/,
+  /\bxox[abprs]-[A-Za-z0-9-]{10,}\b/,
+  /\bsk-ant-[A-Za-z0-9_-]{20,}\b|\bsk-(?:proj-)?[A-Za-z0-9_-]{40,}\b/,
+  /\bAIza[0-9A-Za-z_-]{35}\b/,
+  /\bwhsec_[A-Za-z0-9]{20,}\b/,
+];
 const NAME_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const AGENT_DIRS = [".agents/skills", ".claude/skills", ".cursor/skills", ".codex/skills"];
 const COMMON_SECTIONS = ["Activate when", "May change", "Must not claim", "Verify", "Escalate", "No change is valid when"];
@@ -20,7 +30,7 @@ const NON_BUNDLE_SECTIONS = [...COMMON_SECTIONS, "Inspect", "Evidence that count
 const BUNDLE_SECTIONS = [...COMMON_SECTIONS, "Evidence discipline"];
 
 // Skills that create or change visible UI must inspect the project's existing design first.
-const DESIGN_FIRST = new Set(["admin-dashboard", "error-pages", "consent-management", "privacy-policy", "terms-of-service", "forms-readiness", "public-support", "email-compliance", "data-rights", "legal-navigation", "failure-resilience", "mobile-readiness", "content-trust", "launch-identity", "wcag-readiness", "minors-readiness", "faq-readiness"]);
+const DESIGN_FIRST = new Set(["admin-dashboard", "error-pages", "consent-management", "privacy-policy", "terms-of-service", "forms-readiness", "public-support", "email-compliance", "data-rights", "legal-navigation", "failure-resilience", "mobile-readiness", "content-trust", "launch-identity", "wcag-readiness", "minors-readiness", "faq-readiness", "rtl-readiness", "subscription-readiness", "consumer-protection-readiness", "user-content-safety", "ai-features-readiness", "multilingual-readiness"]);
 // Skills where legal or standards specifics come up must send the agent to official sources at run time.
 const LEGAL_LOOKUP = new Set(["compliance-all", "privacy-policy", "terms-of-service", "consent-management", "cookie-and-storage-audit", "analytics-privacy", "policy-consistency", "minors-readiness", "email-compliance", "data-rights", "jurisdiction-applicability", "consumer-protection-readiness", "subscription-readiness", "regulated-domain-triggers", "legal-identity-notices", "wcag-readiness", "privacy-readiness", "ai-features-readiness"]);
 
@@ -91,6 +101,21 @@ function helperClosure(root, helpers) {
   return files;
 }
 
+/** Facts about the canonical helpers: which flags each accepts and which finding codes exist. */
+function helperFacts(root) {
+  const flags = new Map();
+  const codes = new Set();
+  const dir = join(root, "scripts");
+  if (!existsSync(dir)) return { flags, codes, prefixes: new Set() };
+  const files = [...readdirSync(dir).filter((f) => f.endsWith(".mjs")).map((f) => join(dir, f)), ...(existsSync(join(dir, "lib")) ? readdirSync(join(dir, "lib")).map((f) => join(dir, "lib", f)) : [])];
+  for (const f of files) {
+    const src = readFileSync(f, "utf8");
+    for (const m of src.matchAll(/["`']([A-Z][A-Z0-9]+(?:_[A-Z0-9]+)+)["`']/g)) codes.add(m[1]);
+    if (f.startsWith(dir) && !f.includes(`${sep}lib${sep}`)) flags.set(f.slice(dir.length + 1).replace(/\.mjs$/, ""), new Set([...src.matchAll(/(?:^|[\s{,])"?([a-z][a-z-]*)"?\s*:\s*\{\s*type\s*:/gm)].map((m) => m[1])));
+  }
+  return { flags, codes, prefixes: new Set([...codes].map((c) => c.split("_")[0])) };
+}
+
 export function lintRepository(rootArg) {
   const root = resolve(rootArg);
   const issues = [];
@@ -101,14 +126,16 @@ export function lintRepository(rootArg) {
   walk(root, (abs, rel) => {
     if (AGENT_DIRS.some((d) => rel === d || rel.startsWith(`${d}/`))) add("SKILL_AGENT_DIR", rel, "Agent skill directories must not exist in this repository");
     if (rel.endsWith("/SKILL.md") || rel === "SKILL.md") lintSkillFile(root, abs, rel, names, skills, add);
-    if (/\bsk_live_[A-Za-z0-9]{8,}\b/.test(safeRead(abs)) || /-----BEGIN (?:RSA |EC )?PRIVATE KEY-----/.test(safeRead(abs))) add("SECRET", rel, "Secret-shaped content");
+    const text = safeRead(abs);
+    if (SECRET_PATTERNS.some((re) => re.test(text))) add("SECRET", rel, "Secret-shaped content: this repository must contain no real or realistic credentials (build test secrets at runtime)");
   });
 
   const canonicalHelpers = new Set(existsSync(join(root, "scripts")) ? readdirSync(join(root, "scripts")).filter((f) => f.endsWith(".mjs")).map((f) => f.replace(/\.mjs$/, "")) : []);
   const known = new Set(skills.map((s) => s.name));
   const companionDoc = join(root, "docs", "references", "companion-methods.md");
   const library = existsSync(companionDoc) ? parseCompanionLibrary(readFileSync(companionDoc, "utf8")) : null;
-  for (const info of skills) lintQuality(root, info, known, canonicalHelpers, add, library);
+  const facts = helperFacts(root);
+  for (const info of skills) lintQuality(root, info, known, canonicalHelpers, add, library, facts);
   lintCoverage(root, skills, canonicalHelpers, add);
   lintNoPlatform(root, add);
   return issues;
@@ -166,7 +193,7 @@ function lintSkillFile(root, abs, rel, names, skills, add) {
   }
 }
 
-function lintQuality(root, info, knownSkills, canonicalHelpers, add, library) {
+function lintQuality(root, info, knownSkills, canonicalHelpers, add, library, facts) {
   const at = (code, message) => add(code, info.rel, message);
   if (info.internal) return;
   if (!info.kind || !KINDS.has(info.kind)) {
@@ -190,6 +217,18 @@ function lintQuality(root, info, knownSkills, canonicalHelpers, add, library) {
   }
 
   const referenced = new Set([...info.body.matchAll(/scripts\/([a-z][a-z-]*)\.mjs/g)].map((m) => m[1]));
+  // A helper NAMED in the skill (`check-links`, check-links.mjs) is one the skill relies on: it must be carried.
+  for (const h of canonicalHelpers) if (new RegExp(`\`${h}(?:\\.mjs)?[\` ]|\\b${h}\\.mjs`).test(info.body)) referenced.add(h);
+  for (const m of info.body.matchAll(/scripts\/([a-z][a-z-]*)\.mjs([^\n`]*)/g)) {
+    const known = facts?.flags.get(m[1]);
+    if (!known) continue;
+    for (const f of m[2].matchAll(/--([a-z][a-z-]*)/g)) if (!known.has(f[1])) at("SKILL_HELPER_FLAG", `runs scripts/${m[1]}.mjs with --${f[1]}, which that helper does not accept`);
+  }
+  if (facts?.codes.size) {
+    for (const m of new Set([...info.body.matchAll(/`([A-Z][A-Z0-9]+(?:_[A-Z0-9]+)+)`/g)].map((x) => x[1]))) {
+      if (facts.prefixes.has(m.split("_")[0]) && !facts.codes.has(m)) at("SKILL_FINDING_CODE", `cites finding code ${m}, which no helper emits`);
+    }
+  }
   for (const r of referenced) if (!info.helpers.includes(r)) at("SKILL_HELPER_UNDECLARED", `body runs scripts/${r}.mjs but metadata.helpers does not declare "${r}"`);
   for (const h of info.helpers) {
     if (!canonicalHelpers.has(h)) at("SKILL_HELPER_UNKNOWN", `metadata.helpers names "${h}", which is not in scripts/`);

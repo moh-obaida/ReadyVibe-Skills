@@ -7,6 +7,7 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative, resolve, sep } from "node:path";
 import { launchBrowser } from "./browser.mjs";
+import { finding } from "./report.mjs";
 import { findAll, parseHtml, textOf } from "./html.mjs";
 
 const SKIP_DIRS = new Set(["node_modules", ".git", ".next", ".vercel", ".netlify", ".cache"]);
@@ -245,6 +246,18 @@ export async function loadUrlSite(baseUrl, { maxPages = 40, timeoutMs = 10000, r
     notes.push("Some pages are empty client-rendered shells as served. Re-run with --render to read them after JavaScript runs.");
   }
   return { mode: "url", origin, pages, robots, sitemaps: sitemaps.filter((s) => s.status !== 404 || s.url.endsWith("/sitemap.xml")), notes };
+}
+
+/**
+ * If no page could be read (server down, wrong URL, 404 home page, empty directory), a scan of "nothing" must never
+ * look like a clean pass. Returns a loud UNKNOWN finding, or null when at least one HTML page was read.
+ */
+export function siteNotRead(site) {
+  const readable = site.pages.filter((p) => p.status === 200 && p.html);
+  if (readable.length > 0) return null;
+  const first = site.pages[0];
+  const why = site.mode === "dir" ? "the directory contains no HTML files" : first ? (first.error ? `the first request failed (${first.error})` : `the first page returned HTTP ${first.status}`) : "no page was requested";
+  return finding("SITE_NOT_READ", "HIGH", "UNKNOWN", `No pages could be read: ${why}. Nothing was checked, and this is NOT a pass. Fix the URL or directory (start the dev server, or build first) and run again.`);
 }
 
 export async function loadSite(opts) {

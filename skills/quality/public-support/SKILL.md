@@ -4,6 +4,7 @@ description: "Use when a public product needs a working way for visitors to reac
 license: Apache-2.0
 metadata:
   kind: specialist
+  helpers: "check-links"
   launch-checks: "8,25"
   compliance-domains: "12"
   companions: "design-system-reconnaissance,forms-readiness"
@@ -28,7 +29,7 @@ Companions: `design-system-reconnaissance`, `forms-readiness`.
 ## Inspect
 
 1. **What paths exist:** contact page/form, `mailto:` links, support/privacy addresses (`support@`, `privacy@`, `legal@`), help center link, social DMs, in-app chat, phone/address where the business type expects it.
-2. **Do they work?** Links resolve (`check-links`); mailto addresses are on a domain that has mail (the owner confirms the mailbox exists and is monitored; you cannot verify a mailbox from here: UNKNOWN unless they say); contact forms submit to a verified destination (`forms-readiness`); no placeholder domains (`hello@example.com`, `yourcompany.com`).
+2. **Do they work?** Links resolve (`node scripts/check-links.mjs --url <site> --render`, path relative to this skill's folder); mailto addresses are on a domain that has mail (the owner confirms the mailbox exists and is monitored; you cannot verify a mailbox from here: UNKNOWN unless they say); contact forms submit to a verified destination (`forms-readiness`); no placeholder domains (`hello@example.com`, `yourcompany.com`).
 3. **Consistency:** the same contact details in footer, contact page, privacy notice, terms, checkout, emails' footers, 404 page. Mismatched or stale addresses are findings.
 4. **Fit to promises:** the privacy notice's rights-request route (`data-rights`), refund/cancellation contact (`consumer-protection-readiness`), abuse reporting (`user-content-safety`), accessibility feedback route where stated. Each promised route must exist and work.
 5. **Findability:** contact reachable from every page (footer/nav) and from failure states (error pages, checkout errors).
@@ -44,7 +45,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 ## May change
 
-**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components. Never impose a ReadyVibe look on the user's site.
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
 Fix placeholder or dead contact links; unify contact details across pages **using owner-supplied values**; add a contact link to the footer and error pages; wire the contact form to a verified destination the owner names; add the privacy-contact line to legal pages where the owner provides the address. Ask for anything missing. Do not invent addresses, numbers, response times, or team names.
 

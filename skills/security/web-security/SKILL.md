@@ -6,8 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "38,16"
   compliance-domains: "10"
-  helpers: "scan-secrets,audit-assets"
-  companions: "admin-authorization"
+  helpers: "scan-secrets,audit-assets,observe-runtime"
 ---
 
 # web-security
@@ -19,12 +18,6 @@ A pre-launch security review looks for the mistakes that AI-generated and rushed
 - Any deployment is planned, code has server routes or a database, or users can sign in.
 - `production-all` routes here (check 38), or a secret or debug artifact was reported.
 - Not a substitute for a professional penetration test or a dependency audit (`dependency-security`).
-
-## Working alone
-
-This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
-
-Companions: `admin-authorization`.
 
 ## Inspect
 
@@ -38,7 +31,7 @@ Companions: `admin-authorization`.
 
 **5. Sessions and auth.** Cookie flags (`HttpOnly`, `Secure`, `SameSite`), token storage in `localStorage`, session expiry and logout invalidation, password reset flow (tokens single-use, expiring; no user enumeration), brute-force protection on login, secrets in JWTs, "remember me" sanity, rate limits on sensitive endpoints, email verification where relied on.
 
-**6. Transport and headers.** HTTPS everywhere and HSTS on production; headers and CSP (`security-headers`); mixed content (`observe-runtime` reports `MIXED_CONTENT`).
+**6. Transport and headers.** HTTPS everywhere and HSTS on production; headers and CSP (`security-headers`); mixed content (`node scripts/observe-runtime.mjs --url <site> --block-third-party` reports `MIXED_CONTENT`).
 
 **7. Unsafe external resources and supply chain.** `node scripts/audit-assets.mjs --url <site> --render` reports `INSECURE_SUBRESOURCE` (scripts, frames, or images over `http://`), `CDN_SCRIPT_NO_INTEGRITY`, and `CDN_SCRIPT_UNPINNED` (a `@latest` script means what you tested is not what visitors run). Also review third parties that can inject code (tag managers, chat, A/B tools) (`third-party-privacy`, `dependency-security`).
 

@@ -23,6 +23,8 @@ Fixes that look bolted on erode the trust they were meant to build: a 404 in a d
 4. **Voice.** Tone and person in existing copy ("we" vs. "Acme"), casing of headings and buttons, punctuation. Legal or policy copy still needs to be clear; match register without adopting jokes in legal text.
 5. **Assets.** Logo files, favicon, illustration style, icon set.
 6. **Rendered check.** Open the running site at desktop and 375px to see it as visitors do; source can mislead (a component may be overridden).
+7. **The component ladder** (write it into your note, and follow it when building): (1) reuse an existing component as is; (2) compose existing components; (3) extend an existing primitive with a variant or prop; (4) only when nothing fits, create a new component that matches the tokens, spacing, and behavior of its neighbors. Never introduce a "ReadyVibe style", and never casually add another UI library, CSS framework, or icon set; if the project already uses one, use it.
+8. **Behavior patterns too, not just looks:** how dialogs, menus, forms, validation errors, toasts, loading states, and empty states already behave (focus handling, motion, dark mode, RTL/locale handling); new UI must behave the same way.
 
 ## Evidence that counts
 
@@ -33,7 +35,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 ## May change
 
-Only `.readyvibe/design.md`: a short list of the tokens, components, and patterns the specialist should use, with file paths. Never product code.
+Only an optional working note, `.readyvibe/design.md`: a short list of the tokens, components, behavior patterns, and the component ladder the specialist should use, with file paths. Never product code.
 
 ## Must not claim
 
