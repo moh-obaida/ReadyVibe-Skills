@@ -7,6 +7,7 @@ metadata:
   launch-checks: "2,25"
   compliance-domains: "12"
   helpers: "check-links"
+  references: "companion-methods"
 ---
 
 # legal-navigation
@@ -18,6 +19,12 @@ A privacy link that 404s is worse than none: it says "we have a policy" and prov
 - Legal pages exist or are being created, and navigation must reach them.
 - Footer/signup/checkout show "Privacy" or "Terms" links that go nowhere, or legal pages are unreachable.
 - Not to write the pages (`privacy-policy`, `terms-of-service`, `consumer-protection-readiness` for refund text).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `consent-management`, `consumer-protection-readiness`, `design-system-reconnaissance`, `jurisdiction-applicability`, `multilingual-readiness`, `privacy-policy`, `regulated-domain-triggers`, `terms-of-service`.
 
 ## Inspect
 

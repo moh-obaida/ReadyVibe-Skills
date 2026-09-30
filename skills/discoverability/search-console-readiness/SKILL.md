@@ -5,6 +5,7 @@ license: Apache-2.0
 metadata:
   kind: specialist
   launch-checks: "12,13"
+  references: "companion-methods"
 ---
 
 # search-console-readiness
@@ -16,6 +17,12 @@ Search engines tell you what they indexed. Nothing in the repository can. This s
 - The production URL is decided and live, or launch is imminent, and the owner wants to be findable.
 - `seo-readiness` is clean (or nearly), so submitting a broken sitemap is not the outcome.
 - Not before the canonical host is final, and not on staging.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `seo-readiness`.
 
 ## Inspect
 

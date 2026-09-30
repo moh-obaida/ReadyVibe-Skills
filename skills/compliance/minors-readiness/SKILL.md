@@ -6,7 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "6"
   compliance-domains: "5"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # minors-readiness
@@ -18,6 +18,12 @@ A sentence saying "for users 18+" and a checkbox do not create an adult-only pro
 - The product could appeal to children (games, education, toys, social, creator tools, family apps, characters/cartoon style, school context).
 - A date-of-birth, age, grade, or parent field exists; terms or copy state an age rule; accounts or content are public between users.
 - Not for a clearly adult B2B tool with no child signals: record the evidence and stop.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `analytics-privacy`, `design-system-reconnaissance`, `regulated-domain-triggers`, `third-party-privacy`.
 
 ## Inspect
 

@@ -7,6 +7,7 @@ metadata:
   compliance-domains: "1,12"
   launch-checks: "18,9"
   helpers: "inspect-metadata"
+  references: "companion-methods"
 ---
 
 # multilingual-readiness
@@ -18,6 +19,12 @@ A language switcher that leads to half-translated pages, or a privacy policy onl
 - The site has a language/locale switcher, locale-prefixed routes, translation files (i18n libs), or `hreflang`.
 - Markets are being expanded (also update `jurisdiction-applicability`).
 - Not for single-language sites (say so).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `jurisdiction-applicability`, `rtl-readiness`.
 
 ## Inspect
 

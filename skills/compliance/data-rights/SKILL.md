@@ -6,7 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "7,37"
   compliance-domains: "6"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
   helpers: "inventory-data-model"
 ---
 
@@ -19,6 +19,12 @@ The button says "Delete my account". What happens next is the whole question. A 
 - There are accounts, profiles, uploads, orders, or messages, or the notice/footer promises deletion, export, correction, or opt-out.
 - A "Delete account", "Export my data", "Do Not Sell/Share", or "Unsubscribe" control exists or is planned.
 - Not when no personal data is stored and there are no accounts (record why). Not to decide which rights legally apply.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `consent-management`, `design-system-reconnaissance`, `email-compliance`, `public-support`.
 
 ## Inspect
 

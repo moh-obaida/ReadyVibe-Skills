@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "14"
   helpers: "inspect-metadata"
+  references: "companion-methods"
 ---
 
 # social-sharing
@@ -17,6 +18,12 @@ When someone pastes your link into Slack, WhatsApp, LinkedIn, or X, a crawler th
 - The product will be shared publicly (launch posts, campaigns, referrals, press).
 - `inspect-metadata` shows missing/relative/localhost `og:*` or `twitter:*`, or the preview looks broken.
 - Not for pages behind login that are never shared.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `content-trust`.
 
 ## Inspect
 

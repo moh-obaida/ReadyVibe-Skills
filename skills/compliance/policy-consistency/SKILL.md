@@ -6,7 +6,7 @@ metadata:
   kind: auditor
   launch-checks: "1,3,26"
   compliance-domains: "2"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # policy-consistency
@@ -18,6 +18,12 @@ metadata:
 - Any privacy notice, cookie notice, consent banner text, terms clause, security/GDPR/"privacy-first" badge, or marketing claim about data exists.
 - After behavior changes (new vendor, new field, deletion change) or before publishing a new notice.
 - Not to write the notice (`privacy-policy`) or observe behavior from scratch (`cookie-and-storage-audit`, `data-flow-mapping`), though you consume their output.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `cookie-and-storage-audit`, `data-flow-mapping`, `data-rights`, `email-compliance`, `privacy-policy`.
 
 ## Inspect
 

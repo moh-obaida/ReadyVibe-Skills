@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "19,23,26"
   helpers: "check-links,audit-markup"
+  references: "companion-methods"
 ---
 
 # content-trust
@@ -17,6 +18,12 @@ A launch-ready site does what it visibly promises, and tells the truth about its
 - Reviewing any public page before launch, or a site "feels unfinished/fake".
 - Placeholder text, template leftovers, stat counters, testimonial carousels, logo strips, or "as seen in" sections exist.
 - Not for legal claims analysis (`policy-consistency`) or visual redesign.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `design-system-reconnaissance`, `faq-readiness`, `launch-identity`, `policy-consistency`.
 
 ## Inspect
 

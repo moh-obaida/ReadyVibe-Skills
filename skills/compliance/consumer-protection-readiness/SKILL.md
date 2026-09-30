@@ -6,7 +6,7 @@ metadata:
   kind: specialist
   compliance-domains: "7"
   launch-checks: "2,25"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # consumer-protection-readiness
@@ -17,6 +17,12 @@ People feel cheated by *inconsistency and surprise*: a price that changes at che
 
 - Prices, plans, checkout, invoices, trials, subscriptions, auto-renewal, discounts, refunds, returns, shipping, or digital delivery exist.
 - Not for a free product with no offers (record "not applicable"). Integration security of the payment provider is `payments-readiness`. Recurring mechanics in depth are `subscription-readiness`.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `content-trust`, `legal-identity-notices`, `payments-readiness`, `public-support`, `subscription-readiness`.
 
 ## Inspect
 
@@ -52,7 +58,7 @@ Repeat the test-mode purchase and cancel: the total at each step equals the char
 
 ## Escalate
 
-Recurring billing, trials, cross-border sales, digital goods, B2C sales to consumers in regulated regions, refunds or warranty promises, and any payment/auth flow that cannot be exercised: REVIEW REQUIRED. Recommend legal review of commercial terms before launch.
+Recurring billing, trials, cross-border sales, digital goods, B2C sales to consumers in regulated regions, refunds or warranty promises, and any payment/auth flow that cannot be exercised: REVIEW REQUIRED where the wording or applicable rule is unclear; look up the rule at an official source and cite it. Keep the recommendation proportional: name the specific unresolved fact or risk that warrants it (minors, sensitive data, a regulated domain, cross-border sale, unclear markets, contested wording), and do not tell an ordinary low-risk site to hire a lawyer.
 
 ## No change is valid when
 

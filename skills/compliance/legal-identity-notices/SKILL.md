@@ -6,7 +6,7 @@ metadata:
   kind: specialist
   compliance-domains: "12"
   launch-checks: "8,25"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # legal-identity-notices
@@ -18,6 +18,12 @@ Visitors and regulators both expect a real operator behind a site, and asset lic
 - Any public product, and especially: commerce, user accounts, user content, or third-party assets (images, fonts, icons, code, datasets, templates).
 - The footer or legal pages show placeholders, an outdated year, or a name that differs from the product.
 - Not to draft trademark or copyright legal strategy.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `dependency-security`, `policy-consistency`, `user-content-safety`.
 
 ## Inspect
 
@@ -55,7 +61,7 @@ Search rendered pages and legal pages for placeholder patterns ("Your Company", 
 
 ## Escalate
 
-Unknown provenance of significant assets, copyleft in a proprietary product, use of third-party brands/logos, or user content with infringement risk: REVIEW REQUIRED; recommend legal review for a commercial launch.
+Unknown provenance of significant assets, copyleft in a proprietary product, use of third-party brands/logos, or user content with infringement risk: REVIEW REQUIRED; name the specific asset or obligation that is unresolved. Keep the recommendation proportional: name the specific unresolved fact or risk that warrants it (minors, sensitive data, a regulated domain, cross-border sale, unclear markets, contested wording), and do not tell an ordinary low-risk site to hire a lawyer.
 
 ## No change is valid when
 

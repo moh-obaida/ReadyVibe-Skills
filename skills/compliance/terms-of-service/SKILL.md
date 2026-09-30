@@ -6,7 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "2"
   compliance-domains: "7,12"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # terms-of-service
@@ -18,6 +18,12 @@ Terms are the rules of *this* product. Generic terms for a product that has no a
 - The product has accounts, user-generated content, purchases or subscriptions, a marketplace, an API, or acceptable-use concerns; or a terms link exists with no page behind it.
 - Existing terms describe features the product lacks or omit ones it has.
 - Not for a static brochure with no commitments (say so), and not to provide legal advice.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `ai-features-readiness`, `consumer-protection-readiness`, `design-system-reconnaissance`, `legal-identity-notices`, `legal-navigation`, `payments-readiness`, `policy-consistency`, `subscription-readiness`, `user-content-safety`.
 
 ## Inspect
 
@@ -51,7 +57,7 @@ Every substantive clause maps to a real feature; every placeholder is visible an
 
 ## Escalate
 
-Money, subscriptions, minors, user content with safety risk, marketplaces, health/finance/legal services, and any cross-border sale: REVIEW REQUIRED. For a commercial launch recommend legal review of the terms and state what you could not determine.
+Money, subscriptions, minors, user content with safety risk, marketplaces, health/finance/legal services, and any cross-border sale: REVIEW REQUIRED. Say specifically what you could not determine (governing law, liability, refund terms, acceptable-use enforcement). Keep the recommendation proportional: name the specific unresolved fact or risk that warrants it (minors, sensitive data, a regulated domain, cross-border sale, unclear markets, contested wording), and do not tell an ordinary low-risk site to hire a lawyer.
 
 ## No change is valid when
 

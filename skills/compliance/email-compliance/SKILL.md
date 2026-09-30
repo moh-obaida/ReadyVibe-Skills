@@ -6,7 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "36,37"
   compliance-domains: "4"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # email-compliance
@@ -17,6 +17,12 @@ metadata:
 
 - The product has a newsletter or waitlist form, an email provider (Resend, SendGrid, Postmark, Mailchimp, Loops, SES…), email templates, send routes, or scheduled campaigns.
 - Not when no email is sent and no address is collected for messaging (record "not applicable" with the observed reason and the recheck trigger). Not to design campaigns.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `design-system-reconnaissance`.
 
 ## Inspect
 

@@ -11,7 +11,7 @@ npx skills add moh-obaida/ReadyVibe-Skills --skill launch-all
 
 Then tell your agent: **"Make this ready to launch."**
 
-There is nothing else to install. No CLI, no package, no account, no service. The skills work on your existing project, in your existing design.
+No ReadyVibe CLI, package, account, or service is required. A few browser-based checks use Playwright in your project if it is available (the skill says so when it is not). The skills work on your existing project, in your existing design.
 
 ## Install
 
@@ -38,7 +38,7 @@ npx skills add moh-obaida/ReadyVibe-Skills --skill seo-readiness
 npx skills add moh-obaida/ReadyVibe-Skills --all
 ```
 
-Each skill is self-contained after install, including any helper script it uses. Installing many skills does not run them all: each one decides for itself whether it applies.
+Each skill is self-contained after install, including any helper script and shared reference it uses. Where a skill mentions other ReadyVibe skills, they are optional: if one is installed the agent uses it, and if not the skill carries a short inline method for it and says the lane ran at reduced depth. So `launch-all` alone gives a real, shallower launch review; install `--all` (or the specialists you care about) when depth matters, for example privacy, consent, accessibility, or building an admin. Installing many skills does not run them all: each one decides for itself whether it applies.
 
 ## What it does
 
@@ -64,7 +64,7 @@ The models are in [`launch-model.md`](skills/core/launch-all/references/launch-m
 | **discoverability** | `seo-readiness`, `social-sharing`, `structured-data`, `search-console-readiness` |
 | **accessibility** | `wcag-readiness` |
 | **quality** | `content-trust`, `faq-readiness`, `link-integrity`, `error-pages`, `failure-resilience`, `forms-readiness`, `mobile-readiness`, `launch-identity`, `public-support`, `legal-navigation`, `performance-readiness` |
-| **security** | `web-security`, `production-readiness`, `security-headers`, `dependency-security` |
+| **security** | `web-security`, `deployment-cleanup`, `security-headers`, `dependency-security` |
 | **admin** | `admin-dashboard` (builds a complete admin for *your* product), `admin-authorization`, `admin-audit-log` |
 | **internationalization** | `multilingual-readiness`, `rtl-readiness` |
 | **commerce** | `payments-readiness`, `subscription-readiness` |

@@ -6,6 +6,7 @@ metadata:
   kind: bundle
   launch-checks: "9-18"
   helpers: "inspect-metadata,check-links"
+  references: "companion-methods"
 ---
 
 # discoverability-all
@@ -19,6 +20,12 @@ The signals in this family **contradict each other far more often than they are 
 - The site is public and should be discoverable or shareable, or a launch/rebrand/domain move is near.
 - `launch-all` routes here.
 - Not when the product is private or intentionally unindexed. In that case confirm it is *consistently* noindex (meta or header, no sitemap, robots not advertising private paths) and stop.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `deployment-cleanup`, `launch-all`, `launch-identity`, `link-integrity`, `multilingual-readiness`, `search-console-readiness`, `seo-readiness`, `social-sharing`, `structured-data`, `web-security`.
 
 ## Route
 
@@ -38,7 +45,7 @@ The signals in this family **contradict each other far more often than they are 
 | titles, descriptions, canonicals, robots, sitemap, noindex, URL agreement (9–13, 16, 18) | `seo-readiness` |
 | missing/incorrect Open Graph or Twitter tags, share image (14) | `social-sharing` |
 | starter favicon, missing icons, product-name mismatch in titles (15) | `launch-identity` |
-| localhost/staging/preview hosts anywhere shipped (17) | `production-readiness` |
+| localhost/staging/preview hosts anywhere shipped (17) | `deployment-cleanup` |
 | the owner wants Search Console/Bing verification steps | `search-console-readiness` |
 | a real article, product, organization, or FAQ page and JSON-LD exists or would help | `structured-data` |
 | more than one language | `multilingual-readiness` (hreflang, per-language canonicals) |

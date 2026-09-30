@@ -7,6 +7,7 @@ metadata:
   launch-checks: "24,37"
   compliance-domains: "6,10"
   helpers: "inventory-data-model"
+  references: "companion-methods"
 ---
 
 # admin-dashboard
@@ -19,6 +20,12 @@ Build a **complete admin UI for this specific website**: its own information arc
 - The product has data or workflows nobody can operate: submissions, users and roles, content or listings, orders and subscriptions, support requests, reported content, privacy requests, email suppression.
 - An admin exists and needs improving, or a launch review (`launch-all`, `production-all`) found an operator task with no screen.
 - Not for a site with nothing to operate and no request for one.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `admin-audit-log`, `admin-authorization`, `data-rights`, `design-system-reconnaissance`, `failure-resilience`, `forms-readiness`, `launch-all`, `mobile-readiness`, `production-all`, `wcag-readiness`.
 
 ## Inspect
 

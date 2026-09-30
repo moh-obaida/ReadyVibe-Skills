@@ -105,7 +105,10 @@ export function lintRepository(rootArg) {
 
   const canonicalHelpers = new Set(existsSync(join(root, "scripts")) ? readdirSync(join(root, "scripts")).filter((f) => f.endsWith(".mjs")).map((f) => f.replace(/\.mjs$/, "")) : []);
   const known = new Set(skills.map((s) => s.name));
-  for (const info of skills) lintQuality(root, info, known, canonicalHelpers, add);
+  const companionDoc = join(root, "docs", "references", "companion-methods.md");
+  const companionEntries = existsSync(companionDoc) ? new Set([...readFileSync(companionDoc, "utf8").matchAll(/^###\s+(\S+)\s*$/gm)].map((m) => m[1])) : null;
+  if (companionEntries) for (const info of skills) if (!info.internal && !companionEntries.has(info.name)) add("COMPANION_ENTRY_MISSING", "docs/references/companion-methods.md", `no "### ${info.name}" entry: a skill installed without ${info.name} has no inline fallback for it`);
+  for (const info of skills) lintQuality(root, info, known, canonicalHelpers, add, companionEntries);
   lintCoverage(root, skills, canonicalHelpers, add);
   lintNoPlatform(root, add);
   return issues;
@@ -162,7 +165,7 @@ function lintSkillFile(root, abs, rel, names, skills, add) {
   }
 }
 
-function lintQuality(root, info, knownSkills, canonicalHelpers, add) {
+function lintQuality(root, info, knownSkills, canonicalHelpers, add, companionEntries) {
   const at = (code, message) => add(code, info.rel, message);
   if (info.internal) return;
   if (!info.kind || !KINDS.has(info.kind)) {
@@ -208,6 +211,13 @@ function lintQuality(root, info, knownSkills, canonicalHelpers, add) {
     if (!existsSync(src)) at("SKILL_REFERENCE_UNKNOWN", `metadata.references names "${ref}", which is not in docs/references/`);
     else if (!existsSync(dst)) at("SKILL_REFERENCE_MISSING", `references/${ref}.md is not vendored (run: node tools/sync-skills.mjs)`);
     else if (!readFileSync(src).equals(readFileSync(dst))) at("SKILL_REFERENCE_STALE", `references/${ref}.md differs from docs/references/${ref}.md (run: node tools/sync-skills.mjs)`);
+  }
+  // Standalone: every sibling skill this skill names must have an inline fallback, and the skill must say so.
+  const companions = [...new Set([...info.body.matchAll(/`([a-z][a-z0-9]*(?:-[a-z0-9]+)+)`/g)].map((m) => m[1]))].filter((t) => knownSkills.has(t) && t !== info.name);
+  if (companions.length && companionEntries) {
+    if (!info.references.includes("companion-methods")) at("SKILL_STANDALONE", 'names other skills but does not declare metadata.references: "companion-methods"');
+    if (!have.some((h) => h.startsWith("Working alone"))) at("SKILL_STANDALONE", 'names other skills but has no "## Working alone" section saying they are optional and what to do without them');
+    for (const c of companions) if (!companionEntries.has(c)) at("SKILL_STANDALONE", `names \`${c}\` but companion-methods.md has no inline fallback for it`);
   }
   for (const ref of info.body.matchAll(/\]\((references\/[^)#\s]+)\)/g)) if (!existsSync(join(info.dir, ref[1]))) at("SKILL_REFERENCE_MISSING", `links to ${ref[1]}, which does not exist`);
   for (const tok of new Set([...info.body.matchAll(/`([a-z][a-z0-9]*(?:-[a-z0-9]+)+)`/g)].map((m) => m[1]))) {

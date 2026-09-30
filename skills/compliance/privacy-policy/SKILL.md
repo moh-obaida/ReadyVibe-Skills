@@ -6,7 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "1"
   compliance-domains: "2"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # privacy-policy
@@ -19,9 +19,15 @@ A privacy policy that does not describe the product is worse than none: it is a 
 - The footer or forms link to a privacy page that does not exist (coordinate with `legal-navigation`).
 - Not when a lawyer's finished text exists (compare it with `policy-consistency` instead), and not to certify anything.
 
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `analytics-privacy`, `cookie-and-storage-audit`, `data-flow-mapping`, `data-rights`, `design-system-reconnaissance`, `email-compliance`, `legal-navigation`, `minors-readiness`, `payments-readiness`, `policy-consistency`, `public-support`, `third-party-privacy`.
+
 ## Inspect
 
-1. **Use existing evidence first**: `.readyvibe/context.md` (if present), `data-flow-mapping` (fields, recipients), `cookie-and-storage-audit` (cookies, storage, third parties), `analytics-privacy`, `data-rights` (deletion/export behavior), `email-compliance` (sender, marketing), `minors-readiness`, `payments-readiness`, `third-party-privacy`. If they have not run, run the ones that apply; do not guess what the product does.
+1. **Use existing evidence first**: `.readyvibe/context.md` (if present), `data-flow-mapping` (fields, recipients), `cookie-and-storage-audit` (cookies, storage, third parties), `analytics-privacy`, `data-rights` (deletion/export behavior), `email-compliance` (sender, marketing), `minors-readiness`, `payments-readiness`, `third-party-privacy`. If they have not run, run the ones that apply (or follow their entries in the companion methods if not installed); do not guess what the product does.
 2. **Build a fact sheet** with an evidence label for every line:
 
    | Topic | What we know | Source |
@@ -65,7 +71,7 @@ That the notice "complies with GDPR/CCPA/…", "covers all requirements", or "is
 
 ## Escalate
 
-The moment markets, audience, or data types imply specific statutory content (children's data, health, finance, biometric, precise location, employee data, cross-border transfers, automated decisions): mark REVIEW REQUIRED and recommend legal review of the notice before launch. Always recommend it for a commercial launch; say what specifically you could not determine.
+The moment markets, audience, or data types imply specific statutory content (children's data, health, finance, biometric, precise location, employee data, cross-border transfers, automated decisions): mark REVIEW REQUIRED, look up the relevant requirements at an official source, cite them, and say what specifically you could not determine (for example the legal basis, retention, or transfer safeguards). Keep the recommendation proportional: name the specific unresolved fact or risk that warrants it (minors, sensitive data, a regulated domain, cross-border sale, unclear markets, contested wording), and do not tell an ordinary low-risk site to hire a lawyer. A small site that collects an email address and runs one disclosed analytics tool, with facts the owner has confirmed, can be reported as: notice matches observed behavior; owner-only facts listed.
 
 ## No change is valid when
 

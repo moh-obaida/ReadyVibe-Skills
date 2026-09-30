@@ -4,6 +4,7 @@ description: "Use when about to create or change any visible UI in a project, su
 license: Apache-2.0
 metadata:
   kind: foundation
+  references: "companion-methods"
 ---
 
 # design-system-reconnaissance
@@ -14,6 +15,12 @@ Fixes that look bolted on erode the trust they were meant to build: a 404 in a d
 
 - About to add or modify visible UI: `error-pages`, `privacy-policy`/`terms-of-service` pages, `consent-management` controls, footer/nav links, empty/error states, forms.
 - Skip it when the change is invisible (metadata, robots, headers) or when a fresh, recent `.readyvibe/design.md` exists.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `consent-management`, `error-pages`, `privacy-policy`, `terms-of-service`.
 
 ## Inspect
 

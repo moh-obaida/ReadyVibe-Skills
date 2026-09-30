@@ -6,7 +6,7 @@ metadata:
   kind: specialist
   compliance-domains: "1"
   launch-checks: "4,6"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # jurisdiction-applicability
@@ -18,6 +18,12 @@ Most compliance questions are really "where, and for whom?" ReadyVibe does not k
 - `compliance-all` begins, or any specialist needs to decide whether a jurisdiction-dependent behavior (consent gating, retention, age, refunds, accessibility duty) matters.
 - Markets change: new language, currency, country selector, shipping region, or audience.
 - Not to draft legal analysis or select a "primary jurisdiction" for the owner.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `compliance-all`, `minors-readiness`, `regulated-domain-triggers`.
 
 ## Inspect
 

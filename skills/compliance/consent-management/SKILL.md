@@ -7,7 +7,7 @@ metadata:
   launch-checks: "4"
   compliance-domains: "3"
   helpers: "observe-runtime"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # consent-management
@@ -19,6 +19,12 @@ Do not default to "add a cookie banner". Ask, in order: **what loads, is a choic
 - `cookie-and-storage-audit` (or your own pass) found non-essential storage or trackers, or a consent control already exists.
 - Someone asks for a banner, a preference center, or "fix consent".
 - Not when the inventory shows no non-essential storage or trackers (say so and stop), or for deciding which laws apply (`jurisdiction-applicability`).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `cookie-and-storage-audit`, `design-system-reconnaissance`, `jurisdiction-applicability`.
 
 ## Inspect
 

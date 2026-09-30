@@ -4,7 +4,7 @@ ReadyVibe *considers* all 40 checks for every launch review, decides which ones 
 
 Compliance adds a second, conditional layer of 12 domains (see the `compliance-all` skill). Checks 1–8 are the launch-facing edge of that layer.
 
-**Owner** is the specialist that carries the method. **Also** lists skills that contribute evidence. If the owner is not installed, do that lane yourself using the method in this table's "Real question" column, and say in the report that no specialist ran.
+**Owner** is the specialist that carries the method. **Also** lists skills that contribute evidence. If the owner is not installed, do that lane yourself using its entry in [`companion-methods.md`](companion-methods.md) (the "Real question" column says what to answer), and say in the report that the lane ran inline at reduced depth.
 
 ## Family A: Compliance and privacy (bundle: `compliance-all`)
 
@@ -31,7 +31,7 @@ Compliance adds a second, conditional layer of 12 domains (see the `compliance-a
 | 14 | Open Graph / social share | Does a shared link show a correct title, description, and working image? | social-sharing | seo-readiness | The product will never be shared publicly |
 | 15 | Favicon / app icons | Are tab icon, touch icon, and manifest icons real, present, and not starter assets? | launch-identity | social-sharing | Never N/A on a public site |
 | 16 | Indexing sanity | Are public pages indexable, private pages not, and do signals agree? | seo-readiness | web-security | Product is intentionally not indexed (then verify it is consistently `noindex`) |
-| 17 | Staging / localhost / test references | Does any shipped page, config, or link still point at a dev or staging host? | production-readiness | seo-readiness, link-integrity | Never N/A |
+| 17 | Staging / localhost / test references | Does any shipped page, config, or link still point at a dev or staging host? | deployment-cleanup | seo-readiness, link-integrity | Never N/A |
 | 18 | Public URL consistency | Do canonical, sitemap, metadata, redirects, and links agree on one host, scheme, and path form? | seo-readiness | discoverability-all | Single-page site with one URL |
 
 ## Family C: Trust and product readiness (bundle: `trust-all`)
@@ -67,7 +67,7 @@ Compliance adds a second, conditional layer of 12 domains (see the `compliance-a
 | 35 | Forms actually submit and handle outcomes | Does each form deliver data to a working endpoint and handle success and failure? | forms-readiness | failure-resilience | No forms |
 | 36 | Unsubscribe works where marketing email exists | Does the unsubscribe link/route/header resolve and complete? | email-compliance | | The product sends no marketing email |
 | 37 | Unsubscribe results in suppression | After unsubscribing, is the address actually excluded from future marketing sends? | email-compliance | data-rights | The product sends no marketing email |
-| 38 | Exposed secrets, client env mistakes, debug artifacts | Is any credential, private key, debug route, or source map exposed to visitors? | web-security | production-readiness, ai-features-readiness | Never N/A |
+| 38 | Exposed secrets, client env mistakes, debug artifacts | Is any credential, private key, debug route, or source map exposed to visitors? | web-security | deployment-cleanup, ai-features-readiness | Never N/A |
 | 39 | HTTPS / security headers / CSP / production sanity | Is transport secure and are headers and CSP sensible for what this site loads? | security-headers | web-security, dependency-security | Never N/A once deployed; when only a local build exists, mark UNKNOWN |
 | 40 | Performance | Are there oversized assets, blocking resources, font/image waste, or obvious bloat? | performance-readiness | mobile-readiness | Never N/A |
 

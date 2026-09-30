@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "15,9,26"
   helpers: "inspect-metadata"
+  references: "companion-methods"
 ---
 
 # launch-identity
@@ -17,6 +18,12 @@ Nothing signals "unfinished" like a browser tab that says "Vite + React" with a 
 - Titles, favicons, app names, manifest, or emails still show starter or template values, or names differ across the site.
 - Before launch, or after a rename/rebrand.
 - Not for designing identity, and not for legal entity naming (`legal-identity-notices`).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `design-system-reconnaissance`, `legal-identity-notices`.
 
 ## Inspect
 

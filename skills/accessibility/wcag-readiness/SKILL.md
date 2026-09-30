@@ -7,18 +7,24 @@ metadata:
   launch-checks: "27,28,29,30,31,32"
   compliance-domains: "8"
   helpers: "audit-markup,observe-runtime"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # wcag-readiness
 
-Roughly a third to half of WCAG issues can be found automatically. The rest, such as whether alt text is *useful*, whether focus order makes sense, and whether an error is understandable, require someone to use the page. This skill does both, and is honest about which it did.
+Automated scans find only some accessibility problems. Much of the rest, such as whether alt text is *useful*, whether focus order makes sense, and whether an error is understandable, require someone to use the page. This skill does both, and is honest about which it did.
 
 ## Activate when
 
 - Any public or account UI before launch; after adding dialogs, menus, forms, charts, or animation.
 - `quality-all` routes here (checks 27–32).
 - Not to assert conformance or legal compliance.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `design-system-reconnaissance`, `quality-all`.
 
 ## Inspect
 

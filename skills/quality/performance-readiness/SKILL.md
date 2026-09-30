@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "40"
   helpers: "audit-assets,observe-runtime"
+  references: "companion-methods"
 ---
 
 # performance-readiness
@@ -17,6 +18,12 @@ Most launch-day slowness comes from a handful of avoidable things: a 4 MB hero P
 - Any public page before launch, or the site feels slow on a phone.
 - `production-all` routes here (check 40).
 - Not for load testing, server capacity, or database performance.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `production-all`, `third-party-privacy`.
 
 ## Inspect
 

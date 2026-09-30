@@ -38,6 +38,10 @@ Categories: `core` (entry bundles and foundations), `compliance`, `accessibility
 
 `npx skills add` copies only the skill's own folder. So a skill that runs a helper or cites a shared reference **carries a copy** of it. There is one canonical copy in `scripts/` or `docs/references/`; `metadata.helpers` and `metadata.references` in each `SKILL.md` declare what a skill needs; `pnpm sync` copies it; `pnpm check` fails if any copy is missing, stale, or extra. Contributors edit the canonical file and sync. Users never see any of this.
 
+## Skills work alone
+
+A skill may name companion skills, but never depends on them. Every skill that names another skill carries `references/companion-methods.md` (one canonical file, `docs/references/companion-methods.md`, with a short minimum method for **every** skill) and a **Working alone** section: if a companion is installed, use it; if not, follow its entry and report that the lane ran inline at reduced depth. The lint fails if a named companion has no entry, and `tests/install.test.mjs` installs individual skills alone through the real Skills CLI (in CI the test is mandatory, never skipped).
+
 ## How a skill works
 
 Every non-bundle skill is operating method, not a checklist: **Activate when · Inspect · Evidence that counts · May change · Must not claim · Verify · Escalate · No change is valid when.** Bundles (`launch-all`, `compliance-all`, `discoverability-all`, `trust-all`, `quality-all`, `production-all`) are convenience skills that tell the agent to inspect, decide applicability, use the specialist skills and helpers, repair, verify, and summarize. There is no orchestration engine: the `SKILL.md` is the orchestration.

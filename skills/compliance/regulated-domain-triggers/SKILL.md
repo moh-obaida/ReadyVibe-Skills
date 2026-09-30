@@ -6,7 +6,7 @@ metadata:
   kind: specialist
   compliance-domains: "11"
   launch-checks: "6"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # regulated-domain-triggers
@@ -18,6 +18,12 @@ General web compliance (a privacy page, a consent banner, a sitemap) does not co
 - Recon runs on a new project, or product scope changes (new feature, new data type, new audience).
 - Product copy, fields, integrations, or categories suggest any domain below.
 - Not to explain those regimes or to say they don't apply.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `ai-features-readiness`, `analytics-privacy`, `consumer-protection-readiness`, `privacy-policy`, `terms-of-service`.
 
 ## Inspect
 

@@ -7,6 +7,7 @@ metadata:
   launch-checks: "1,7"
   compliance-domains: "2,9"
   helpers: "inventory-data-model"
+  references: "companion-methods"
 ---
 
 # data-flow-mapping
@@ -18,6 +19,12 @@ Every privacy statement, deletion promise, and vendor list rests on one question
 - Before drafting or checking a privacy notice, a deletion/export flow, or a vendor list.
 - The product has forms, accounts, checkout, uploads, or server routes that receive user data.
 - Not to assign legal bases or conclude what is lawful.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `cookie-and-storage-audit`, `regulated-domain-triggers`.
 
 ## Inspect
 

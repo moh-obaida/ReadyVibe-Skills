@@ -7,6 +7,7 @@ metadata:
   compliance-domains: "7,10"
   launch-checks: "38,35"
   helpers: "scan-secrets"
+  references: "companion-methods"
 ---
 
 # payments-readiness
@@ -18,6 +19,12 @@ Payment bugs are trust and money bugs: a test key in production means no revenue
 - A payment provider SDK, checkout link, pricing table button, or webhook exists.
 - Before launch or a switch from test to live mode.
 - Not for pricing/refund wording (`consumer-protection-readiness`) or recurring billing rules (`subscription-readiness`). Never handle real cards.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `consumer-protection-readiness`, `email-compliance`, `failure-resilience`, `public-support`, `regulated-domain-triggers`, `subscription-readiness`.
 
 ## Inspect
 

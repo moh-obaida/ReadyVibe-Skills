@@ -1,5 +1,5 @@
 ---
-name: production-readiness
+name: deployment-cleanup
 description: "Use when a site must be cleaned of development, staging, and test artifacts before going live: localhost and staging URLs, preview hostnames, test data and accounts, debug routes, source maps, console noise, placeholder environment values, and mismatches between build modes. It finds them in source, config, and shipped output and repairs the safe ones. Do not use it for penetration testing, for deployment itself, or to modify production infrastructure or environment values."
 license: Apache-2.0
 metadata:
@@ -7,9 +7,10 @@ metadata:
   launch-checks: "17,38"
   compliance-domains: "10"
   helpers: "scan-secrets,inspect-metadata,check-links"
+  references: "companion-methods"
 ---
 
-# production-readiness
+# deployment-cleanup
 
 The site works, but it still thinks it is running on someone's laptop: canonical to `localhost:5173`, sitemap on `staging.`, `NEXT_PUBLIC_API_URL=http://localhost:3001`, a test-mode payment key, a `/debug` route. This skill hunts those leftovers.
 
@@ -18,6 +19,12 @@ The site works, but it still thinks it is running on someone's laptop: canonical
 - Before any launch, domain cutover, or move from preview to production.
 - `discoverability-all`/`production-all` route here (checks 17, 38).
 - Not to deploy, change DNS, or edit production secrets.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `discoverability-all`, `production-all`, `security-headers`.
 
 ## Inspect
 

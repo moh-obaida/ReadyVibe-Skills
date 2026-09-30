@@ -7,6 +7,7 @@ metadata:
   launch-checks: "38,16"
   compliance-domains: "10"
   helpers: "scan-secrets,audit-assets"
+  references: "companion-methods"
 ---
 
 # web-security
@@ -19,13 +20,19 @@ A pre-launch security review looks for the mistakes that AI-generated and rushed
 - `production-all` routes here (check 38), or a secret or debug artifact was reported.
 - Not a substitute for a professional penetration test or a dependency audit (`dependency-security`).
 
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `admin-authorization`, `dependency-security`, `deployment-cleanup`, `production-all`, `security-headers`, `seo-readiness`, `third-party-privacy`, `user-content-safety`.
+
 ## Inspect
 
 **1. Secrets and env.** Run `node scripts/scan-secrets.mjs --root .` (paths relative to this skill's folder). It reports secret-shaped values (redacted), client-prefixed env variables with secret-like names (`NEXT_PUBLIC_*SECRET*`, `VITE_*KEY` for private keys), tracked `.env` files, and source maps and localhost in shipped output. Then reason: which findings are truly private (a Stripe secret key, a Supabase `service_role`, a database URL, a webhook secret, an AI provider key) versus public identifiers by design (publishable keys, anon keys, analytics IDs)? For each real one: where is it used, was it committed, is it in git history? (`git log -S` only for the *fact*, never print the value.)
 
 **2. Authorization and exposure (source, then runtime on staging).** For every route, server action, and API handler: is authentication required where data is private; is authorization checked **on the server** per resource (object-level: can user A fetch user B's record by changing an ID?); admin routes guarded server-side (`admin-authorization`); client-side route guards alone are not security. Database access: row-level security enabled and policies present (Supabase/Firebase rules), not `allow read, write: if true`. Check that "private" pages are not publicly reachable: request them unauthenticated, and check that robots/sitemap do not advertise them (`seo-readiness`).
 
-**3. Debug and dev leftovers.** Debug/test/seed/reset routes, GraphQL introspection/playground open, verbose error responses with stack traces, `console.log` of tokens or user objects, permissive CORS (`*` with credentials), source maps in production, test accounts/default passwords, `NODE_ENV`-dependent code that fails open, feature flags exposing admin tools (`production-readiness` shares this).
+**3. Debug and dev leftovers.** Debug/test/seed/reset routes, GraphQL introspection/playground open, verbose error responses with stack traces, `console.log` of tokens or user objects, permissive CORS (`*` with credentials), source maps in production, test accounts/default passwords, `NODE_ENV`-dependent code that fails open, feature flags exposing admin tools (`deployment-cleanup` shares this).
 
 **4. Input and output handling.** Unsafe HTML rendering (`dangerouslySetInnerHTML`, `innerHTML`, markdown without sanitization); SQL/NoSQL query construction with user input; open redirects (`?next=` unvalidated); SSRF in fetch-by-URL features; file upload validation (`user-content-safety`); CSRF on cookie-authenticated state-changing routes.
 

@@ -256,7 +256,10 @@ async function browserAvailable() {
 
 describe("observe-runtime (real headless browser, local pages only)", async () => {
   const available = await browserAvailable();
-  const skip = available ? false : "No Playwright/Chromium available. Not run.";
+  const skip = available || process.env.CI ? false : "No Playwright/Chromium available. Not run.";
+  test("a headless browser is available (mandatory in CI)", () => {
+    if (process.env.CI) assert.ok(available, "In CI the browser tests must run: install Chromium with playwright-core.");
+  });
   const steps = join(fixtures, "steps");
   test("flags tracking before interaction and a Reject that does not stop it", { skip }, async () => {
     const { server, url } = await serve(join(fixtures, "consent-bad"));

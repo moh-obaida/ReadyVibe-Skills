@@ -6,7 +6,7 @@ metadata:
   kind: specialist
   compliance-domains: "7"
   launch-checks: "2,35"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # subscription-readiness
@@ -17,6 +17,12 @@ Recurring billing is where good products lose trust: a free trial that quietly c
 
 - Plans renew, trials convert, seats/usage are billed periodically, or "cancel anytime" appears in copy.
 - Not for one-time purchases (`payments-readiness`), and not for wording requirements (`consumer-protection-readiness` escalates those).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `consumer-protection-readiness`, `data-rights`, `email-compliance`, `payments-readiness`.
 
 ## Inspect
 
@@ -51,7 +57,7 @@ Repeat the test-mode subscribe → trial → cancel → failed-renewal cases; co
 
 ## Escalate
 
-Any recurring billing to consumers, trials, regional pricing, or auto-renewal wording: REVIEW REQUIRED, recommend legal review of terms and checkout disclosures before launch. Flows you cannot exercise in test mode: UNVERIFIED.
+Any recurring billing to consumers, trials, regional pricing, or auto-renewal wording: REVIEW REQUIRED where the wording or the applicable rule is unclear or differs by market; look the rule up at an official source, cite it, and name what remains unresolved. Keep the recommendation proportional: name the specific unresolved fact or risk that warrants it (minors, sensitive data, a regulated domain, cross-border sale, unclear markets, contested wording), and do not tell an ordinary low-risk site to hire a lawyer. Flows you cannot exercise in test mode: UNVERIFIED.
 
 ## No change is valid when
 

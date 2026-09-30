@@ -4,6 +4,7 @@ description: "Use when reviewing a pull request, branch, or release for launch a
 license: Apache-2.0
 metadata:
   kind: auditor
+  references: "companion-methods"
 ---
 
 # compliance-diff
@@ -15,6 +16,12 @@ Launch readiness decays. A month after a clean review, someone adds a session-re
 - A PR, branch, or release diff is under review, or the user asks "what does this change do to our launch/privacy posture?"
 - A context note (`.readyvibe/context.md`), if one exists, has "NOT APPLICABLE" items whose recheck triggers might have fired.
 - Not for a first full review (use `launch-all`).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `admin-authorization`, `ai-features-readiness`, `analytics-privacy`, `consent-management`, `consumer-protection-readiness`, `cookie-and-storage-audit`, `data-flow-mapping`, `data-rights`, `email-compliance`, `jurisdiction-applicability`, `launch-all`, `legal-navigation`, `minors-readiness`, `multilingual-readiness`, `payments-readiness`, `policy-consistency`, `privacy-policy`, `public-support`, `regulated-domain-triggers`, `seo-readiness`, `subscription-readiness`, `third-party-privacy`, `user-content-safety`, `web-security`.
 
 ## Inspect
 

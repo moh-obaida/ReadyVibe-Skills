@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "39,38"
   compliance-domains: "10"
+  references: "companion-methods"
 ---
 
 # dependency-security
@@ -17,6 +18,12 @@ Every dependency is code you ship. A launch review should know what is in the tr
 - Manifests exist (`package.json`, lockfiles, `requirements.txt`, `Gemfile.lock`, `go.mod`, `Cargo.lock`, `composer.lock`).
 - Before launch, after a big scaffold, or when the AI generator added many packages.
 - Not to perform general code review or to upgrade frameworks.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `legal-identity-notices`, `performance-readiness`, `web-security`.
 
 ## Inspect
 

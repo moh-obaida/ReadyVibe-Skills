@@ -6,6 +6,7 @@ metadata:
   kind: bundle
   launch-checks: "27-34"
   helpers: "audit-markup,observe-runtime"
+  references: "companion-methods"
 ---
 
 # quality-all
@@ -17,6 +18,12 @@ Owns launch family D (checks 27–34). The web looks fine on the developer's lap
 - Any public UI is about to launch, or the user mentions accessibility, mobile, responsive, keyboard, or "works on my phone".
 - `launch-all` routes here.
 - Not for legal conclusions about accessibility. That is REVIEW REQUIRED under `compliance-all` domain 8.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `compliance-all`, `forms-readiness`, `launch-all`, `mobile-readiness`, `multilingual-readiness`, `rtl-readiness`, `wcag-readiness`.
 
 ## Route
 

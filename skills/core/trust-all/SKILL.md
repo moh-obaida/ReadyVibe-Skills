@@ -6,6 +6,7 @@ metadata:
   kind: bundle
   launch-checks: "19-26"
   helpers: "check-links,audit-markup"
+  references: "companion-methods"
 ---
 
 # trust-all
@@ -17,6 +18,12 @@ Owns launch family C (checks 19–26). Trust is broader than badges: it is wheth
 - The site is public and about to be shown to real users, investors, press, or customers.
 - `launch-all` routes here, or the user says "it feels unfinished / fake / sketchy".
 - Not for legal-page authoring (`compliance-all`) or visual redesign (this repairs broken trust surfaces in the existing design).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `compliance-all`, `content-trust`, `error-pages`, `failure-resilience`, `faq-readiness`, `launch-all`, `launch-identity`, `legal-navigation`, `link-integrity`, `public-support`.
 
 ## Route
 

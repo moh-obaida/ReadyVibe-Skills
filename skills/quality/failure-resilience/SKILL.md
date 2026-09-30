@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "24,35"
   helpers: "observe-runtime"
+  references: "companion-methods"
 ---
 
 # failure-resilience
@@ -17,6 +18,12 @@ Demo data and a fast laptop hide the states real users meet on day one: slow net
 - The UI fetches data, submits actions, uses auth, uploads files, or renders lists/results that can be empty.
 - Reviewing before launch or after users report blank screens or "stuck" pages.
 - Not for fully static sites with no interactive data (say so).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `design-system-reconnaissance`.
 
 ## Inspect
 

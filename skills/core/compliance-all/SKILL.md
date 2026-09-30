@@ -6,7 +6,7 @@ metadata:
   kind: bundle
   launch-checks: "1-8"
   compliance-domains: "1-12"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # compliance-all
@@ -21,6 +21,12 @@ It must never produce "GDPR ✅", "CCPA ✅", or "ADA ✅".
 - `launch-all` routes here for launch checks 1–8.
 - The user says "make us compliant". Reframe it (see Escalate) and proceed with what can be inspected.
 - Not for pure SEO, layout, or performance work.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `cookie-and-storage-audit`, `data-flow-mapping`, `jurisdiction-applicability`, `launch-all`, `minors-readiness`, `regulated-domain-triggers`, `site-reconnaissance`.
 
 ## Route
 
@@ -42,7 +48,7 @@ Start with domain 1, because it gates everything else.
 | 7 Consumer protection | consumer-protection-readiness, subscription-readiness, payments-readiness | no prices, checkout, or billing |
 | 8 Accessibility obligations | wcag-readiness | never fully skipped for a public product; legal weight is always REVIEW REQUIRED |
 | 9 Vendors / data sharing | third-party-privacy | no third-party hosts or SDKs |
-| 10 Security / production | web-security, security-headers, production-readiness | never skipped once deployed |
+| 10 Security / production | web-security, security-headers, deployment-cleanup | never skipped once deployed |
 | 11 Regulated-domain triggers | regulated-domain-triggers (plus ai-features-readiness when models are called) | product language, fields, and features touch no regulated domain |
 | 12 Legal identity / IP / notices | legal-identity-notices, public-support, legal-navigation | never skipped for a public product |
 | 1-8 launch pages | privacy-policy, terms-of-service | see each skill's "No change is valid" section |

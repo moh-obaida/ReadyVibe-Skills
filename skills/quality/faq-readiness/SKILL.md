@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "20"
   helpers: "check-links"
+  references: "companion-methods"
 ---
 
 # faq-readiness
@@ -18,6 +19,12 @@ A good FAQ removes the doubt that stops someone from signing up, buying, or trus
 - A launch review (`launch-all`, `trust-all`, `content-trust`) found predictable questions left unanswered at the point of decision: what does it cost, what happens when the trial ends, how do I cancel, what do you do with my data, when will it arrive, does it work with X.
 - Support messages or the contact inbox keep asking the same things.
 - Not when the product is self-explanatory and low-friction. Then say so; a clearer headline or call to action is usually the better fix (`content-trust`).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `consumer-protection-readiness`, `content-trust`, `design-system-reconnaissance`, `launch-all`, `policy-consistency`, `privacy-policy`, `structured-data`, `trust-all`, `wcag-readiness`.
 
 ## Inspect
 

@@ -6,7 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "1,7"
   compliance-domains: "2,6"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # privacy-readiness
@@ -18,6 +18,12 @@ After you know *what* is collected (`data-flow-mapping`), ask whether the produc
 - Personal data is stored or processed, especially accounts, profiles, uploads, or messages.
 - Reviewing before launch, after a data-model change, or before answering data-rights requests.
 - Not to define legal retention periods (owner/legal decision).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `admin-authorization`, `data-flow-mapping`, `policy-consistency`, `web-security`.
 
 ## Inspect
 

@@ -6,6 +6,7 @@ metadata:
   kind: bundle
   launch-checks: "1-40"
   helpers: "inspect-metadata,check-links,audit-markup,audit-assets,scan-secrets,observe-runtime"
+  references: "companion-methods"
 ---
 
 # launch-all
@@ -22,6 +23,12 @@ The canonical scope is the 40-check launch model in [references/launch-model.md]
 - Do not activate for one narrow request ("fix my sitemap"). Use `seo-readiness` directly.
 - Do not activate for "make us GDPR/CCPA compliant". Use `compliance-all`, and expect it to refuse that framing (see Escalate).
 
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `admin-audit-log`, `admin-authorization`, `admin-dashboard`, `compliance-all`, `consumer-protection-readiness`, `design-system-reconnaissance`, `discoverability-all`, `launch-verification`, `payments-readiness`, `production-all`, `quality-all`, `regulated-domain-triggers`, `seo-readiness`, `site-reconnaissance`, `subscription-readiness`, `trust-all`.
+
 ## Flow
 
 ```
@@ -36,7 +43,7 @@ The canonical scope is the 40-check launch model in [references/launch-model.md]
 
 ### 1. Recon: context, without a questionnaire
 
-Run `site-reconnaissance`, or do its job inline. Infer from the repository, config, routes, dependencies, environment templates, network behavior, and project docs. Establish:
+Run `site-reconnaissance` if installed; otherwise follow its entry in [references/companion-methods.md](references/companion-methods.md). Infer from the repository, config, routes, dependencies, environment templates, network behavior, and project docs. Establish:
 
 - public vs internal; deployment target and production host if known
 - audience, languages, apparent markets (documented ones only; do not guess a jurisdiction from a domain name)
@@ -93,7 +100,9 @@ Activate a specialist when **both** hold: its check applies, and the sweep or re
 | Operators have tasks nobody can perform (submissions, privacy requests, moderation, users, refunds) and the owner wants an admin | `admin-dashboard` (builds or improves one from the real app) |
 | Health, finance, education, minors, legal, crypto, gambling, AI features | `regulated-domain-triggers` first; it may stop ordinary work |
 
-Prefer the family bundles over invoking many specialists yourself. A bundle already knows how to select within its family. If a specialist is not installed, do its lane inline from the model's "Real question" column and label that in the report.
+Prefer the family bundles over invoking many specialists yourself. A bundle already knows how to select within its family.
+
+**If a bundle or specialist is not installed, do not stop and do not skip the lane.** Every skill has a minimum method in [references/companion-methods.md](references/companion-methods.md). Follow that entry, use the helpers in this skill's `scripts/`, and label the lane *inline, reduced depth* in the report. A launch review with only `launch-all` installed is real but shallower than one with the specialists: say which lanes ran inline, and suggest installing the full set (`npx skills add moh-obaida/ReadyVibe-Skills --all`) when depth matters (privacy, consent, admin, accessibility).
 
 ### 5. Repair
 

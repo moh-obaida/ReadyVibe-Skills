@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "8,25"
   compliance-domains: "12"
+  references: "companion-methods"
 ---
 
 # public-support
@@ -17,6 +18,12 @@ Visitors need a way to say "this is broken", "delete my data", or "I was charged
 - Any public product; especially commerce, accounts, forms, or a launch with press attention.
 - Legal pages reference a contact route; footer says "Contact" but goes nowhere.
 - Not to set up a helpdesk or staff support.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `consumer-protection-readiness`, `data-rights`, `design-system-reconnaissance`, `forms-readiness`, `legal-identity-notices`, `user-content-safety`.
 
 ## Inspect
 

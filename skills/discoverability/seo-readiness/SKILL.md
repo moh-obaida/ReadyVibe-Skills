@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "9,10,11,12,13,16,18"
   helpers: "inspect-metadata,check-links"
+  references: "companion-methods"
 ---
 
 # seo-readiness
@@ -17,6 +18,12 @@ File existence is the easy 10%. The failures that cost launches are **contradict
 - The product has public pages meant to be found, or launch/domain/redesign is near.
 - Titles look like "Vite + React", canonicals or sitemap hosts look wrong, or the site has never been indexed.
 - Not for a private/internal product (confirm it is consistently `noindex`), not for ranking strategy or keyword research.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `multilingual-readiness`, `search-console-readiness`, `site-reconnaissance`, `web-security`.
 
 ## Inspect
 

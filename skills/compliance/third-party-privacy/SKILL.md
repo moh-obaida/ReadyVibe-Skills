@@ -7,6 +7,7 @@ metadata:
   launch-checks: "3,5"
   compliance-domains: "9"
   helpers: "observe-runtime"
+  references: "companion-methods"
 ---
 
 # third-party-privacy
@@ -18,6 +19,12 @@ Every third-party request tells that third party at least the visitor's IP addre
 - Any third-party origin appears in network traffic or source (fonts, CDNs, embeds, widgets, SDKs).
 - The privacy notice needs a recipient list, or the owner wants to reduce external dependencies.
 - Not to rule on international transfer legality or contractual terms with vendors (REVIEW REQUIRED).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `analytics-privacy`, `payments-readiness`, `regulated-domain-triggers`.
 
 ## Inspect
 

@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "18"
   helpers: "inspect-metadata"
+  references: "companion-methods"
 ---
 
 # structured-data
@@ -16,6 +17,12 @@ Structured data is a **claim to search engines about visible content**. False or
 
 - JSON-LD/microdata already exists (validate it), or a page is a real article, product, organization, local business, event, or breadcrumb trail where accurate markup helps.
 - Not on pages that fit none of those, and not to "add schema" generically.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `content-trust`.
 
 ## Inspect
 

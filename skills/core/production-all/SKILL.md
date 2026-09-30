@@ -6,6 +6,7 @@ metadata:
   kind: bundle
   launch-checks: "35-40"
   helpers: "scan-secrets,audit-assets,check-links,observe-runtime"
+  references: "companion-methods"
 ---
 
 # production-all
@@ -16,6 +17,12 @@ Owns launch family E (checks 35–40): forms that submit, unsubscribe that works
 
 - A launch, deploy, or domain cutover is near, or the user mentions forms, newsletters, env vars, secrets, headers, or speed.
 - `launch-all` routes here.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `admin-audit-log`, `admin-authorization`, `admin-dashboard`, `dependency-security`, `deployment-cleanup`, `email-compliance`, `forms-readiness`, `launch-all`, `performance-readiness`, `security-headers`, `web-security`.
 
 ## Route
 
@@ -35,7 +42,7 @@ Owns launch family E (checks 35–40): forms that submit, unsubscribe that works
 | forms exist and must submit and handle outcomes (35, 30) | `forms-readiness` |
 | marketing email exists (36, 37) | `email-compliance` (skip if there is none; say why) |
 | secrets, client env mistakes, debug routes, auth clues (38) | `web-security` |
-| localhost/staging/dev artifacts, source maps, test data in production (17, 38) | `production-readiness` |
+| localhost/staging/dev artifacts, source maps, test data in production (17, 38) | `deployment-cleanup` |
 | headers, CSP, HTTPS (39) | `security-headers` |
 | vulnerable or abandoned dependencies | `dependency-security` |
 | oversized assets, blocking resources, font/image waste (40) | `performance-readiness` |

@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "22,23,17"
   helpers: "check-links"
+  references: "companion-methods"
 ---
 
 # link-integrity
@@ -17,6 +18,12 @@ Broken links in the nav or footer are the fastest way to look abandoned. But a f
 - Before launch, after a routing/rename/migration, or when links look wrong.
 - `launch-all`/`trust-all`/`discoverability-all` route here for checks 22, 23 (dead hrefs), or 17 (dev/staging hosts in links).
 - Not for behaviors that need JavaScript interaction only (clicking a menu); check those in a browser.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `discoverability-all`, `error-pages`, `launch-all`, `legal-navigation`, `privacy-policy`, `production-all`, `terms-of-service`, `trust-all`.
 
 ## Inspect
 

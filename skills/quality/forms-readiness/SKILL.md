@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "30,35,23"
   helpers: "audit-markup,observe-runtime"
+  references: "companion-methods"
 ---
 
 # forms-readiness
@@ -16,6 +17,12 @@ A form that looks fine and silently drops messages is a launch-day disaster: you
 
 - The site has any `<form>` or form-like flow, including signup/login, waitlist, contact, newsletter, checkout, feedback, or search.
 - Not on production without the owner's explicit authorization (submitting creates real records, sends real email, or triggers real payments). Not to build backends the owner did not ask for.
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `design-system-reconnaissance`, `email-compliance`, `privacy-policy`, `third-party-privacy`, `wcag-readiness`.
 
 ## Inspect
 

@@ -7,7 +7,7 @@ metadata:
   compliance-domains: "9,11"
   launch-checks: "38"
   helpers: "scan-secrets"
-  references: "official-sources"
+  references: "official-sources,companion-methods"
 ---
 
 # ai-features-readiness
@@ -18,6 +18,12 @@ AI features fail launch in predictable ways: an API key in the browser bundle, u
 
 - Source calls a model API (OpenAI, Anthropic, Gemini, Mistral, Replicate, Hugging Face, Vercel AI SDK, LangChain, etc.), embeds an AI widget, or the copy mentions AI/assistant/copilot/generated.
 - Not when there is no AI feature (say so and stop).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `content-trust`, `data-flow-mapping`, `failure-resilience`, `policy-consistency`, `regulated-domain-triggers`.
 
 ## Inspect
 

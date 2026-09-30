@@ -7,7 +7,7 @@ ReadyVibe-Skills is a public repository of installable coding-agent skills. **Th
 - A skill lives at `skills/<category>/<name>/SKILL.md`. Write operating method, not a checklist: **Activate when · Inspect · Evidence that counts · May change · Must not claim · Verify · Escalate · No change is valid when.** Bundles route instead of inspecting.
 - Use the evidence labels OBSERVED / SOURCE-INDICATED / DECLARED / INFERRED / UNKNOWN / REVIEW REQUIRED. Unknown is never a pass and never a failure. Do not report suspicion as fact.
 - **Quote the `description` value in YAML.** An unquoted `: ` inside it makes the frontmatter invalid and an installer may silently skip the skill.
-- A skill must work by itself after `npx skills add`. It must never require a ReadyVibe CLI, engine, runtime, account, service, or npm package.
+- A skill must work by itself after `npx skills add`. It must never require a ReadyVibe CLI, engine, runtime, account, service, or npm package, **or another ReadyVibe skill**. Naming a companion skill is fine; the skill then needs a *Working alone* section and the companion needs a minimum-method entry in `docs/references/companion-methods.md` (vendored via `metadata.references`). Adding a skill means adding its entry there.
 - A skill that creates or changes visible UI must first inspect the project's existing design system (`design-system-reconnaissance`). Never impose a ReadyVibe look.
 - **No legal rules from memory.** Legal-sensitive skills send the agent to official sources at run time (`docs/references/official-sources.md`), to cite what it read and mark applicability REVIEW REQUIRED.
 - Every launch check and compliance domain needs an owning skill in `skills/core/launch-all/references/launch-model.md` or `skills/core/compliance-all/references/compliance-domains.md`; the lint checks this.
@@ -27,6 +27,6 @@ pnpm install
 pnpm check      # vendored files in sync, skill lint, helper + lint + installability tests
 ```
 
-Installability tests need npm access once to fetch the Skills CLI and are skipped if unavailable. Browser tests need Chromium (via Playwright) and are skipped if unavailable.
+Installability and browser tests are skipped on a laptop if npm access or Chromium is unavailable, but **fail in CI** (`CI=true`): the distribution mechanism must always be tested.
 
 Add `Signed-off-by:` to commits (Developer Certificate of Origin).

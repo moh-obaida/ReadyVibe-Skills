@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "21"
   helpers: "check-links"
+  references: "companion-methods"
 ---
 
 # error-pages
@@ -17,6 +18,12 @@ A launch-ready 404 is not "404 Page Not Found" on a blank framework default. It 
 - Any site with routes; especially SPAs (Vite/CRA) where unknown URLs fall through to `index.html` with 200.
 - The 404 is a framework default, unstyled, missing, or `LINK_SOFT_404` showed up in `check-links`.
 - Not for intentional redirects or for private/authenticated route handling (that is authorization).
+
+## Working alone
+
+This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+
+Companions named here: `design-system-reconnaissance`, `failure-resilience`.
 
 ## Inspect
 
