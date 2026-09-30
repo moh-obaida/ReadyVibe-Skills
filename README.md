@@ -49,6 +49,16 @@ npx skills add moh-obaida/ReadyVibe-Skills --all                       # every s
 
 Add `--agent <name>` (for example `--agent claude-code`) to install for one agent only. These commands were verified against Skills CLI 1.7.0.
 
+### Pin to a release
+
+Skills are instructions your agent runs, so pin an install to a release if you do not want it to change underneath you:
+
+```bash
+npx skills add moh-obaida/ReadyVibe-Skills#v1.0.0 --skill launch-all
+```
+
+The pinned form (`#v1.0.0`, a tag, or a full commit SHA) was verified end to end against the `v1.0.0` release: listing, isolated installs, the default install layout, and `--all`. See the [releases](https://github.com/moh-obaida/ReadyVibe-Skills/releases) and the [CHANGELOG](CHANGELOG.md).
+
 ## Standalone skills, and when specialists go deeper
 
 Every skill works **on its own** after install. Its helper scripts and shared references travel inside its own folder.
