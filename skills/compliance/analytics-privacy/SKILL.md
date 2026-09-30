@@ -1,12 +1,13 @@
 ---
 name: analytics-privacy
-description: "Use when a site includes analytics, advertising pixels, session replay, heatmaps, or a tag manager and you need to know what they collect, when they fire, and whether the disclosure and any consent gating match. It inventories vendors and personal-data exposure and verifies timing at runtime. Do not use it to install analytics, to certify a vendor as compliant, or to state that analytics needs or does not need consent without rule context."
+description: "Use when a site includes analytics, advertising pixels, session replay, heatmaps, or a tag manager and you need to know what they collect, when they fire, and whether the disclosure and any consent gating match. It inventories vendors and personal-data exposure and verifies timing at runtime. Do not use it to install analytics, to certify a vendor as compliant, or to state that analytics needs or does not need consent without looking up the rule at an official source."
 license: Apache-2.0
 metadata:
   kind: specialist
   launch-checks: "5"
   compliance-domains: "3,9"
   helpers: "observe-runtime"
+  references: "official-sources"
 ---
 
 # analytics-privacy
@@ -36,6 +37,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - The correct phrasing when only source exists: "Analytics integration is present; pre-consent gating has not been proven." Never "analytics loads before consent" without an observed request before a choice.
 - Vendor documentation (cookieless mode, IP anonymization) is DECLARED; it lowers concern only when configuration and traffic corroborate it.
 - Cookieless does not mean disclosure-free or rule-free: report the facts; applicability is REVIEW REQUIRED.
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
 

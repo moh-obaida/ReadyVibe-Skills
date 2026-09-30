@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "1,7"
   compliance-domains: "2,6"
+  references: "official-sources"
 ---
 
 # privacy-readiness
@@ -33,6 +34,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 - A query without a user filter is SOURCE-INDICATED exposure. Prove it by requesting as a different test user before saying data leaks.
 - "No retention job found" is SOURCE-INDICATED within the code you can see; managed databases may have policies you cannot see: UNKNOWN.
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
 

@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "36,37"
   compliance-domains: "4"
+  references: "official-sources"
 ---
 
 # email-compliance
@@ -40,8 +41,11 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - OBSERVED needs the unsubscribe run on staging with a test address **and** a check that the address is excluded by the send-selection logic (a test send to the sandbox, or a query result).
 - Handler sets a flag: SOURCE-INDICATED suppression. Add "send path filter verified" to upgrade it.
 - Provider-side suppression you cannot inspect is UNKNOWN. Say what the owner should confirm in the provider dashboard.
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
+
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components. Never impose a ReadyVibe look on the user's site.
 
 - Fix a placeholder/dead unsubscribe link; wire an existing unsubscribe route to the real suppression mechanism; add the suppression filter to send queries; add `List-Unsubscribe` headers through the existing provider integration; fix localhost/staging URLs in templates; add an honest signup line near the form describing what will be sent ("Product updates, about monthly").
 - Separate a marketing block out of a transactional email **only** with the owner's decision.

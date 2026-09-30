@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "6"
   compliance-domains: "5"
+  references: "official-sources"
 ---
 
 # minors-readiness
@@ -34,8 +35,11 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - Stated audience is DECLARED. Evident audience is INFERRED (list the signals). A gap between them is a finding, not a verdict about the law.
 - Whether the product is "directed to children" in a legal sense is REVIEW REQUIRED. Do not conclude it yourself.
 - An age field that is collected but unenforced is SOURCE-INDICATED; prove the bypass by trying it on a test flow.
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
+
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components. Never impose a ReadyVibe look on the user's site.
 
 - Make an existing age check actually enforce (server-side validation, not only UI; no auto-retry loophole) **when the owner has stated the rule**.
 - Stop collecting age/DOB that nothing uses; remove age data from analytics.

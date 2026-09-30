@@ -1,28 +1,22 @@
 {
-  "name": "readyvibe",
+  "name": "readyvibe-skills",
   "private": true,
   "version": "0.1.0",
-  "description": "Installable launch-readiness skills for coding agents. Install with: npx skills add moh-obaida/ReadyVibe-Skills",
+  "description": "Production and launch skills for vibe-coded websites. Install with: npx skills add moh-obaida/ReadyVibe-Skills",
   "license": "Apache-2.0",
+  "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "packageManager": "pnpm@10.15.0",
   "scripts": {
-    "build": "pnpm -r --filter @readyvibe/schemas --filter @readyvibe/engine --filter @readyvibe/cli run build",
-    "typecheck": "pnpm -r --filter @readyvibe/schemas --filter @readyvibe/engine --filter @readyvibe/cli --filter @readyvibe/skill-lint run typecheck",
-    "test": "pnpm test:internal && pnpm test:helpers",
-    "test:internal": "pnpm -r --filter @readyvibe/schemas --filter @readyvibe/engine --filter @readyvibe/cli --filter @readyvibe/skill-lint run test",
-    "test:helpers": "node --test scripts/test/",
-    "sync-skills": "node scripts/sync-skill-assets.mjs",
-    "skill-lint": "pnpm --filter @readyvibe/skill-lint build && node tools/skill-lint/dist/cli.js .",
-    "check": "node scripts/sync-skill-assets.mjs --check && pnpm skill-lint && pnpm test",
-    "format": "prettier --write ."
+    "sync": "node tools/sync-skills.mjs",
+    "lint": "node tools/lint-skills.mjs",
+    "test": "node --test tests/",
+    "check": "node tools/sync-skills.mjs --check && node tools/lint-skills.mjs && node --test tests/"
   },
   "devDependencies": {
-    "@types/node": "^22.20.4",
     "playwright-core": "1.61.1",
-    "prettier": "^3.6.2",
-    "typescript": "^5.9.2"
+    "yaml": "^2.8.1"
   }
 }

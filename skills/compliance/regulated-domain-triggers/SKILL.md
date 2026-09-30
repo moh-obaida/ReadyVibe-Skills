@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   compliance-domains: "11"
   launch-checks: "6"
+  references: "official-sources"
 ---
 
 # regulated-domain-triggers
@@ -42,6 +43,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 - A signal in copy is OBSERVED text. Whether the *regime* applies is REVIEW REQUIRED, always.
 - "Wellness journal" with symptom tracking is health-adjacent; do not decide where the line is.
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
 

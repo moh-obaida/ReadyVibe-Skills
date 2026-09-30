@@ -7,6 +7,7 @@ metadata:
   launch-checks: "3,4,5"
   compliance-domains: "3"
   helpers: "observe-runtime"
+  references: "official-sources"
 ---
 
 # cookie-and-storage-audit
@@ -17,7 +18,7 @@ metadata:
 
 - Any cookie, storage key, tracker, embed, or third-party script is present in source, or the user asks what the site stores/loads.
 - Before adding, changing, or removing a consent control (`consent-management`), or writing a cookie/privacy disclosure (`privacy-policy`, `policy-consistency`).
-- Not to decide whether consent is required (that needs rule context; see `jurisdiction-applicability`).
+- Not to decide whether consent is required (that needs a rule looked up at an official source; see `jurisdiction-applicability`).
 
 ## Inspect
 
@@ -55,9 +56,10 @@ Add `--block-third-party` to observe what the page *attempts* without sending re
 Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REVIEW REQUIRED. UNKNOWN is never a pass and never a failure.
 
 - Vendor in source but no request observed: SOURCE-INDICATED. Say "integration present; runtime loading not observed on the pages exercised."
-- Request observed at load: OBSERVED, and it is a fact about timing. Whether consent was required is a separate question needing rule context: REVIEW REQUIRED.
+- Request observed at load: OBSERVED, and it is a fact about timing. Whether consent was required is a separate question needing a rule looked up at an official source: REVIEW REQUIRED.
 - Absence is only proven for what you exercised: which pages, which viewport, which states, how long you waited. State the coverage.
 - Tag managers hide downstream tags. If GTM/Segment is present, the inventory is incomplete until runtime shows what it fires, and that may depend on the container's configuration you cannot see.
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
 

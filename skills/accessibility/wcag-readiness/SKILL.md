@@ -7,6 +7,7 @@ metadata:
   launch-checks: "27,28,29,30,31,32"
   compliance-domains: "8"
   helpers: "audit-markup,observe-runtime"
+  references: "official-sources"
 ---
 
 # wcag-readiness
@@ -46,6 +47,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - Scanner output is OBSERVED for the DOM at that moment, and a clean scan is not a pass. Keyboard, focus, contrast, and screen-reader behavior are UNKNOWN until you exercised them.
 - Alt text quality needs human judgment about the image's role; you must *see* the image and its context.
 - State the depth reached: "scan + keyboard pass on 4 flows; no screen-reader testing".
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
 

@@ -1,125 +1,126 @@
-# ReadyVibe
+# ReadyVibe-Skills
 
-Skills that let your coding agent decide whether a website is actually ready to launch, fix what can safely be fixed, and say plainly what still needs a human.
+**Production and launch skills for vibe-coded websites.**
 
-A vibe-coded site can look finished and still have a `localhost` canonical, a private route in its sitemap, analytics that ignore "Reject", an unsubscribe link that goes to `#`, and a privacy page describing a different product. ReadyVibe finds those.
+Your AI coding agent built a site that *looks* finished. These skills teach it to find what still stands between that site and a real launch, fix what can safely be fixed, verify the result, and say plainly what needs a human or a lawyer.
 
+```bash
+npx skills add moh-obaida/ReadyVibe-Skills --list
+npx skills add moh-obaida/ReadyVibe-Skills --skill launch-all
 ```
-INSPECT the actual product → DETERMINE what applies → VERIFY what is true
-→ FIX what can safely be fixed → FLAG what needs human review → DO NOT INVENT COMPLIANCE
-```
+
+Then tell your agent: **"Make this ready to launch."**
+
+There is nothing else to install. No CLI, no package, no account, no service. The skills work on your existing project, in your existing design.
 
 ## Install
 
 ```bash
+# see everything available
+npx skills add moh-obaida/ReadyVibe-Skills --list
+
+# the broad entry point: "is this ready to launch?"
+npx skills add moh-obaida/ReadyVibe-Skills --skill launch-all
+
+# privacy, consent, email, age, rights, and legal-page review
+npx skills add moh-obaida/ReadyVibe-Skills --skill compliance-all
+
+# build a full admin UI tailored to your app, in your design system
+npx skills add moh-obaida/ReadyVibe-Skills --skill admin-dashboard
+
+# build an FAQ from your real questions and verified answers
+npx skills add moh-obaida/ReadyVibe-Skills --skill faq-readiness
+
+# one specialist
+npx skills add moh-obaida/ReadyVibe-Skills --skill seo-readiness
+
+# everything
 npx skills add moh-obaida/ReadyVibe-Skills --all
 ```
 
-That is the whole installation. There is no ReadyVibe CLI, package, dashboard, or project setup step. Or pick skills:
+Each skill is self-contained after install, including any helper script it uses. Installing many skills does not run them all: each one decides for itself whether it applies.
 
-```bash
-npx skills add moh-obaida/ReadyVibe-Skills --list
-npx skills add moh-obaida/ReadyVibe-Skills --skill launch-all seo-readiness consent-management
-```
+## What it does
 
-Installing every skill does not run every skill.
-
-## Use
-
-In your coding agent, in your project:
-
-> Check this site before I launch.
-
-`launch-all` takes it from there. It works out what kind of product this is, considers all 40 launch checks, activates only the specialists that can help, verifies what it can in a real browser, fixes safe issues, and reports:
+A vibe-coded site can have a `localhost` canonical, a private route in its sitemap, analytics that ignore "Reject", an unsubscribe link that goes to `#`, and a privacy page describing a different product. ReadyVibe's skills look at the **actual project** and follow one loop:
 
 ```
-READY · FIXED · BLOCKERS · REVIEW REQUIRED · UNVERIFIED · NEXT ACTION
+inspect the project → determine what applies → verify what is true
+→ fix what is safe → flag what needs a human → do not invent compliance
 ```
 
-## The model: 40 launch checks + 12 conditional compliance domains
+`launch-all` considers **40 launch checks**, activates only the specialists that can help, and reports **READY · FIXED · BLOCKERS · REVIEW REQUIRED · UNVERIFIED · NEXT ACTION**. `compliance-all` adds **12 conditional compliance domains**. Checks that do not apply are marked *not applicable, with the reason*. No marketing email means no unsubscribe work; no non-essential trackers means no cookie banner is added; no need for an FAQ means none is invented.
 
-ReadyVibe *considers* 52 areas and *activates* only what applies. "No marketing email" means the unsubscribe checks do not apply. No non-essential trackers means it will not add a cookie banner. No FAQ need means it will not manufacture one.
-
-| Family | Checks | Entry skill |
-|---|---|---|
-| Compliance and privacy | 1–8 privacy policy, terms, cookie/tracker disclosure, consent behavior, analytics inventory, age handling, deletion, contact | `compliance-all` |
-| Discoverability | 9–18 titles, descriptions, canonicals, robots, sitemap, social share, favicon, indexing sanity, staging leftovers, URL consistency | `discoverability-all` |
-| Trust and product readiness | 19–26 primary CTA, FAQ, 404, broken links, dead controls, states, support path, claims and social proof | `trust-all` |
-| Accessibility and responsive | 27–34 alt text, semantics, keyboard and focus, forms, contrast, motion, mobile, overflow and touch | `quality-all` |
-| Forms, comms, security, performance | 35–40 forms submit, unsubscribe works, suppression, secrets, headers and CSP, performance | `production-all` |
-
-The full table, with the owning skill and the "not applicable when" condition for every check, is in [`launch-model.md`](skills/bundles/launch-all/references/launch-model.md). Compliance adds 12 applicability-driven domains (jurisdiction, disclosure vs behavior, consent, marketing email, minors, privacy rights, consumer protection, accessibility obligations, vendors, security, regulated-domain triggers, legal identity and notices), routed by `compliance-all`: [`compliance-domains.md`](skills/bundles/compliance-all/references/compliance-domains.md).
-
-## What makes it more than a checklist
-
-Every skill separates what it **observed** from what it only **suspects**:
-
-- "vendor appears in source" is not "vendor loaded before consent"
-- "unsubscribe link exists" is not "future marketing is suppressed"
-- "delete sets `active=false`" is not "the data is deleted"
-- "privacy page says X" is not "the runtime behaves like X"
-- "no horizontal scrollbar" is not "works on a phone"
-- "sitemap exists" is not "sitemap is safe and correct"
-
-Unknown is never converted into pass or fail. Each skill states when it activates, what it inspects, what evidence counts, what it may change, what it must not claim, how it verifies a fix, when it escalates, and when *no change* is the right answer.
+The models are in [`launch-model.md`](skills/core/launch-all/references/launch-model.md) and [`compliance-domains.md`](skills/core/compliance-all/references/compliance-domains.md).
 
 ## Skills
 
-54 skills, in six bundles and specialists. Highlights:
+55 skills in nine categories.
 
-| | |
+| Category | Skills |
 |---|---|
-| Entry points | `launch-all`, `compliance-all`, `discoverability-all`, `trust-all`, `quality-all`, `production-all` |
-| Foundations | `site-reconnaissance`, `design-system-reconnaissance`, `launch-verification`, `compliance-diff` |
-| Privacy behavior | `cookie-and-storage-audit`, `consent-management`, `analytics-privacy`, `third-party-privacy`, `policy-consistency`, `data-flow-mapping`, `data-rights` |
-| Legal pages and applicability | `privacy-policy`, `terms-of-service`, `jurisdiction-applicability`, `regulated-domain-triggers`, `legal-identity-notices`, `minors-readiness` |
-| Email and commerce | `email-compliance`, `consumer-protection-readiness`, `payments-readiness`, `subscription-readiness` |
-| Discoverability | `seo-readiness`, `social-sharing`, `structured-data`, `search-console-readiness`, `multilingual-readiness` |
-| Trust and UX | `content-trust`, `link-integrity`, `error-pages`, `failure-resilience`, `launch-identity`, `public-support`, `legal-navigation` |
-| Accessibility and mobile | `wcag-readiness`, `mobile-readiness`, `forms-readiness`, `rtl-readiness` |
-| Security and performance | `web-security`, `production-readiness`, `security-headers`, `dependency-security`, `performance-readiness`, `ai-features-readiness` |
+| **core** | Entry points: `launch-all`, `compliance-all`, `discoverability-all`, `trust-all`, `quality-all`, `production-all`. Foundations: `site-reconnaissance`, `design-system-reconnaissance`, `launch-verification`, `compliance-diff` |
+| **compliance** | `cookie-and-storage-audit`, `consent-management`, `analytics-privacy`, `third-party-privacy`, `policy-consistency`, `data-flow-mapping`, `privacy-readiness`, `privacy-policy`, `terms-of-service`, `data-rights`, `email-compliance`, `minors-readiness`, `jurisdiction-applicability`, `consumer-protection-readiness`, `regulated-domain-triggers`, `legal-identity-notices`, `ai-features-readiness`, `user-content-safety` |
+| **discoverability** | `seo-readiness`, `social-sharing`, `structured-data`, `search-console-readiness` |
+| **accessibility** | `wcag-readiness` |
+| **quality** | `content-trust`, `faq-readiness`, `link-integrity`, `error-pages`, `failure-resilience`, `forms-readiness`, `mobile-readiness`, `launch-identity`, `public-support`, `legal-navigation`, `performance-readiness` |
+| **security** | `web-security`, `production-readiness`, `security-headers`, `dependency-security` |
+| **admin** | `admin-dashboard` (builds a complete admin for *your* product), `admin-authorization`, `admin-audit-log` |
+| **internationalization** | `multilingual-readiness`, `rtl-readiness` |
+| **commerce** | `payments-readiness`, `subscription-readiness` |
+
+## How the skills behave
+
+- **Facts vs. suspicion.** Every skill separates what it *observed* from what it only *suspects*: "vendor appears in source" is not "vendor loaded before consent"; "unsubscribe link exists" is not "future marketing is suppressed"; "delete sets `active=false`" is not "the data is deleted"; "no horizontal scrollbar" is not "works on a phone". Unknown is never turned into a pass or a failure.
+- **Your design, not ours.** Anything that creates or changes visible UI (404 pages, consent controls, legal pages, forms, support, unsubscribe, admin screens) first inspects your existing design system and builds from it.
+- **Legal specifics are looked up, not remembered.** No skill carries a legal database. When a rule matters, the skill reads the current text at an official source, cites it, separates fact from interpretation, and marks applicability *review required*. If it cannot look it up, the answer is *unknown*. See [`official-sources.md`](docs/references/official-sources.md).
+- **It will not invent.** No made-up legal terms, addresses, retention periods, testimonials, FAQ answers, or metrics.
+- **Built for your site, not from a template.** `admin-dashboard` reads your data model and features, writes a short brief (who operates this, their frequent tasks, your vocabulary), and builds a full admin whose navigation, labels, landing view, and screens are yours, in your design. It shows only real data: no invented revenue, charts, or growth. `faq-readiness` likewise works from real questions and answers it can verify.
+- **It says when to stop.** Regulated domains (health, finance, children, and similar), exposed credentials, and anything needing a lawyer are escalated, not smoothed over.
 
 ## Bundled helpers
 
-Where an agent cannot reliably do a job by reading files, the skill carries a small zero-dependency Node script in its own `scripts/` folder (copied per skill, because installs copy only the skill's folder):
+Where an agent cannot reliably do a job by reading files, the skill carries a small zero-dependency Node script (Node 20+) in its own `scripts/` folder. None call a model.
 
 | Helper | Used for |
 |---|---|
 | `inspect-metadata.mjs` | titles, descriptions, canonicals, robots.txt, sitemap.xml, noindex, Open Graph, favicon, and the contradictions between them |
-| `check-links.mjs` | broken nav/footer/CTA links, dead hrefs, sitemap and canonical targets; separates confirmed 404s from transient failures |
-| `audit-markup.mjs` | labels, alt text, landmarks, viewport, form basics |
-| `audit-assets.mjs` | oversized assets, render-blocking scripts, third-party count |
+| `check-links.mjs` | broken nav, footer, and CTA links, dead hrefs, sitemap and canonical targets; separates confirmed 404s from transient failures |
+| `audit-markup.mjs` | labels, alt text, landmarks, viewport, form basics, placeholder text |
+| `inventory-data-model.mjs` | entities and columns from Prisma, SQL, Drizzle, and Mongoose; personal-data, soft-delete, and role columns; auth, payments, and UI-kit stack; existing admin routes |
+| `audit-assets.mjs` | oversized assets, render-blocking and unsafe external scripts |
 | `scan-secrets.mjs` | secrets (redacted), client-exposed env names, tracked `.env`, source maps and localhost in shipped output |
-| `observe-runtime.mjs` | headless-browser timeline of cookies, storage, and third parties; reject/accept/withdraw effects; planted-data leakage; overflow; keyboard focus |
+| `observe-runtime.mjs` | headless-browser timeline of cookies, storage, and third parties; reject/accept/withdraw effects; planted-data leakage; forced API failures; overflow; keyboard focus |
 
-`observe-runtime` needs Playwright in the project being inspected. Everything else runs on plain Node 20+. None of the helpers call a model.
+`observe-runtime` needs Playwright in the project being inspected and says so when it is missing; everything else runs on plain Node.
 
 ## What ReadyVibe will not do
 
-It is not a lawyer, a WCAG conformance audit, a penetration test, or a promise that a search engine will index a page. It will not say "GDPR compliant", "CCPA compliant", or "fully compliant". Jurisdiction-specific rules are not supplied from model memory; without a reviewed official source, applicability stays *review required* while the technical facts are still verified. It will not invent a company address, retention period, refund term, testimonial, or metric.
+It is not a lawyer, a WCAG conformance audit, a penetration test, or a promise that a search engine will index a page. It will not say "GDPR compliant", "CCPA compliant", or "fully compliant". Whether an agent following these skills produces good work on your project still depends on the agent; review what it changes.
 
-## Repository layout
+## Repository
 
 ```
-skills/<category>/<name>/SKILL.md   the product: one folder per skill
-skills/<...>/scripts/               helpers vendored into each skill that uses them
-skills/bundles/launch-all/references/, skills/bundles/compliance-all/references/   the 40-check and 12-domain models
-scripts/                            canonical helper source and its tests
-tools/skill-lint/                   lint for skill quality and model coverage
+skills/<category>/<name>/   the skills (each folder is self-contained once installed)
+scripts/                    canonical helper scripts
+docs/                       current-model.md (source of truth), references/, skill-layout.md, archive/
+tools/                      sync-skills.mjs, lint-skills.mjs
+tests/                      helper, lint, and installability tests
+fixtures/                   synthetic sites and planted-defect projects
 ```
 
-`packages/`, `rules/`, `fixtures/`, and `docs/` hold earlier engine, schema, and rule work. They are internal, unpublished, and **not required by any skill**.
+Read [`docs/current-model.md`](docs/current-model.md). Earlier CLI/engine platform designs are kept in [`docs/archive/`](docs/archive/) as historical only.
 
 ## Contributing
 
 ```bash
 pnpm install
-pnpm check          # helpers in sync + skill lint + all tests
-pnpm sync-skills    # after editing anything in scripts/
+pnpm sync    # after editing a canonical helper or shared reference
+pnpm check   # sync check + skill lint + all tests
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-Apache-2.0 for the skills, helpers, and tests. CC0-1.0 for original templates meant to be copied. Laws and standards stay external. See `NOTICE`.
+Apache-2.0. See `LICENSE` and `NOTICE`. Laws and standards stay external and are cited, not relicensed.

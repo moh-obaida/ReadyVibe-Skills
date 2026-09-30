@@ -6,6 +6,7 @@ metadata:
   kind: auditor
   launch-checks: "1,3,26"
   compliance-domains: "2"
+  references: "official-sources"
 ---
 
 # policy-consistency
@@ -34,6 +35,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - Source-only contradictions are SOURCE-INDICATED: "policy says X; code does Y (runtime not exercised)". Do not upgrade to observed.
 - "Doesn't say" is not "says no". Omission findings are MEDIUM by default; contradictions about tracking, deletion, or selling data are HIGH when observed.
 - The policy's legal adequacy is out of scope. You compare **statements to behavior**.
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
 

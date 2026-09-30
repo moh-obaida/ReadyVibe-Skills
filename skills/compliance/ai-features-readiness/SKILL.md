@@ -7,6 +7,7 @@ metadata:
   compliance-domains: "9,11"
   launch-checks: "38"
   helpers: "scan-secrets"
+  references: "official-sources"
 ---
 
 # ai-features-readiness
@@ -35,6 +36,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - A key in source is SOURCE-INDICATED; treat as exposed if it appears in client-shipped output (OBSERVED via scan) and report without printing the value.
 - Provider retention/training settings are DECLARED or UNKNOWN unless the owner shows the account setting.
 - Prompt-injection resilience is not provable by inspection: say "not tested" or describe the specific tests run.
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
 

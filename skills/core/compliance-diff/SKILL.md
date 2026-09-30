@@ -13,7 +13,7 @@ Launch readiness decays. A month after a clean review, someone adds a session-re
 ## Activate when
 
 - A PR, branch, or release diff is under review, or the user asks "what does this change do to our launch/privacy posture?"
-- The context file (`.readyvibe/context.md`) has "NOT APPLICABLE" items whose recheck triggers might have fired.
+- A context note (`.readyvibe/context.md`), if one exists, has "NOT APPLICABLE" items whose recheck triggers might have fired.
 - Not for a first full review (use `launch-all`).
 
 ## Inspect

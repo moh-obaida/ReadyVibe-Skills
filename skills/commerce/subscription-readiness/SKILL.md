@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   compliance-domains: "7"
   launch-checks: "2,35"
+  references: "official-sources"
 ---
 
 # subscription-readiness
@@ -34,6 +35,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 - Test-mode flow completed: OBSERVED in test mode. Live billing, tax collection, and provider dashboard policies are DECLARED/UNKNOWN.
 - Copy vs configuration mismatch requires reading both (the price/interval in the provider config or code, and the rendered copy).
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
 

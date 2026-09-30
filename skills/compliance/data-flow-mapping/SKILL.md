@@ -6,6 +6,7 @@ metadata:
   kind: foundation
   launch-checks: "1,7"
   compliance-domains: "2,9"
+  helpers: "inventory-data-model"
 ---
 
 # data-flow-mapping
@@ -21,7 +22,7 @@ Every privacy statement, deletion promise, and vendor list rests on one question
 ## Inspect
 
 1. **Entry points.** Every `<form>`, input, upload, OAuth/signup flow, API/server action, webhook, and analytics/identify call. For each: which fields (email, name, phone, address, DOB, payment, free text, files, location, IDs, IP).
-2. **Storage.** Database schema/migrations/ORM models, key-value stores, object storage buckets, logs, third-party CRMs. Identify tables/columns that hold personal data, and soft-delete flags, retention or cleanup code, backups you can see referenced.
+2. **Storage.** Start with `node scripts/inventory-data-model.mjs --root .` (path relative to this skill's folder). It lists entities and columns from Prisma, SQL migrations, Drizzle, and Mongoose, and flags personal-data-like, secret-like, soft-delete, and owner columns; it shows what is *defined*, not populated, and names stores it cannot read (read those from code). Then read the database schema/migrations/ORM models, key-value stores, object storage buckets, logs, third-party CRMs. Identify tables/columns that hold personal data, and soft-delete flags, retention or cleanup code, backups you can see referenced.
 3. **Flows out.** Server-side calls to email, payment, CRM, support, AI, analytics, storage APIs; client-side third-party requests (with `cookie-and-storage-audit`). Record what fields go to which recipient.
 4. **Identifiers.** User IDs in URLs, cookies, localStorage, analytics distinct IDs; whether they are linkable to a person.
 5. **Sensitive signals.** Health, finance, biometrics, precise location, children, government IDs, credentials, free-text fields that may contain any of these. Flag for `regulated-domain-triggers`.

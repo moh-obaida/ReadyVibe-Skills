@@ -42,7 +42,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 ## May change
 
-Only `.readyvibe/context.md`. Never product code.
+Only an optional working note, `.readyvibe/context.md`, which other skills may read but none require. Never product code.
 
 Suggested shape (short, human-readable, each line evidence-labeled):
 

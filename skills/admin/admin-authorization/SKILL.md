@@ -1,6 +1,6 @@
 ---
 name: admin-authorization
-description: "Use when a product already has admin, staff, moderator, or operator routes, screens, or APIs, and you need to verify that every privileged operation is protected by server-side authorization, not by a hidden link. It tests privileged routes as anonymous and as a normal user on a local or staging build. Do not use it to build an admin area, to accept a hidden menu item as authorization, or to test production accounts you do not own."
+description: "Use when a product already has admin, staff, moderator, or operator routes, screens, or APIs, and you need to verify that every privileged operation is protected by server-side authorization, not by a hidden link. It tests privileged routes as anonymous and as a normal user on a local or staging build. Do not use it to build the admin screens themselves, to accept a hidden menu item as authorization, or to test production accounts you do not own."
 license: Apache-2.0
 metadata:
   kind: specialist
@@ -16,7 +16,7 @@ The most common critical bug in vibe-coded apps: `/admin` is "protected" because
 
 - Any admin/staff/operator route or API exists (`/admin`, `/dashboard/users`, `/api/admin/*`, role fields, "isAdmin" checks), or roles/permissions exist.
 - `production-all`/`web-security` routes here.
-- Not to design an admin product or add roles the product does not need. If the only "admin" is the database console, say so.
+- Not to design admin features (that is `admin-dashboard`, which calls this skill for access control). If the only "admin" is the database console, say so.
 
 ## Inspect
 

@@ -15,7 +15,7 @@ When something goes wrong, "who changed that?" is the first question. Without a 
 ## Activate when
 
 - Privileged actions exist (`admin-authorization` lists them) and are destructive or sensitive.
-- Before launch of anything with staff/support access to user data.
+- Before launch of anything with staff/support access to user data, and whenever `admin-dashboard` adds destructive actions.
 - Not when there are no privileged actions, and not to add analytics or product telemetry.
 
 ## Inspect

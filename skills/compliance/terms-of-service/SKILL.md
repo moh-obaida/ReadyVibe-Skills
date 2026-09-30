@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "2"
   compliance-domains: "7,12"
+  references: "official-sources"
 ---
 
 # terms-of-service
@@ -34,6 +35,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - A clause about a feature needs evidence the feature exists (a route, a billing integration, a content form).
 - Commercial terms (fees, refunds) are DECLARED by the owner; unsupported ones are placeholders.
 - Whether terms are *enforceable* or *sufficient* is not observable. It is REVIEW REQUIRED.
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
 

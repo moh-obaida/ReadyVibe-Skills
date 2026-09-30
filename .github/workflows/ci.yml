@@ -3,7 +3,7 @@ on:
   push:
   pull_request:
 jobs:
-  test:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,7 +15,5 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm -r --filter @readyvibe/schemas --filter @readyvibe/engine --filter @readyvibe/cli --filter @readyvibe/skill-lint exec tsc -p tsconfig.json --noEmit
-      - run: pnpm test
-      - run: pnpm --filter @readyvibe/skill-lint exec tsc -p tsconfig.json
-      - run: node tools/skill-lint/dist/cli.js .
+      - run: pnpm exec playwright-core install --with-deps chromium
+      - run: pnpm check

@@ -1,12 +1,13 @@
 ---
 name: consent-management
-description: "Use when a site has analytics, advertising, session replay, or other optional trackers and a consent control exists or may be needed. It determines whether gating is applicable from available rule context, then verifies the behavior of reject, accept, and withdraw, not the appearance of the banner. Do not use it to add a cookie banner to a site with nothing to gate, to decide legal applicability from memory, or to design a dark-pattern consent flow."
+description: "Use when a site has analytics, advertising, session replay, or other optional trackers and a consent control exists or may be needed. It determines whether gating is applicable by looking up the current rule at an official source, then verifies the behavior of reject, accept, and withdraw, not the appearance of the banner. Do not use it to add a cookie banner to a site with nothing to gate, to decide legal applicability from memory, or to design a dark-pattern consent flow."
 license: Apache-2.0
 metadata:
   kind: specialist
   launch-checks: "4"
   compliance-domains: "3"
   helpers: "observe-runtime"
+  references: "official-sources"
 ---
 
 # consent-management
@@ -22,7 +23,7 @@ Do not default to "add a cookie banner". Ask, in order: **what loads, is a choic
 ## Inspect
 
 1. **Inventory and timing.** Use the inventory from `cookie-and-storage-audit`; if none exists, run `node scripts/observe-runtime.mjs --url <site>` and read the `initial` snapshot (paths relative to this skill's folder).
-2. **Applicability.** Read `.readyvibe/context.md` and any reviewed rule source the project or owner supplies (official source snapshots, counsel's memo). ReadyVibe ships no reviewed jurisdiction packs. Record: markets (DECLARED/INFERRED/UNKNOWN), whether a reviewed obligation exists for them, and what it would require for these technologies. **Without a reviewed source, applicability stays REVIEW REQUIRED**; do not supply it from memory. You can still verify behavior.
+2. **Applicability.** Read `.readyvibe/context.md` if present. If a rule decides whether gating is needed, look up the current requirement at an official source while you run (`references/official-sources.md`), cite it with the access date, and treat whether it applies to this business as REVIEW REQUIRED. Record: markets (DECLARED/INFERRED/UNKNOWN), the source you read and what it says about these technologies. **If you could not consult a source, applicability stays UNKNOWN / REVIEW REQUIRED**; do not supply it from memory. You can still verify behavior.
 3. **The control, if one exists.** Read the implementation: where the choice is stored, what reads it, which scripts are gated and how (conditional loading vs. only hiding UI), whether default state is "off" for optional technologies, whether reject is as easy as accept (same screen, similar prominence, no pre-ticked boxes), whether the choice can be revisited.
 4. **Behavior, in a fresh browser context per path** (see `cookie-and-storage-audit` for step files):
    - **Before choice:** what fired at load? (`initial` snapshot)
@@ -39,10 +40,11 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - "Banner hides after click" proves UI, not behavior. Only requests, cookies, and storage prove behavior.
 - The consent record itself (a cookie/key storing the choice) is normally not a tracker; confirm it stores only the choice.
 - If runtime proof is unavailable (no Playwright, staging inaccessible), say "reject/accept/withdraw behavior not verified" and list it under UNVERIFIED.
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
 
-Only when **requirements are sufficiently known** (a reviewed rule or the owner's stated rule) or the defect is behavioral regardless of rule (Reject that does nothing; a choice that is forgotten on reload; optional scripts loaded unconditionally while a control claims to gate them):
+Only when **requirements are sufficiently known** (an official source you read this run, or the owner's stated rule) or the defect is behavioral regardless of rule (Reject that does nothing; a choice that is forgotten on reload; optional scripts loaded unconditionally while a control claims to gate them):
 
 - Move initialization of optional scripts behind the recorded choice (load-on-consent), not merely behind a hidden overlay.
 - Fix persistence and reload behavior of an existing choice.

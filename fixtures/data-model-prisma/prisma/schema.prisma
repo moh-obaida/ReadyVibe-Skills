@@ -1,0 +1,23 @@
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  role         String   @default("user")
+  passwordHash String
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  orders       Order[]
+}
+
+model Order {
+  id        String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  total     Int
+  deletedAt DateTime?
+}
+
+model Session {
+  id    String @id
+  token String
+}

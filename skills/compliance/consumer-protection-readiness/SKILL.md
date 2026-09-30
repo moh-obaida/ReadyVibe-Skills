@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   compliance-domains: "7"
   launch-checks: "2,25"
+  references: "official-sources"
 ---
 
 # consumer-protection-readiness
@@ -35,6 +36,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - Price and total mismatches are OBSERVED only from a run through the flow. Reading templates is SOURCE-INDICATED.
 - Refund/cancellation *terms* are DECLARED by the owner. A missing one is a gap to ask about, not something to write.
 - Whether wording or flows satisfy any consumer law is REVIEW REQUIRED.
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
 

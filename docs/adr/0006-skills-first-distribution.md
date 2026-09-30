@@ -1,26 +1,23 @@
 # ADR 0006: Skills-first distribution
 
-Status: accepted (2026-09-29)
+Status: accepted (2026-09-29), simplified (2026-09-30). The current model is [`../current-model.md`](../current-model.md).
 
 ## Context
 
-The first implementation pass built a deterministic engine, a CLI, JSON schemas, a rule-pack system, and 45 skills that were generated from one template and told the agent to run `npx @readyvibe/cli`. The infrastructure was solid; the skill layer, which is what a user installs, contained no methodology.
-
-`npx skills add` copies only a skill's own folder into the user's project. It does not install top-level `scripts/`, `shared/`, or npm packages.
+The first implementation built a CLI, a deterministic engine, JSON schemas, and rule packs, with skills that told the agent to run `npx @readyvibe/cli`. The skill layer, which is what a user installs, had no methodology. Also, `npx skills add` copies only a skill's own folder, so nothing outside a skill directory reaches the user.
 
 ## Decision
 
-1. **The product is the skill collection.** Installation is `npx skills add moh-obaida/ReadyVibe-Skills`. There is no second install step, no ReadyVibe CLI to learn, no dashboard, no admin UI, no SDK, and no published npm package.
-2. **Each skill carries its own operating method**: when to activate, what to inspect, what evidence counts, what it may change, what it must not claim, how to verify, when to escalate, and when no change is valid. `tools/skill-lint` enforces this mechanically.
-3. **Deterministic helpers are skill resources, not a product.** A helper exists only because a specific skill needs a capability an agent cannot reliably get by reading files (link crawling, sitemap/canonical relationships, secret scanning, browser observation of cookies and network, planted-data detection). Helpers are zero-dependency scripts in `scripts/`, tested there, and **vendored into each skill that declares them** (`metadata.helpers`), with `scripts/sync-skill-assets.mjs --check` and the lint enforcing that copies match.
-4. **The launch model is canonical and finite**: 40 launch-readiness checks and 12 conditional compliance domains, each owned by a named skill (`skills/bundles/launch-all/references/launch-model.md`, `skills/bundles/compliance-all/references/compliance-domains.md`). ReadyVibe considers all of them, activates what applies, and the lint fails if a check or domain has no owner.
-5. **Evidence language is part of every skill**: OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, REVIEW REQUIRED. Unknown is never a pass or a failure. No skill may claim legal compliance.
-6. **Legal rules are not supplied from model memory.** Applicability that depends on a jurisdiction stays review-required unless an authoritative, reviewed source is provided.
+1. The product is the skill collection, installed with `npx skills add`. There is no ReadyVibe CLI, SDK, engine, runtime, backend, or package.
+2. Each skill carries its own method and works alone. `tools/lint-skills.mjs` enforces the structure.
+3. Deterministic helpers are small scripts that exist only to make a specific skill better. They live in `scripts/` and are vendored into each skill that declares them; `tools/sync-skills.mjs` copies them and the lint verifies the copies.
+4. The launch model is 40 checks plus 12 compliance domains, each owned by a skill.
+5. Legal specifics are looked up at official sources while a skill runs (`docs/references/official-sources.md`), never supplied from memory, and never turned into a compliance claim. No legal database is built.
+6. UI-changing skills inspect the project's existing design system first. `admin-dashboard` may build a dashboard from the application's real models, in the project's design system, with no invented metrics.
 
 ## Consequences
 
-- `packages/` (schemas, engine, CLI), `rules/`, and most of `docs/architecture/` are internal, unpublished, and not required by any skill. They may be reused underneath skills later; they are not extended for their own sake.
-- The `.readyvibe/` directory in a user's project holds short human-readable notes (`context.md`, `verification.md`) written by skills. It is not a schema-validated interchange format.
-- `launch-readiness` (duplicate of `launch-all`) and `admin-all` (encouraged building an admin product) were removed. Admin skills were repositioned as launch-safety reviews of admin surfaces that already exist.
-- Vendored helper copies cost repository size (about 2 MB) in exchange for skills that work after a plain `npx skills add`.
-- Behavior of a real coding agent following these skills is not exercised by any deterministic test here; it needs a model-consuming evaluation, which is deliberately out of scope for this repository's automated checks.
+- The old `packages/` (CLI, engine, schemas) and `rules/` were removed; they remain in git history at `64405be`. The 13 architecture documents and 3 platform-specific ADRs moved to `docs/archive/` marked historical.
+- `.readyvibe/` is at most an optional working-notes folder that skills may write and none require.
+- Vendored helper copies cost about 2 MB of repository size in exchange for skills that work after a plain `npx skills add`.
+- Real-agent behavior is not covered by the automated checks; it needs a separate model-consuming evaluation.

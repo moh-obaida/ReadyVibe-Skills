@@ -6,6 +6,8 @@ metadata:
   kind: specialist
   launch-checks: "7,37"
   compliance-domains: "6"
+  references: "official-sources"
+  helpers: "inventory-data-model"
 ---
 
 # data-rights
@@ -21,7 +23,7 @@ The button says "Delete my account". What happens next is the whole question. A 
 ## Inspect
 
 1. **What is promised.** Read the notice, settings screens, and marketing copy for rights and timelines. Make each a checkable claim ("deletes your data within 30 days").
-2. **Trace deletion.** From the UI action → API/server action → DB operations:
+2. **Trace deletion.** Run `node scripts/inventory-data-model.mjs --root .` (path relative to this skill's folder) to list every entity holding personal data and every soft-delete or state column (`SOFT_DELETE_COLUMN`, `PERSONAL_DATA_COLUMNS`); these are what a real deletion must cover. Then follow the code, from the UI action → API/server action → DB operations:
    - Hard `DELETE`, anonymization/scrubbing, or **soft delete** (`deleted_at`, `active=false`, `status='deleted'`)? Soft delete that is never purged is retention, not deletion.
    - **Cascade coverage:** profile, sessions/tokens, uploads and storage objects, orders/invoices (some must be *retained*; record what and why), comments/content authored, audit/log tables, analytics/CRM/email-provider records (Mailchimp, HubSpot, Stripe customers, support tools), search indexes, caches, backups (retention windows).
    - **Auth side:** the auth provider account (Supabase/Firebase/Clerk/Auth0) deleted too, or only the app row?
@@ -40,8 +42,11 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - Handler code is SOURCE-INDICATED. A post-delete database/provider check on a test account is OBSERVED.
 - Retained-by-design records (invoices) are not failures if disclosed; whether retention is legally required is REVIEW REQUIRED.
 - Provider and backup contents you cannot inspect: UNKNOWN.
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
+
+**Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components. Never impose a ReadyVibe look on the user's site.
 
 Low-risk fixes with the owner's agreement: extend an existing deletion to cover missed tables/objects; make soft-delete followed by a purge job; delete the auth-provider record; add an export that gathers existing fields; correct UI/notice copy to describe what deletion actually does. Test destructive code against **test data only**. Never delete real user data, run migrations against production, or invent timelines and deadlines.
 

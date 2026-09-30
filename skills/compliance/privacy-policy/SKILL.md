@@ -6,6 +6,7 @@ metadata:
   kind: specialist
   launch-checks: "1"
   compliance-domains: "2"
+  references: "official-sources"
 ---
 
 # privacy-policy
@@ -20,7 +21,7 @@ A privacy policy that does not describe the product is worse than none: it is a 
 
 ## Inspect
 
-1. **Use existing evidence first**: `.readyvibe/context.md`, `data-flow-mapping` (fields, recipients), `cookie-and-storage-audit` (cookies, storage, third parties), `analytics-privacy`, `data-rights` (deletion/export behavior), `email-compliance` (sender, marketing), `minors-readiness`, `payments-readiness`, `third-party-privacy`. If they have not run, run the ones that apply; do not guess what the product does.
+1. **Use existing evidence first**: `.readyvibe/context.md` (if present), `data-flow-mapping` (fields, recipients), `cookie-and-storage-audit` (cookies, storage, third parties), `analytics-privacy`, `data-rights` (deletion/export behavior), `email-compliance` (sender, marketing), `minors-readiness`, `payments-readiness`, `third-party-privacy`. If they have not run, run the ones that apply; do not guess what the product does.
 2. **Build a fact sheet** with an evidence label for every line:
 
    | Topic | What we know | Source |
@@ -46,6 +47,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 - Every sentence in the notice that states a fact about the product needs a source in the fact sheet. If it does not have one, it is either a placeholder or it is cut.
 - Vendor names come from observed requests or code, not from a template list of "typical" vendors.
 - Contact points must be real and working: verify the email/form exists (`public-support`).
+- **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
 ## May change
 
