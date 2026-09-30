@@ -6,7 +6,8 @@ metadata:
   kind: specialist
   launch-checks: "1"
   compliance-domains: "2"
-  references: "official-sources,companion-methods"
+  references: "official-sources"
+  companions: "data-flow-mapping,cookie-and-storage-audit,analytics-privacy,third-party-privacy,data-rights,email-compliance,minors-readiness,payments-readiness,policy-consistency,design-system-reconnaissance"
 ---
 
 # privacy-policy
@@ -21,9 +22,9 @@ A privacy policy that does not describe the product is worse than none: it is a 
 
 ## Working alone
 
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
 
-Companions named here: `analytics-privacy`, `cookie-and-storage-audit`, `data-flow-mapping`, `data-rights`, `design-system-reconnaissance`, `email-compliance`, `legal-navigation`, `minors-readiness`, `payments-readiness`, `policy-consistency`, `public-support`, `third-party-privacy`.
+Companions: `data-flow-mapping`, `cookie-and-storage-audit`, `analytics-privacy`, `third-party-privacy`, `data-rights`, `email-compliance`, `minors-readiness`, `payments-readiness`, `policy-consistency`, `design-system-reconnaissance`.
 
 ## Inspect
 

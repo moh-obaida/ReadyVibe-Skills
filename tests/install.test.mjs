@@ -35,14 +35,17 @@ function assertSelfContained(name, dir, { siblingsAbsentIn } = {}) {
   for (const m of body.matchAll(/\]\((references\/[^)#\s]+)\)/g)) assert.ok(existsSync(join(dir, m[1])), `${name}: links to ${m[1]}, which is not inside the skill`);
   for (const m of body.matchAll(/scripts\/([a-z][a-z-]*)\.mjs/g)) assert.ok(existsSync(join(dir, "scripts", `${m[1]}.mjs`)), `${name}: runs scripts/${m[1]}.mjs, which is not inside the skill`);
 
-  // Every sibling skill it names needs an inline fallback carried in its own folder.
-  const companions = [...new Set([...body.matchAll(/`([a-z][a-z0-9]*(?:-[a-z0-9]+)+)`/g)].map((m) => m[1]))].filter((t) => ALL.has(t) && t !== name);
+  // Companions are declared, not inferred from mentions. The skill carries exactly those fallbacks, pruned.
+  const companions = csv(meta.companions);
+  for (const c of companions) assert.ok(ALL.has(c) && c !== name, `${name}: declared companion ${c} is not another ReadyVibe skill`);
+  const doc = join(dir, "references", "companion-methods.md");
   if (companions.length) {
-    const doc = join(dir, "references", "companion-methods.md");
-    assert.ok(existsSync(doc), `${name}: names ${companions.length} other skills but carries no companion-methods.md`);
-    const entries = new Set([...readFileSync(doc, "utf8").matchAll(/^###\s+(\S+)\s*$/gm)].map((m) => m[1]));
-    for (const c of companions) assert.ok(entries.has(c), `${name}: no inline fallback for ${c}`);
-    assert.ok(/## Working alone/.test(body), `${name}: names other skills but says nothing about working without them`);
+    assert.ok(existsSync(doc), `${name}: declares companions but carries no companion-methods.md`);
+    const entries = [...readFileSync(doc, "utf8").matchAll(/^###\s+(\S+)\s*$/gm)].map((m) => m[1]).sort();
+    assert.deepEqual(entries, [...companions].sort(), `${name}: companion-methods.md must contain exactly the declared companions`);
+    assert.ok(/## Working alone/.test(body), `${name}: declares companions but has no Working alone section`);
+  } else {
+    assert.ok(!existsSync(doc), `${name}: declares no companions but carries a companion-methods.md`);
   }
   if (siblingsAbsentIn) for (const other of ALL.keys()) if (other !== name) assert.ok(!existsSync(join(siblingsAbsentIn, other)), `${name}: sibling ${other} is present, so this is not an isolated install`);
   return { helpers: csv(meta.helpers), companions };

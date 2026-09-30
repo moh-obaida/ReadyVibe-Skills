@@ -6,7 +6,7 @@ metadata:
   kind: bundle
   launch-checks: "9-18"
   helpers: "inspect-metadata,check-links"
-  references: "companion-methods"
+  companions: "seo-readiness,social-sharing,launch-identity,deployment-cleanup,search-console-readiness,structured-data,multilingual-readiness,link-integrity"
 ---
 
 # discoverability-all
@@ -23,9 +23,9 @@ The signals in this family **contradict each other far more often than they are 
 
 ## Working alone
 
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. The lanes this bundle can activate are companions because it promises to run them when they apply: consider them all, activate only the ones that fit. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
 
-Companions named here: `deployment-cleanup`, `launch-all`, `launch-identity`, `link-integrity`, `multilingual-readiness`, `search-console-readiness`, `seo-readiness`, `social-sharing`, `structured-data`, `web-security`.
+Companions: `seo-readiness`, `social-sharing`, `launch-identity`, `deployment-cleanup`, `search-console-readiness`, `structured-data`, `multilingual-readiness`, `link-integrity`.
 
 ## Route
 

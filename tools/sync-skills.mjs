@@ -12,10 +12,13 @@
 // A skill declares what it needs in SKILL.md frontmatter:
 //   metadata.helpers:    "check-links,inspect-metadata"     -> scripts/<name>.mjs (+ its lib/ imports)
 //   metadata.references: "official-sources"                 -> docs/references/<name>.md
+//   metadata.companions: "data-flow-mapping,data-rights"    -> references/companion-methods.md, GENERATED from
+//                        docs/references/companion-methods.md with only those skills' entries
 // Transitive imports of ./lib/*.mjs are followed automatically.
 
-import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { buildCompanionFile, parseCompanionLibrary } from "./lib/companions.mjs";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -45,6 +48,15 @@ function referencesOf(skillMd) {
   const m = front.match(/^\s*references:\s*"([^"]*)"/m);
   return m ? m[1].split(",").map((x) => x.trim()).filter(Boolean) : [];
 }
+
+function companionsOf(skillMd) {
+  const front = skillMd.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? "";
+  const m = front.match(/^\s*companions:\s*"([^"]*)"/m);
+  return m ? m[1].split(",").map((x) => x.trim()).filter(Boolean) : [];
+}
+
+const libraryPath = join(root, "docs", "references", "companion-methods.md");
+const library = existsSync(libraryPath) ? parseCompanionLibrary(readFileSync(libraryPath, "utf8")) : null;
 
 function closure(helpers) {
   const files = new Set();
@@ -103,6 +115,27 @@ for (const dir of skillDirs()) {
       copyFileSync(src, dst);
       copied++;
     }
+  }
+  const companions = companionsOf(readFileSync(join(dir, "SKILL.md"), "utf8"));
+  const companionDst = join(dir, "references", "companion-methods.md");
+  if (companions.length) {
+    if (!library) throw new Error("docs/references/companion-methods.md not found");
+    const missing = companions.filter((c) => !library.entries.has(c));
+    if (missing.length) throw new Error(`${dir.replace(`${root}/`, "")}: no companion-methods entry for ${missing.join(", ")}`);
+    const built = buildCompanionFile(library, companions);
+    if (!existsSync(companionDst) || readFileSync(companionDst, "utf8") !== built) {
+      problems++;
+      if (check) console.error(`out of date (generated): ${companionDst.replace(`${root}/`, "")}`);
+      else {
+        mkdirSync(dirname(companionDst), { recursive: true });
+        writeFileSync(companionDst, built);
+        copied++;
+      }
+    }
+  } else if (existsSync(companionDst)) {
+    problems++;
+    if (check) console.error(`unexpected (no companions declared): ${companionDst.replace(`${root}/`, "")}`);
+    else rmSync(companionDst);
   }
   for (const rel of have) {
     if (wanted.has(rel)) continue;

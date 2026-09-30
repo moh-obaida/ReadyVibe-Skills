@@ -6,8 +6,9 @@ metadata:
   kind: specialist
   launch-checks: "7,37"
   compliance-domains: "6"
-  references: "official-sources,companion-methods"
+  references: "official-sources"
   helpers: "inventory-data-model"
+  companions: "design-system-reconnaissance"
 ---
 
 # data-rights
@@ -22,9 +23,9 @@ The button says "Delete my account". What happens next is the whole question. A 
 
 ## Working alone
 
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
 
-Companions named here: `consent-management`, `design-system-reconnaissance`, `email-compliance`, `public-support`.
+Companions: `design-system-reconnaissance`.
 
 ## Inspect
 

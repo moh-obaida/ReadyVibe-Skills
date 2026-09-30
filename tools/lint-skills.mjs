@@ -9,6 +9,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { parseDocument } from "yaml";
+import { buildCompanionFile, parseCompanionLibrary } from "./lib/companions.mjs";
 
 const CATEGORIES = new Set(["core", "compliance", "accessibility", "discoverability", "quality", "security", "admin", "internationalization", "commerce"]);
 const KINDS = new Set(["specialist", "foundation", "auditor", "bundle"]);
@@ -106,9 +107,8 @@ export function lintRepository(rootArg) {
   const canonicalHelpers = new Set(existsSync(join(root, "scripts")) ? readdirSync(join(root, "scripts")).filter((f) => f.endsWith(".mjs")).map((f) => f.replace(/\.mjs$/, "")) : []);
   const known = new Set(skills.map((s) => s.name));
   const companionDoc = join(root, "docs", "references", "companion-methods.md");
-  const companionEntries = existsSync(companionDoc) ? new Set([...readFileSync(companionDoc, "utf8").matchAll(/^###\s+(\S+)\s*$/gm)].map((m) => m[1])) : null;
-  if (companionEntries) for (const info of skills) if (!info.internal && !companionEntries.has(info.name)) add("COMPANION_ENTRY_MISSING", "docs/references/companion-methods.md", `no "### ${info.name}" entry: a skill installed without ${info.name} has no inline fallback for it`);
-  for (const info of skills) lintQuality(root, info, known, canonicalHelpers, add, companionEntries);
+  const library = existsSync(companionDoc) ? parseCompanionLibrary(readFileSync(companionDoc, "utf8")) : null;
+  for (const info of skills) lintQuality(root, info, known, canonicalHelpers, add, library);
   lintCoverage(root, skills, canonicalHelpers, add);
   lintNoPlatform(root, add);
   return issues;
@@ -157,6 +157,7 @@ function lintSkillFile(root, abs, rel, names, skills, add) {
       kind: typeof meta.kind === "string" ? meta.kind : undefined,
       helpers: csv(meta.helpers),
       references: csv(meta.references),
+      companions: csv(meta.companions),
       launchChecks: parseNumberList(meta["launch-checks"]),
       domains: parseNumberList(meta["compliance-domains"]),
       internal: meta.internal === true,
@@ -165,7 +166,7 @@ function lintSkillFile(root, abs, rel, names, skills, add) {
   }
 }
 
-function lintQuality(root, info, knownSkills, canonicalHelpers, add, companionEntries) {
+function lintQuality(root, info, knownSkills, canonicalHelpers, add, library) {
   const at = (code, message) => add(code, info.rel, message);
   if (info.internal) return;
   if (!info.kind || !KINDS.has(info.kind)) {
@@ -182,7 +183,7 @@ function lintQuality(root, info, knownSkills, canonicalHelpers, add, companionEn
 
   if (/@readyvibe\/|npx\s+readyvibe|readyvibe\s+(doctor|recon|report)|ReadyVibe\s+(CLI|engine|daemon|runtime|account|cloud)/i.test(info.body)) at("SKILL_PLATFORM_DEPENDENCY", "skills must work on their own: no ReadyVibe CLI, engine, runtime, account, or npm package. Use bundled scripts/ helpers or normal inspection");
   if (info.body.split("\n").length > 600) at("SKILL_TOO_LONG", "SKILL.md exceeds 600 lines; move detail into references/");
-  if (DESIGN_FIRST.has(info.name) && !info.body.includes("design-system-reconnaissance")) at("SKILL_DESIGN_FIRST", "a skill that changes visible UI must first inspect the project's existing design system (design-system-reconnaissance)");
+  if (DESIGN_FIRST.has(info.name) && (!info.body.includes("design-system-reconnaissance") || !info.companions.includes("design-system-reconnaissance"))) at("SKILL_DESIGN_FIRST", "a skill that changes visible UI must first inspect the project's existing design system: mention design-system-reconnaissance and declare it in metadata.companions");
   if (LEGAL_LOOKUP.has(info.name)) {
     if (!info.references.includes("official-sources")) at("SKILL_LEGAL_SOURCES", 'legal-sensitive skills must declare metadata.references: "official-sources"');
     if (!/official-sources|official source/i.test(info.body)) at("SKILL_LEGAL_SOURCES", "legal-sensitive skills must tell the agent to consult current official sources at run time");
@@ -212,13 +213,29 @@ function lintQuality(root, info, knownSkills, canonicalHelpers, add, companionEn
     else if (!existsSync(dst)) at("SKILL_REFERENCE_MISSING", `references/${ref}.md is not vendored (run: node tools/sync-skills.mjs)`);
     else if (!readFileSync(src).equals(readFileSync(dst))) at("SKILL_REFERENCE_STALE", `references/${ref}.md differs from docs/references/${ref}.md (run: node tools/sync-skills.mjs)`);
   }
-  // Standalone: every sibling skill this skill names must have an inline fallback, and the skill must say so.
-  const companions = [...new Set([...info.body.matchAll(/`([a-z][a-z0-9]*(?:-[a-z0-9]+)+)`/g)].map((m) => m[1]))].filter((t) => knownSkills.has(t) && t !== info.name);
-  if (companions.length && companionEntries) {
-    if (!info.references.includes("companion-methods")) at("SKILL_STANDALONE", 'names other skills but does not declare metadata.references: "companion-methods"');
-    if (!have.some((h) => h.startsWith("Working alone"))) at("SKILL_STANDALONE", 'names other skills but has no "## Working alone" section saying they are optional and what to do without them');
-    for (const c of companions) if (!companionEntries.has(c)) at("SKILL_STANDALONE", `names \`${c}\` but companion-methods.md has no inline fallback for it`);
+  // Companions are DECLARED (metadata.companions), never inferred from mentions. Routing, escalation, and
+  // documentation mentions of other skills are not dependencies. Each declared companion must exist, have a
+  // fallback entry, and appear in the generated per-skill companion-methods.md (only those entries).
+  if (info.references.includes("companion-methods")) at("SKILL_COMPANIONS", 'metadata.references must not list "companion-methods": it is generated from metadata.companions');
+  const dstCompanion = join(info.dir, "references", "companion-methods.md");
+  if (new Set(info.companions).size !== info.companions.length) at("SKILL_COMPANIONS", "metadata.companions lists a skill more than once");
+  for (const c of info.companions) {
+    if (c === info.name) at("SKILL_COMPANIONS", "a skill cannot be its own companion");
+    else if (!knownSkills.has(c)) at("SKILL_COMPANIONS", `declared companion "${c}" is not a ReadyVibe skill`);
+    else if (library && !library.entries.has(c)) at("SKILL_COMPANION_FALLBACK", `declared companion "${c}" has no "### ${c}" fallback entry in docs/references/companion-methods.md`);
   }
+  if (info.companions.length) {
+    if (!have.some((h) => h.startsWith("Working alone"))) at("SKILL_COMPANIONS", 'a skill with companions needs a "## Working alone" section');
+    else {
+      const working = sectionText(info.body, "Working alone");
+      for (const c of info.companions) if (!working.includes(`\`${c}\``)) at("SKILL_COMPANIONS", `the Working alone section does not list companion \`${c}\``);
+    }
+    if (library && info.companions.every((c) => library.entries.has(c) && knownSkills.has(c))) {
+      const built = buildCompanionFile(library, info.companions);
+      if (!existsSync(dstCompanion)) at("SKILL_COMPANION_FILE", "references/companion-methods.md is not generated (run: node tools/sync-skills.mjs)");
+      else if (readFileSync(dstCompanion, "utf8") !== built) at("SKILL_COMPANION_FILE", "references/companion-methods.md is stale or not pruned to the declared companions (run: node tools/sync-skills.mjs)");
+    }
+  } else if (existsSync(dstCompanion)) at("SKILL_COMPANION_FILE", "references/companion-methods.md exists but the skill declares no companions (run: node tools/sync-skills.mjs)");
   for (const ref of info.body.matchAll(/\]\((references\/[^)#\s]+)\)/g)) if (!existsSync(join(info.dir, ref[1]))) at("SKILL_REFERENCE_MISSING", `links to ${ref[1]}, which does not exist`);
   for (const tok of new Set([...info.body.matchAll(/`([a-z][a-z0-9]*(?:-[a-z0-9]+)+)`/g)].map((m) => m[1]))) {
     if (REFERENCE_SUFFIX.test(tok) && !knownSkills.has(tok) && !canonicalHelpers.has(tok) && !NOT_A_SKILL.has(tok) && !/^(next|use|dangerously|set|list|check|cache|x|content)-/.test(tok)) at("SKILL_UNKNOWN_REFERENCE", `refers to \`${tok}\`, which is not a ReadyVibe skill or helper`);

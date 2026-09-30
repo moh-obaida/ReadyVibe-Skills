@@ -7,7 +7,7 @@ metadata:
   launch-checks: "3,4,5"
   compliance-domains: "3"
   helpers: "observe-runtime"
-  references: "official-sources,companion-methods"
+  references: "official-sources"
 ---
 
 # cookie-and-storage-audit
@@ -19,12 +19,6 @@ metadata:
 - Any cookie, storage key, tracker, embed, or third-party script is present in source, or the user asks what the site stores/loads.
 - Before adding, changing, or removing a consent control (`consent-management`), or writing a cookie/privacy disclosure (`privacy-policy`, `policy-consistency`).
 - Not to decide whether consent is required (that needs a rule looked up at an official source; see `jurisdiction-applicability`).
-
-## Working alone
-
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
-
-Companions named here: `analytics-privacy`, `consent-management`, `jurisdiction-applicability`, `policy-consistency`, `privacy-policy`, `privacy-readiness`.
 
 ## Inspect
 

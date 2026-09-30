@@ -5,7 +5,6 @@ license: Apache-2.0
 metadata:
   kind: auditor
   helpers: "inspect-metadata,check-links,audit-markup,scan-secrets,observe-runtime"
-  references: "companion-methods"
 ---
 
 # launch-verification
@@ -18,12 +17,6 @@ metadata:
 - `launch-all` reaches its verify step.
 - The user asks "did that actually fix it?" or "is this ready now?"
 - Not as a first pass; find problems with the owning specialist first.
-
-## Working alone
-
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
-
-Companions named here: `launch-all`.
 
 ## Inspect
 

@@ -6,7 +6,6 @@ metadata:
   kind: foundation
   compliance-domains: "1"
   helpers: "inspect-metadata"
-  references: "companion-methods"
 ---
 
 # site-reconnaissance
@@ -18,12 +17,6 @@ Every other ReadyVibe skill is only as good as its picture of the product. This 
 - Starting any substantial launch review, or the first time a specialist is invoked on a project.
 - The applicable checks depend on facts you do not yet have (is there email? accounts? payments? which markets?).
 - Skip it when `.readyvibe/context.md` exists, is recent, and nothing relevant changed. Update rather than redo.
-
-## Working alone
-
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
-
-Companions named here: `cookie-and-storage-audit`, `regulated-domain-triggers`.
 
 ## Inspect
 

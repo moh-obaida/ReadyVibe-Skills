@@ -6,7 +6,8 @@ metadata:
   kind: bundle
   launch-checks: "1-8"
   compliance-domains: "1-12"
-  references: "official-sources,companion-methods"
+  references: "official-sources"
+  companions: "jurisdiction-applicability,site-reconnaissance,cookie-and-storage-audit,data-flow-mapping,policy-consistency,privacy-policy,terms-of-service,privacy-readiness,consent-management,analytics-privacy,third-party-privacy,email-compliance,minors-readiness,data-rights,consumer-protection-readiness,subscription-readiness,payments-readiness,wcag-readiness,web-security,security-headers,deployment-cleanup,regulated-domain-triggers,ai-features-readiness,legal-identity-notices,public-support,legal-navigation"
 ---
 
 # compliance-all
@@ -24,9 +25,9 @@ It must never produce "GDPR ✅", "CCPA ✅", or "ADA ✅".
 
 ## Working alone
 
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. The lanes this bundle can activate are companions because it promises to run them when they apply: consider them all, activate only the ones that fit. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
 
-Companions named here: `cookie-and-storage-audit`, `data-flow-mapping`, `jurisdiction-applicability`, `launch-all`, `minors-readiness`, `regulated-domain-triggers`, `site-reconnaissance`.
+Companions: `jurisdiction-applicability`, `site-reconnaissance`, `cookie-and-storage-audit`, `data-flow-mapping`, `policy-consistency`, `privacy-policy`, `terms-of-service`, `privacy-readiness`, `consent-management`, `analytics-privacy`, `third-party-privacy`, `email-compliance`, `minors-readiness`, `data-rights`, `consumer-protection-readiness`, `subscription-readiness`, `payments-readiness`, `wcag-readiness`, `web-security`, `security-headers`, `deployment-cleanup`, `regulated-domain-triggers`, `ai-features-readiness`, `legal-identity-notices`, `public-support`, `legal-navigation`.
 
 ## Route
 

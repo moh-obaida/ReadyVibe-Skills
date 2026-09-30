@@ -7,7 +7,6 @@ metadata:
   launch-checks: "17,38"
   compliance-domains: "10"
   helpers: "scan-secrets,inspect-metadata,check-links"
-  references: "companion-methods"
 ---
 
 # deployment-cleanup
@@ -19,12 +18,6 @@ The site works, but it still thinks it is running on someone's laptop: canonical
 - Before any launch, domain cutover, or move from preview to production.
 - `discoverability-all`/`production-all` route here (checks 17, 38).
 - Not to deploy, change DNS, or edit production secrets.
-
-## Working alone
-
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
-
-Companions named here: `discoverability-all`, `production-all`, `security-headers`.
 
 ## Inspect
 

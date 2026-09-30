@@ -6,7 +6,6 @@ metadata:
   kind: specialist
   compliance-domains: "10"
   launch-checks: "38,16"
-  references: "companion-methods"
 ---
 
 # admin-authorization
@@ -18,12 +17,6 @@ The most common critical bug in vibe-coded apps: `/admin` is "protected" because
 - Any admin/staff/operator route or API exists (`/admin`, `/dashboard/users`, `/api/admin/*`, role fields, "isAdmin" checks), or roles/permissions exist.
 - `production-all`/`web-security` routes here.
 - Not to design admin features (that is `admin-dashboard`, which calls this skill for access control). If the only "admin" is the database console, say so.
-
-## Working alone
-
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
-
-Companions named here: `admin-audit-log`, `admin-dashboard`, `production-all`, `seo-readiness`, `web-security`.
 
 ## Inspect
 

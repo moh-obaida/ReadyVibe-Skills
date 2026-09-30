@@ -7,7 +7,6 @@ metadata:
   launch-checks: "39"
   compliance-domains: "10"
   helpers: "observe-runtime"
-  references: "companion-methods"
 ---
 
 # security-headers
@@ -19,12 +18,6 @@ Headers are set by the *deployment*, not by the code alone: the platform, CDN, a
 - A deployed URL (production or a production-like preview) exists, or the owner is about to configure hosting.
 - `production-all` routes here (check 39).
 - Not on a local dev server as a verdict (it is UNKNOWN), and not as a replacement for a security review.
-
-## Working alone
-
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
-
-Companions named here: `production-all`, `web-security`.
 
 ## Inspect
 

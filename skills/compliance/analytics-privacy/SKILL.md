@@ -7,7 +7,7 @@ metadata:
   launch-checks: "5"
   compliance-domains: "3,9"
   helpers: "observe-runtime"
-  references: "official-sources,companion-methods"
+  references: "official-sources"
 ---
 
 # analytics-privacy
@@ -19,12 +19,6 @@ metadata:
 - An analytics, ad, replay, heatmap, A/B, or tag-manager tool appears in source or network traffic.
 - Someone asks whether tracking is disclosed or gated, or is about to add a new tool.
 - Not to choose or install an analytics product. Not to rule on legal necessity.
-
-## Working alone
-
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
-
-Companions named here: `consent-management`, `regulated-domain-triggers`.
 
 ## Inspect
 

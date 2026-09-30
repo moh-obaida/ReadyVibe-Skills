@@ -6,7 +6,7 @@ metadata:
   kind: bundle
   launch-checks: "35-40"
   helpers: "scan-secrets,audit-assets,check-links,observe-runtime"
-  references: "companion-methods"
+  companions: "forms-readiness,email-compliance,web-security,deployment-cleanup,security-headers,dependency-security,performance-readiness,admin-authorization,admin-audit-log,admin-dashboard"
 ---
 
 # production-all
@@ -20,9 +20,9 @@ Owns launch family E (checks 35–40): forms that submit, unsubscribe that works
 
 ## Working alone
 
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. The lanes this bundle can activate are companions because it promises to run them when they apply: consider them all, activate only the ones that fit. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
 
-Companions named here: `admin-audit-log`, `admin-authorization`, `admin-dashboard`, `dependency-security`, `deployment-cleanup`, `email-compliance`, `forms-readiness`, `launch-all`, `performance-readiness`, `security-headers`, `web-security`.
+Companions: `forms-readiness`, `email-compliance`, `web-security`, `deployment-cleanup`, `security-headers`, `dependency-security`, `performance-readiness`, `admin-authorization`, `admin-audit-log`, `admin-dashboard`.
 
 ## Route
 

@@ -6,7 +6,8 @@ metadata:
   kind: specialist
   compliance-domains: "7"
   launch-checks: "2,25"
-  references: "official-sources,companion-methods"
+  references: "official-sources"
+  companions: "subscription-readiness,payments-readiness"
 ---
 
 # consumer-protection-readiness
@@ -20,9 +21,9 @@ People feel cheated by *inconsistency and surprise*: a price that changes at che
 
 ## Working alone
 
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
 
-Companions named here: `content-trust`, `legal-identity-notices`, `payments-readiness`, `public-support`, `subscription-readiness`.
+Companions: `subscription-readiness`, `payments-readiness`.
 
 ## Inspect
 

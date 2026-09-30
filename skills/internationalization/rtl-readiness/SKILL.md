@@ -6,7 +6,6 @@ metadata:
   kind: specialist
   launch-checks: "33,28"
   helpers: "observe-runtime"
-  references: "companion-methods"
 ---
 
 # rtl-readiness
@@ -17,12 +16,6 @@ RTL is not "flip the page". Direction, layout, and reading order change; icons, 
 
 - An RTL locale is offered or planned; content includes RTL text; users report backwards layouts.
 - Not for LTR-only sites.
-
-## Working alone
-
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
-
-Companions named here: `multilingual-readiness`.
 
 ## Inspect
 

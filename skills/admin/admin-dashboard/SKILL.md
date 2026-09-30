@@ -7,7 +7,7 @@ metadata:
   launch-checks: "24,37"
   compliance-domains: "6,10"
   helpers: "inventory-data-model"
-  references: "companion-methods"
+  companions: "design-system-reconnaissance,admin-authorization,admin-audit-log,data-rights,wcag-readiness,forms-readiness,mobile-readiness,failure-resilience"
 ---
 
 # admin-dashboard
@@ -23,9 +23,9 @@ Build a **complete admin UI for this specific website**: its own information arc
 
 ## Working alone
 
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
+This skill is self-contained. Its **companions** (declared in its metadata) are skills whose method it may need to do its own promised work. Use of a companion can be conditional: declaring one does not mean running it. When a companion's lane applies, use the skill if it is installed; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip an applicable lane silently. Skills mentioned here only for escalation, referral, documentation, or optional deeper follow-up are not dependencies: report the hand-off and finish honestly.
 
-Companions named here: `admin-audit-log`, `admin-authorization`, `data-rights`, `design-system-reconnaissance`, `failure-resilience`, `forms-readiness`, `launch-all`, `mobile-readiness`, `production-all`, `wcag-readiness`.
+Companions: `design-system-reconnaissance`, `admin-authorization`, `admin-audit-log`, `data-rights`, `wcag-readiness`, `forms-readiness`, `mobile-readiness`, `failure-resilience`.
 
 ## Inspect
 

@@ -6,7 +6,6 @@ metadata:
   kind: specialist
   compliance-domains: "12"
   launch-checks: "38"
-  references: "companion-methods"
 ---
 
 # user-content-safety
@@ -17,12 +16,6 @@ The moment strangers can put content in front of other strangers, the site needs
 
 - Posts, comments, reviews, profiles with bios/avatars, uploads, messages, public galleries, or shared links exist.
 - Not when users only see their own private data, or when content is admin-authored only.
-
-## Working alone
-
-This skill is self-contained. Where it names other ReadyVibe skills, they are **optional companions**: if one is installed, use it; if not, follow its short entry in [references/companion-methods.md](references/companion-methods.md) and say in your report which lanes ran inline at reduced depth. Never skip a lane silently.
-
-Companions named here: `admin-audit-log`, `admin-authorization`, `admin-dashboard`, `data-rights`, `legal-identity-notices`, `minors-readiness`, `terms-of-service`.
 
 ## Inspect
 
