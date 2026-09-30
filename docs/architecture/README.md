@@ -1,5 +1,9 @@
 # ReadyVibe Launch-Readiness System — Architecture Specification
 
+> **Superseded in part by [ADR 0006: Skills-first distribution](../adr/0006-skills-first-distribution.md).**
+> The product is the installable skill collection (`npx skills add`). The engine, CLI, schemas, and rule packs described below are internal supporting work: unpublished, not required by any skill, and not to be extended unless a specific skill needs a capability it cannot get from normal agent inspection or a bundled `scripts/` helper. Where this specification says the engine assigns statuses, or that skills run `npx @readyvibe/cli`, read the skills under `skills/` instead: they carry their own methodology, evidence rules, and helpers. The 40-check launch model and 12 compliance domains live in `skills/bundles/`.
+
+
 | Field | Value |
 | --- | --- |
 | Status | Draft 0.2 — normative for all implementation work |

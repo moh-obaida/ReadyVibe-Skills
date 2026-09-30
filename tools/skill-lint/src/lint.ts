@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
-import { join, relative, sep } from "node:path";
-import { parse, parseDocument } from "yaml";
+import { dirname, join, relative, sep } from "node:path";
+import { parseDocument } from "yaml";
+import { lintCoverage, lintSkillQuality, parseNumberList, type SkillInfo } from "./skills.js";
 
 export interface LintIssue {
   code: string;
@@ -20,6 +21,7 @@ const NAME_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 export function lintRepository(root: string): LintIssue[] {
   const issues: LintIssue[] = [];
   const names = new Map<string, string>();
+  const infos: SkillInfo[] = [];
 
   walk(root, (abs, rel) => {
     const normalized = rel.split(sep).join("/");
@@ -31,7 +33,7 @@ export function lintRepository(root: string): LintIssue[] {
       });
     }
     if (normalized.endsWith("/SKILL.md") || normalized === "SKILL.md") {
-      issues.push(...lintSkillFile(root, abs, normalized, names));
+      issues.push(...lintSkillFile(root, abs, normalized, names, infos));
     }
     if (normalized.endsWith(".yaml") && normalized.startsWith("rules/packs/")) {
       issues.push(...lintObligation(abs, normalized));
@@ -51,6 +53,12 @@ export function lintRepository(root: string): LintIssue[] {
     }
   });
 
+  const canonicalHelpers = new Set(
+    existsSync(join(root, "scripts")) ? readdirSync(join(root, "scripts")).filter((f) => f.endsWith(".mjs")).map((f) => f.replace(/\.mjs$/, "")) : [],
+  );
+  const known = new Set(infos.map((i) => i.name));
+  for (const info of infos) issues.push(...lintSkillQuality(root, info, known, canonicalHelpers));
+  issues.push(...lintCoverage(root, infos, canonicalHelpers));
   return issues;
 }
 
@@ -58,7 +66,7 @@ function isCc0Path(rel: string): boolean {
   return rel.includes("/assets/clauses/") || rel.includes("/assets/templates/") || rel.startsWith("vendor-catalog/");
 }
 
-function lintSkillFile(root: string, abs: string, rel: string, names: Map<string, string>): LintIssue[] {
+function lintSkillFile(root: string, abs: string, rel: string, names: Map<string, string>, infos: SkillInfo[]): LintIssue[] {
   const issues: LintIssue[] = [];
   const parts = rel.split("/");
   const depthOk = parts.length === 4 && parts[0] === "skills" && parts[3] === "SKILL.md";
@@ -78,7 +86,7 @@ function lintSkillFile(root: string, abs: string, rel: string, names: Map<string
     return issues;
   }
   const doc = parseDocument(match[1] ?? "");
-  const data = doc.toJS() as { name?: string; description?: string; metadata?: { internal?: unknown } };
+  const data = doc.toJS() as { name?: string; description?: string; metadata?: Record<string, unknown> & { internal?: unknown } };
   if (typeof data.name !== "string" || !NAME_RE.test(data.name) || data.name.length > 64 || data.name !== dirName) {
     issues.push({
       code: "SKILL_FRONTMATTER_NAME",
@@ -112,24 +120,19 @@ function lintSkillFile(root: string, abs: string, rel: string, names: Map<string
       issues.push({ code: "SKILL_DUPLICATE", file: rel, message: `Duplicate skill name also at ${prior}` });
     } else names.set(data.name, rel);
   }
-  const contractPath = join(root, "skills", parts[1]!, dirName, "contract.yaml");
-  if (!existsSync(contractPath)) {
-    issues.push({ code: "SKILL_CONTRACT", file: rel, message: "Missing contract.yaml" });
-  } else {
-    const contract = parse(readFileSync(contractPath, "utf8")) as { name?: string; kind?: string };
-    if (contract.name !== data.name) {
-      issues.push({ code: "SKILL_CONTRACT", file: rel, message: "contract.yaml name must match SKILL.md" });
-    }
-    if (contract.kind === "BUNDLE") {
-      const body = raw.split("---").slice(2).join("---");
-      if (/CONSENT\.|procedure:|## Discover/i.test(body) && body.length > 4000) {
-        issues.push({
-          code: "SKILL_BUNDLE_DUPLICATE",
-          file: rel,
-          message: "Bundle skills must stay thin and must not copy specialist procedures",
-        });
-      }
-    }
+  if (data.name) {
+    const meta = (data.metadata ?? {}) as Record<string, unknown>;
+    infos.push({
+      name: data.name,
+      rel,
+      dir: dirname(abs),
+      kind: typeof meta.kind === "string" ? meta.kind : undefined,
+      helpers: String(meta.helpers ?? "").split(",").map((h) => h.trim()).filter(Boolean),
+      launchChecks: parseNumberList(meta["launch-checks"]),
+      domains: parseNumberList(meta["compliance-domains"]),
+      internal: meta.internal === true,
+      body: raw.slice(match[0].length),
+    });
   }
   return issues;
 }

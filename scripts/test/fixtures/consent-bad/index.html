@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Bad consent</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TEST"></script>
+<style>.wide{width:900px;background:#eee}</style></head>
+<body>
+<main><h1>Bad consent</h1><p>We do not use analytics.</p><div class="wide">too wide for a phone</div><a href="/x" style="display:inline-block;width:10px;height:10px">x</a>
+<form id="signup" action="/subscribe" method="post"><input name="email" type="email" placeholder="Email"><button type="submit">Join</button></form></main>
+<div id="cookie-banner" role="dialog"><p>This site uses cookies. Privacy</p><button id="accept">Accept</button><button id="reject">Reject</button></div>
+<script>
+  fetch("https://www.google-analytics.com/g/collect?v=2&tid=G-TEST", { mode: "no-cors" }).catch(function () {});
+  document.cookie = "_ga=GA1.1.999; path=/";
+  document.getElementById("reject").onclick = function () { localStorage.setItem("consent", "rejected"); document.getElementById("cookie-banner").remove(); fetch("https://www.google-analytics.com/g/collect?v=2&en=after_reject", { mode: "no-cors" }).catch(function () {}); };
+  document.getElementById("signup").addEventListener("submit", function (e) { e.preventDefault(); var email = e.target.email.value; fetch("/subscribe", { method: "POST", body: new URLSearchParams({ email: email }) }); fetch("https://www.google-analytics.com/g/collect?v=2&uid=" + encodeURIComponent(email), { mode: "no-cors" }).catch(function () {}); });
+</script></body></html>

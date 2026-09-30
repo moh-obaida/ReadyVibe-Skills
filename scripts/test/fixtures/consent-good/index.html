@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Good consent</title></head>
+<body>
+<main><h1>Good consent</h1>
+<form id="signup" action="/subscribe" method="post"><label for="email">Email</label><input id="email" name="email" type="email"><button type="submit">Join</button></form></main>
+<div id="cookie-banner" role="dialog"><p>We use cookies for analytics if you allow it. Privacy</p><button id="accept">Accept all</button><button id="reject">Reject all</button></div>
+<script>
+  function loadAnalytics() { fetch("https://www.google-analytics.com/g/collect?v=2&tid=G-TEST", { mode: "no-cors" }).catch(function () {}); document.cookie = "_ga=GA1.1.123; path=/"; }
+  var choice = localStorage.getItem("consent");
+  if (choice === "accepted") loadAnalytics();
+  if (choice) document.getElementById("cookie-banner").remove();
+  var acc = document.getElementById("accept"); if (acc) acc.onclick = function () { localStorage.setItem("consent", "accepted"); loadAnalytics(); document.getElementById("cookie-banner").remove(); };
+  var rej = document.getElementById("reject"); if (rej) rej.onclick = function () { localStorage.setItem("consent", "rejected"); document.getElementById("cookie-banner").remove(); };
+  document.getElementById("signup").addEventListener("submit", function (e) { e.preventDefault(); fetch("/subscribe", { method: "POST", body: new URLSearchParams(new FormData(e.target)) }); });
+</script></body></html>

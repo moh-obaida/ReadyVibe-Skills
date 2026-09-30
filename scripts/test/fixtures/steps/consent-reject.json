@@ -1,0 +1,6 @@
+[
+  {"do":"click","text":"Reject"},
+  {"do":"snapshot","label":"after-reject","expect":"no-new-nonessential"},
+  {"do":"reload"},
+  {"do":"snapshot","label":"after-reject-reload","expect":"no-new-nonessential"}
+]

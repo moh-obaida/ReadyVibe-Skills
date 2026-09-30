@@ -1,0 +1,5 @@
+[
+  {"do":"fill","selector":"input[name=email]","value":"$CANARY_EMAIL"},
+  {"do":"submit","selector":"#signup"},
+  {"do":"snapshot","label":"after-submit"}
+]

@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| Status | Accepted |
+| Status | Accepted; publishing the packages is superseded by [ADR 0006](0006-skills-first-distribution.md) |
 | Date | 2026-09-29 |
 | Decided by | Implementation (architecture left module packaging open once responsibilities were fixed) |
 

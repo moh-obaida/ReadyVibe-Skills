@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>States</title></head>
+<body><main><h1>Items</h1><div id="out" role="status">Loading…</div></main>
+<script>
+  fetch("/api/items").then(function (r) { if (!r.ok) throw new Error("bad"); return r.json(); })
+    .then(function (d) { document.getElementById("out").textContent = d.length ? d.join(", ") : "No items yet."; })
+    .catch(function () { document.getElementById("out").textContent = "We could not load your items. Try again."; });
+</script></body></html>
