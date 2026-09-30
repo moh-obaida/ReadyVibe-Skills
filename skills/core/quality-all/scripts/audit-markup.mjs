@@ -32,6 +32,8 @@ if (unread) findings.push(unread);
 const GENERIC_LINK = /^(click here|here|read more|learn more|more|link|this|details|continue)$/i;
 const FILENAME_ALT = /^(img|image|photo|picture|screenshot|dsc|untitled)?[\s_-]*\d*\.?(png|jpe?g|gif|webp|svg|avif)?$|\.(png|jpe?g|gif|webp|svg|avif)$/i;
 const PLACEHOLDER_TEXT = [
+  // The marker the legal-page skills leave for owner-only facts. Visible on a live page it is a launch blocker.
+  [/\[\[\s*OWNER TO PROVIDE[^\]]*\]\]?/i, "HIGH", "an unresolved owner-fact marker (\"OWNER TO PROVIDE\")"],
   [/lorem ipsum|dolor sit amet|consectetur adipiscing/i, "MEDIUM", "lorem ipsum filler"],
   [/\b(your (company|name|email|business|brand|logo|text|tagline|website|product)( name)?( here)?|company name here|insert (text|image|title|description) here)\b/i, "MEDIUM", "template placeholder wording"],
   [/\b(john|jane) doe\b|\bfirstname lastname\b/i, "MEDIUM", "sample person name"],

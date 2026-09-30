@@ -14,7 +14,7 @@ import assert from "node:assert/strict";
 import { existsSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { assertHelpersStart, assertSelfContained, freshProject, installAlone, listSkills } from "./lib/install-check.mjs";
+import { assertHelpersStart, assertSelfContained, freshProject, installAlone, installDefault, listSkills } from "./lib/install-check.mjs";
 import { promisify } from "node:util";
 import { execFile } from "node:child_process";
 
@@ -52,6 +52,14 @@ for (const name of REPRESENTATIVE) {
   const { helpers, companions } = assertSelfContained(name, dir, { allNames, siblingsAbsentIn: skillsDir });
   await assertHelpersStart(name, dir, helpers, project);
   console.log(`   ok: SKILL.md, ${helpers.length} helper(s) [${helpers.join(", ")}], ${companions.length} declared companion(s), no sibling installed`);
+}
+
+step(`default install (no --agent) of launch-all from ${spec}`);
+{
+  const { project, dir } = await installDefault(spec, "launch-all");
+  const { helpers } = assertSelfContained("launch-all", dir, { allNames });
+  await assertHelpersStart("launch-all", dir, helpers, project);
+  console.log(`   ok: real files at ${dir.replace(project, ".")}`);
 }
 
 if (doAll) {

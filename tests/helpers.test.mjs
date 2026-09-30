@@ -227,6 +227,9 @@ describe("inventory-data-model", () => {
 describe("audit-markup", () => {
   test("finds label, alt, viewport, GET-with-password, and semantic problems", async () => {
     const { json } = await run("audit-markup.mjs", ["--dir", join(fixtures, "leaky-site")]);
+    const marker = json.findings.find((f) => f.code === "PLACEHOLDER_TEXT" && /OWNER TO PROVIDE/.test(f.message));
+    assert.ok(marker, "an unresolved [[OWNER TO PROVIDE]] marker must be detected");
+    assert.equal(marker.severity, "HIGH", "a visible owner-fact marker on a page is a launch blocker");
     for (const code of ["PLACEHOLDER_TEXT", "FORM_GET_WITH_PASSWORD", "CONTROL_NO_LABEL", "PLACEHOLDER_ONLY_LABEL", "IMG_ALT_MISSING", "LINK_NO_NAME", "LANG_MISSING", "VIEWPORT_MISSING", "CLICKABLE_NON_SEMANTIC", "HEADING_SKIP"]) assert.ok(codes(json).has(code), code);
   });
   test("a correct site has no findings", async () => {

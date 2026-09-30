@@ -4,6 +4,7 @@ description: "Use when a product with accounts, user content, purchases, subscri
 license: Apache-2.0
 metadata:
   kind: specialist
+  helpers: "audit-markup"
   launch-checks: "2"
   compliance-domains: "7,12"
   references: "official-sources"
@@ -40,7 +41,7 @@ Companions: `user-content-safety`, `payments-readiness`, `subscription-readiness
 Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REVIEW REQUIRED. UNKNOWN is never a pass and never a failure.
 
 - A clause about a feature needs evidence the feature exists (a route, a billing integration, a content form).
-- Commercial terms (fees, refunds) are DECLARED by the owner; unsupported ones are placeholders.
+- Commercial terms (fees, refunds) are DECLARED by the owner; unsupported ones are `[[OWNER TO PROVIDE: …]]` placeholders.
 - Whether terms are *enforceable* or *sufficient* is not observable. It is REVIEW REQUIRED.
 - **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
@@ -54,7 +55,7 @@ That terms are "legally binding", "enforceable", "comprehensive", "compliant wit
 
 ## Verify
 
-Every substantive clause maps to a real feature; every placeholder is visible and listed for the owner; links resolve; signup/checkout reference the terms if they are meant to bind; the page renders in the site's design at desktop and 375px. Cross-check with `policy-consistency` and `subscription-readiness` (terms must agree with what checkout shows).
+Every substantive clause maps to a real feature; every owner-only fact is a visible `[[OWNER TO PROVIDE: …]]` marker listed for the owner (`node scripts/audit-markup.mjs --url <site> --render`, path relative to this skill's folder, reports each as a HIGH `PLACEHOLDER_TEXT` finding: the page is not launch-ready until they are supplied); links resolve; signup/checkout reference the terms if they are meant to bind; the page renders in the site's design at desktop and 375px. Cross-check with `policy-consistency` and `subscription-readiness` (terms must agree with what checkout shows).
 
 ## Escalate
 

@@ -8,7 +8,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { describe, test } from "node:test";
 import { fileURLToPath } from "node:url";
-import { assertHelpersStart, assertSelfContained, installAlone, listSkills } from "../tools/lib/install-check.mjs";
+import { assertHelpersStart, assertSelfContained, installAlone, installDefault, listSkills } from "../tools/lib/install-check.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const CI = Boolean(process.env.CI);
@@ -55,6 +55,12 @@ describe("npx skills add", () => {
       await assertHelpersStart(name, dir, helpers, project);
     });
   }
+
+  test("the default install (no --agent) also yields a self-contained skill", { skip }, async () => {
+    const { project, dir } = await installDefault(fakeRepo, "privacy-policy");
+    const { helpers } = assertSelfContained("privacy-policy", dir, { allNames });
+    await assertHelpersStart("privacy-policy", dir, helpers, project);
+  });
 
   test("an installed helper does real work from the installed location", { skip }, async () => {
     const { execFile } = await import("node:child_process");

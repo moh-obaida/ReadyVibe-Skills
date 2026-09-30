@@ -30,7 +30,7 @@ Use only the lines that carry information. A LOW finding is often one line.
 
 | Severity | Meaning | Examples |
 |---|---|---|
-| HIGH | Blocks launch, or causes real harm or exposure | exposed credential; private/admin route discoverable; privacy behavior contradicting disclosure; broken payment or auth flow; account deletion that does not do what it claims; marketing unsubscribe that does nothing; production canonical pointing at localhost; launch-blocking form failure; sitewide `noindex` on a site meant to be found |
+| HIGH | Blocks launch, or causes real harm or exposure | exposed credential; private/admin route discoverable; privacy behavior contradicting disclosure; broken payment or auth flow; account deletion that does not do what it claims; marketing unsubscribe that does nothing; production canonical pointing at localhost; launch-blocking form failure; sitewide `noindex` on a site meant to be found; a visible `[[OWNER TO PROVIDE: …]]` marker on a live legal page (the owner-only fact is still missing) |
 | MEDIUM | Materially hurts trust, discoverability, or usability; fix soon | starter title on the home page; private route in sitemap without exposure; no reject option where one is implemented; mobile horizontal overflow on key pages; missing form labels |
 | LOW | Polish, low risk | missing favicon; weak social preview; minor metadata quality; small accessibility issue |
 

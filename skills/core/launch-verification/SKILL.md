@@ -38,6 +38,7 @@ Re-run it in the same conditions (same viewport, same starting state, same origi
 | layout | `observe-runtime --viewport 375x812` | 768px and desktop |
 | secrets/env | `scan-secrets` | build output rebuilt, not the old `dist/` |
 | assets/performance | `audit-assets` | page still renders correctly |
+| legal pages with owner facts | `audit-markup` (`PLACEHOLDER_TEXT`) | every `[[OWNER TO PROVIDE]]` marker is either resolved or listed as a blocker |
 
 Helpers live in this skill's `scripts/` folder. If a needed helper cannot run (no server, no Playwright) or reports `SITE_NOT_READ`, the item is UNVERIFIED, not passed.
 

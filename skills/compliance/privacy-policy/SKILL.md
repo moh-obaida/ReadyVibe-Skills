@@ -4,7 +4,7 @@ description: "Use when a site needs a privacy notice, or an existing one must re
 license: Apache-2.0
 metadata:
   kind: specialist
-  helpers: "check-links"
+  helpers: "check-links,audit-markup"
   launch-checks: "1"
   compliance-domains: "2"
   references: "official-sources"
@@ -69,7 +69,7 @@ That the notice "complies with GDPR/CCPA/…", "covers all requirements", or "is
 
 - Every observed cookie, vendor, and data field appears in the notice; nothing in the notice contradicts `policy-consistency` results.
 - All links resolve (`node scripts/check-links.mjs --url <site> --render`, path relative to this skill's folder); the page renders with the site's styling at desktop and 375px; a footer link and form links exist.
-- Placeholders are visible and enumerated in the reply as "the owner must supply: …".
+- Placeholders are visible and enumerated in the reply as "the owner must supply: …". Run `node scripts/audit-markup.mjs --url <site> --render`: every remaining `[[OWNER TO PROVIDE: …]]` marker shows up as a HIGH `PLACEHOLDER_TEXT` finding. That is intended while the owner's facts are missing, and it means the page is **not launch-ready** until they are supplied; never remove a marker by guessing the fact.
 
 ## Escalate
 

@@ -38,6 +38,20 @@ export async function installAlone(spec, name, { agent = "claude-code" } = {}) {
   return { project, skillsDir: join(project, ".claude", "skills") };
 }
 
+/**
+ * Install ONE skill the way most users will: no --agent. The CLI puts the real files in `.agents/skills/<name>`
+ * (shared by many agents) and symlinks them into agent folders such as `.claude/skills`.
+ * Returns the directory holding the real files, and whether an agent folder links to it.
+ */
+export async function installDefault(spec, name) {
+  const project = freshProject(`rv-default-${name}-`);
+  await run("npx", ["-y", "skills", "add", spec, "--skill", name, "-y"], { cwd: project, timeout: 240000, maxBuffer: 30_000_000 });
+  const candidates = [join(project, ".agents", "skills", name), join(project, ".claude", "skills", name)];
+  const dir = candidates.find((d) => existsSync(join(d, "SKILL.md")));
+  assert.ok(dir, `a default install of ${name} produced no SKILL.md in ${candidates.join(" or ")}`);
+  return { project, dir };
+}
+
 function walk(dir, out = []) {
   for (const e of readdirSync(dir)) (statSync(join(dir, e)).isDirectory() ? walk(join(dir, e), out) : out.push(join(dir, e)));
   return out;

@@ -16,7 +16,7 @@ concurrency:
 jobs:
   check:
     name: check (node ${{ matrix.node }})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     strategy:
       fail-fast: false
@@ -44,7 +44,7 @@ jobs:
     name: install from the public GitHub repository
     needs: check
     if: github.event_name == 'push'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
