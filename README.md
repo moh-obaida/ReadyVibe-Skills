@@ -10,31 +10,17 @@ Your AI coding agent built a site that *looks* finished. These skills teach that
 ## Quick start
 
 ```bash
-npx skills add moh-obaida/ReadyVibe-Skills --skill launch-all
+npx skills add moh-obaida/ReadyVibe-Skills 
 ```
 
 Then, in your coding agent, inside your project:
 
 > Make this ready to launch.
 
-That is all. `launch-all` inspects your project, decides which launch areas apply, checks only those, fixes safe issues in your existing design, verifies the fixes, and ends with a short report: **READY · FIXED · BLOCKERS · REVIEW REQUIRED · UNVERIFIED · NEXT ACTION**.
+That is all. the agent uses the skills and inspects your project, decides which launch areas apply, checks only those, fixes safe issues in your existing design, verifies the fixes, and ends with a short report: **READY · FIXED · BLOCKERS · REVIEW REQUIRED · UNVERIFIED · NEXT ACTION**.
 
 No ReadyVibe CLI, package, account, or service is required. A few browser-based checks use [Playwright](https://playwright.dev) if your project has it; a skill tells you when it cannot run one.
 
-## `launch-all` is not `--all`
-
-These two are easy to confuse, so plainly:
-
-| | What it does |
-|---|---|
-| `--skill launch-all` | Installs **one** skill. When you run it, it *considers* all 40 launch checks and **activates only the ones that apply** to your site. It never runs all 55 skills. A typical run is a shared inspection plus a handful of relevant lanes. |
-| `--all` | Installs **every** skill (for every agent the Skills CLI supports). It does not run anything. Each skill still decides for itself whether it applies. |
-
-Install more than one skill by name if you like:
-
-```bash
-npx skills add moh-obaida/ReadyVibe-Skills --skill launch-all seo-readiness consent-management
-```
 
 ## Install options
 
@@ -44,7 +30,7 @@ npx skills add moh-obaida/ReadyVibe-Skills --skill launch-all          # the bro
 npx skills add moh-obaida/ReadyVibe-Skills --skill compliance-all      # privacy, consent, email, age, rights, legal pages
 npx skills add moh-obaida/ReadyVibe-Skills --skill admin-dashboard     # build a full admin tailored to your app
 npx skills add moh-obaida/ReadyVibe-Skills --skill faq-readiness       # an FAQ from real questions and verified answers
-npx skills add moh-obaida/ReadyVibe-Skills --all                       # every skill, for every supported agent
+npx skills add moh-obaida/ReadyVibe-Skills                             # every skill there is
 ```
 
 Add `--agent <name>` (for example `--agent claude-code`) to install for one agent only. These commands were verified against Skills CLI 1.7.0.
@@ -54,7 +40,7 @@ Add `--agent <name>` (for example `--agent claude-code`) to install for one agen
 Skills are instructions your agent runs, so pin an install to a release if you do not want it to change underneath you:
 
 ```bash
-npx skills add moh-obaida/ReadyVibe-Skills#v1.0.0 --skill launch-all
+npx skills add moh-obaida/ReadyVibe-Skills#v1.0.0 
 ```
 
 The pinned form (`#v1.0.0`, a tag, or a full commit SHA) was verified end to end against the `v1.0.0` release: listing, isolated installs, the default install layout, and `--all`. See the [releases](https://github.com/moh-obaida/ReadyVibe-Skills/releases) and the [CHANGELOG](CHANGELOG.md).
