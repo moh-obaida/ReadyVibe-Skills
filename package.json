@@ -15,7 +15,10 @@
     "lint": "node tools/lint-skills.mjs",
     "test": "node --test tests/*.test.mjs",
     "verify:public": "node tools/verify-public-install.mjs",
-    "check": "node tools/sync-skills.mjs --check && node tools/lint-skills.mjs && node --test tests/*.test.mjs"
+    "check": "node tools/sync-skills.mjs --check && node tools/lint-skills.mjs && node --test tests/*.test.mjs",
+    "marketplace:build": "node tools/package-marketplace.mjs --all",
+    "marketplace:skill": "node tools/package-marketplace.mjs",
+    "marketplace:check": "node tools/package-marketplace.mjs --all --check"
   },
   "devDependencies": {
     "playwright-core": "1.61.1",
