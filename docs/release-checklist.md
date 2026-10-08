@@ -10,6 +10,7 @@ Work top to bottom. Do not tag until every box above the tag step is checked. Re
 - [ ] Every skill name intentional; no stale names (`grep -rn production-readiness` outside `docs/archive/` is empty)
 - [ ] `metadata.companions` reviewed by hand: only real method dependencies, no referrals
 - [ ] Generated files synchronized: `pnpm sync --check`
+- [ ] Marketplace bundle builds and validates: `pnpm marketplace:bundle:check` (and `pnpm marketplace:bundle` when preparing an Agensi upload)
 - [ ] Lint green: `pnpm lint`
 - [ ] Tests green in CI mode: `CI=true pnpm test` on the supported Node versions (22 and 24)
 - [ ] No secrets or realistic credentials (the lint's `SECRET` rule; fixtures are synthetic)

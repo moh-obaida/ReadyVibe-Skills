@@ -39,6 +39,8 @@ jobs:
       - run: pnpm lint
       # Every published skill must produce exactly one Agensi-compatible, self-contained ZIP.
       - run: pnpm marketplace:check
+      # The unified ReadyVibe Skills bundle (one master SKILL.md, every public skill reachable) must build and validate; a broken bundle fails CI.
+      - run: pnpm marketplace:bundle:check
       # Helper, lint, browser, and Skills CLI install tests. CI=true makes the CLI and browser tests mandatory (never skipped).
       - run: pnpm test
 

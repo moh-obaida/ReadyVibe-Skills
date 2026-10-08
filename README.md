@@ -109,6 +109,10 @@ Where an agent cannot reliably do a job by reading files, a skill carries a smal
 
 A helper that reads nothing (server down, wrong URL) reports `SITE_NOT_READ` and exits non-zero, never a clean result. `observe-runtime` refuses to submit forms on non-local origins unless you explicitly allow it.
 
+## Marketplace bundle (Agensi)
+
+For marketplaces that detect a single `SKILL.md`, the repository builds one extra artifact, `dist/agensi/ReadyVibe-Skills.zip`: the whole collection as one skill named **ReadyVibe Skills**, with a master router and all 55 methods, helpers, and references inside. It is built with `pnpm marketplace:bundle` (validate only: `pnpm marketplace:bundle:check`) and is not committed. It does not change `npx skills add`. See [`docs/marketplace-distribution.md`](docs/marketplace-distribution.md).
+
 ## What ReadyVibe does not promise
 
 It is not a lawyer, a WCAG conformance audit, a penetration test, or a promise that a search engine will index a page. It will not say "GDPR compliant", "CCPA compliant", "fully compliant", "accessible", or "secure" as an unqualified result. Whether an agent following these skills does good work on your project depends on the agent and your project, so review what it changes. Skills are instructions your agent runs with your project's permissions: read a skill before you install it.
