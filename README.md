@@ -40,10 +40,10 @@ Add `--agent <name>` (for example `--agent claude-code`) to install for one agen
 Skills are instructions your agent runs, so pin an install to a release if you do not want it to change underneath you:
 
 ```bash
-npx skills add moh-obaida/ReadyVibe-Skills#v1.0.0 
+npx skills add moh-obaida/ReadyVibe-Skills#v1.0.1 
 ```
 
-The pinned form (`#v1.0.0`, a tag, or a full commit SHA) was verified end to end against the `v1.0.0` release: listing, isolated installs, the default install layout, and `--all`. See the [releases](https://github.com/moh-obaida/ReadyVibe-Skills/releases) and the [CHANGELOG](CHANGELOG.md).
+The pinned form (`#v1.0.0`, a tag, or a full commit SHA) was verified end to end against the `v1.0.1` release: listing, isolated installs, the default install layout, and `--all`. See the [releases](https://github.com/moh-obaida/ReadyVibe-Skills/releases) and the [CHANGELOG](CHANGELOG.md).
 
 ## Standalone skills, and when specialists go deeper
 
