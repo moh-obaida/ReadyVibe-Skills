@@ -1,0 +1,266 @@
+{
+  "comment": "Authored routing table for the ReadyVibe Skills marketplace bundle. Every skill named here must be a public skill; every public skill must appear in at least one route (tools/lib/bundle.mjs fails the build otherwise). 'load' is ordered: the first skill is the entry method, later ones are loaded only when their scope applies. Routes are matched top to bottom after an explicit skill name has been ruled out.",
+  "routes": [
+    {
+      "id": "full-launch",
+      "request": "Whole-site launch readiness: \"is this ready to launch / ship / go live?\", \"make my entire website ready\", a pre-launch pass on a vibe-coded site",
+      "keywords": ["ready to launch", "go live", "ship it", "pre-launch", "launch readiness", "entire website", "whole site", "vibe-coded", "production ready"],
+      "load": ["launch-all"],
+      "note": "launch-all considers all 40 checks and activates only the specialists that apply. It never runs every skill."
+    },
+    {
+      "id": "compliance-broad",
+      "request": "Privacy / compliance readiness across the board (GDPR, CCPA, cookies, email, age, deletion)",
+      "keywords": ["gdpr", "ccpa", "compliance", "privacy readiness", "make us compliant", "legal readiness"],
+      "load": ["compliance-all"],
+      "note": "Expect it to refuse the framing \"make us compliant\": it reports what can be inspected and fixed technically and what needs human or legal review."
+    },
+    {
+      "id": "discoverability-broad",
+      "request": "Everything that decides whether the site can be found: metadata, robots, sitemap, canonicals, social previews, favicon",
+      "keywords": ["discoverability", "findable", "indexing", "search presence"],
+      "load": ["discoverability-all"]
+    },
+    {
+      "id": "trust-broad",
+      "request": "The site feels unfinished or untrustworthy: dead buttons, placeholders, fake claims, weak 404, no contact path",
+      "keywords": ["feels unfinished", "looks fake", "placeholder", "trust", "dead buttons"],
+      "load": ["trust-all"]
+    },
+    {
+      "id": "quality-broad",
+      "request": "Combined accessibility and responsive-quality review",
+      "keywords": ["accessibility and mobile", "quality review", "responsive and accessible"],
+      "load": ["quality-all"]
+    },
+    {
+      "id": "production-broad",
+      "request": "Production sweep: forms delivery, unsubscribe, secrets, staging leftovers, headers, performance",
+      "keywords": ["production sweep", "production checks", "before going live", "pre-deploy"],
+      "load": ["production-all"]
+    },
+    {
+      "id": "seo",
+      "request": "SEO: titles, meta descriptions, canonicals, robots.txt, sitemap.xml, indexing",
+      "keywords": ["seo", "search engine", "meta description", "canonical", "sitemap", "robots.txt", "noindex", "ranking", "indexed"],
+      "load": ["seo-readiness", "search-console-readiness", "structured-data", "social-sharing"],
+      "note": "seo-readiness is the entry. Load the others only for Search Console setup, structured data, or social previews."
+    },
+    {
+      "id": "social-previews",
+      "request": "Link previews: Open Graph, Twitter/X cards, share images",
+      "keywords": ["open graph", "og:image", "twitter card", "link preview", "share image", "social sharing"],
+      "load": ["social-sharing"]
+    },
+    {
+      "id": "structured-data",
+      "request": "Structured data / schema.org / JSON-LD / rich results",
+      "keywords": ["json-ld", "schema.org", "structured data", "rich results"],
+      "load": ["structured-data"]
+    },
+    {
+      "id": "search-console",
+      "request": "Search Console / Bing Webmaster setup and verification",
+      "keywords": ["search console", "webmaster tools", "site verification"],
+      "load": ["search-console-readiness"]
+    },
+    {
+      "id": "accessibility",
+      "request": "Accessibility: keyboard, screen reader, contrast, focus, alt text, labels, zoom, reduced motion",
+      "keywords": ["accessibility", "a11y", "wcag", "screen reader", "keyboard", "contrast", "alt text", "focus"],
+      "load": ["wcag-readiness"],
+      "note": "Reports observed behavior only; never claims WCAG conformance or a legal accessibility outcome."
+    },
+    {
+      "id": "mobile",
+      "request": "Mobile and tablet layout: viewport, overflow, navigation, touch targets, forms and tables on small screens",
+      "keywords": ["mobile", "responsive", "phone", "tablet", "touch target", "viewport", "small screen"],
+      "load": ["mobile-readiness", "design-system-reconnaissance"],
+      "note": "Layout fixes change visible UI, so design-system-reconnaissance runs first and the repair is built from the project's own design system."
+    },
+    {
+      "id": "rtl-multilingual",
+      "request": "Right-to-left layouts, translations, language switching, hreflang",
+      "keywords": ["rtl", "right-to-left", "arabic", "hebrew", "multilingual", "translation", "hreflang", "localization", "i18n"],
+      "load": ["rtl-readiness", "multilingual-readiness"]
+    },
+    {
+      "id": "performance",
+      "request": "Performance: oversized assets, blocking scripts, slow loads",
+      "keywords": ["performance", "slow", "page weight", "lighthouse", "core web vitals", "oversized images", "blocking scripts"],
+      "load": ["performance-readiness"]
+    },
+    {
+      "id": "forms",
+      "request": "Forms and user flows: labels, validation, submission endpoints, loading/success/error states, duplicate submits",
+      "keywords": ["form", "contact form", "signup", "login form", "waitlist", "checkout form", "validation", "submit"],
+      "load": ["forms-readiness", "failure-resilience", "email-compliance"],
+      "note": "forms-readiness is the entry. Load failure-resilience for broader loading/empty/error states and email-compliance only when the form feeds email or newsletters."
+    },
+    {
+      "id": "ui-states",
+      "request": "Loading, empty, success and error states; infinite spinners; swallowed errors",
+      "keywords": ["loading state", "empty state", "error state", "spinner", "blank screen", "resilience"],
+      "load": ["failure-resilience"]
+    },
+    {
+      "id": "security",
+      "request": "Security: exposed secrets, auth, authorization, sessions, private routes, debug endpoints, unsafe redirects",
+      "keywords": ["security", "authentication", "authorization", "session", "secrets", "api keys", "vulnerable", "vulnerability", "vulnerabilities", "private routes"],
+      "load": ["web-security", "security-headers", "dependency-security", "admin-authorization", "payments-readiness"],
+      "note": "web-security is the entry for authentication and authorization audits. Load admin-authorization when admin or operator routes exist, security-headers for HTTPS/headers/CSP, dependency-security for manifests and lockfiles, payments-readiness when money moves. Not a penetration test; never claims a site is secure."
+    },
+    {
+      "id": "security-headers",
+      "request": "HTTPS, redirects, HSTS, response headers, Content-Security-Policy",
+      "keywords": ["csp", "content-security-policy", "hsts", "https", "security headers", "cors"],
+      "load": ["security-headers"]
+    },
+    {
+      "id": "dependencies",
+      "request": "Vulnerable or suspicious dependencies, lockfiles",
+      "keywords": ["dependencies", "npm audit", "lockfile", "vulnerable packages", "supply chain"],
+      "load": ["dependency-security"]
+    },
+    {
+      "id": "deployment",
+      "request": "Deployment cleanup: localhost/staging URLs, test data, debug routes, source maps, placeholder env values",
+      "keywords": ["deployment", "staging", "localhost", "source maps", "debug routes", "test data", "env values", "before deploy"],
+      "load": ["deployment-cleanup", "security-headers", "dependency-security"]
+    },
+    {
+      "id": "links",
+      "request": "Broken links, dead CTAs, bad route targets, mailto/tel links",
+      "keywords": ["broken links", "404 links", "dead links", "dead cta", "link check"],
+      "load": ["link-integrity"]
+    },
+    {
+      "id": "error-pages",
+      "request": "404 / 500 / error pages",
+      "keywords": ["404 page", "500 page", "error page", "not found page"],
+      "load": ["error-pages"]
+    },
+    {
+      "id": "content",
+      "request": "Real content: clear purpose and call to action, lorem ipsum, fake testimonials/metrics, unfinished UI",
+      "keywords": ["lorem ipsum", "fake testimonials", "fake metrics", "call to action", "placeholder text", "unfinished ui"],
+      "load": ["content-trust"]
+    },
+    {
+      "id": "identity",
+      "request": "Template leftovers and product identity: starter titles, default favicon, wrong product name, app icons and manifest",
+      "keywords": ["favicon", "app icon", "manifest", "starter title", "vite", "template leftovers", "product name"],
+      "load": ["launch-identity"]
+    },
+    {
+      "id": "faq",
+      "request": "An FAQ built from real questions and verified answers",
+      "keywords": ["faq", "frequently asked"],
+      "load": ["faq-readiness"]
+    },
+    {
+      "id": "contact-support",
+      "request": "Contact, support and business-identity paths",
+      "keywords": ["contact page", "support", "contact us", "business address", "who runs this"],
+      "load": ["public-support", "legal-identity-notices"]
+    },
+    {
+      "id": "legal-pages-links",
+      "request": "Reachable legal pages: footer/signup/checkout links to privacy, terms, cookies, refund, accessibility",
+      "keywords": ["footer links", "legal links", "legal pages"],
+      "load": ["legal-navigation"]
+    },
+    {
+      "id": "privacy-policy",
+      "request": "Write or fix the privacy policy so it matches real behavior",
+      "keywords": ["privacy policy", "privacy notice"],
+      "load": ["privacy-policy", "data-flow-mapping", "policy-consistency"]
+    },
+    {
+      "id": "terms",
+      "request": "Terms of service / terms of use",
+      "keywords": ["terms of service", "terms of use", "terms and conditions"],
+      "load": ["terms-of-service"]
+    },
+    {
+      "id": "cookies-consent",
+      "request": "Cookies, storage, trackers, consent banner behavior, analytics, third-party scripts",
+      "keywords": ["cookie", "consent", "banner", "tracker", "analytics", "pixel", "third-party scripts", "local storage"],
+      "load": ["cookie-and-storage-audit", "consent-management", "analytics-privacy", "third-party-privacy"]
+    },
+    {
+      "id": "policy-vs-behavior",
+      "request": "Do the policies, banners and claims match what the product actually does?",
+      "keywords": ["policy matches", "claims match", "contradiction", "mismatch"],
+      "load": ["policy-consistency"]
+    },
+    {
+      "id": "data-map-rights",
+      "request": "What personal data is collected and where it goes; deletion, export, user data rights; data minimization",
+      "keywords": ["personal data", "data map", "data flow", "delete my account", "data deletion", "data export", "dsar", "retention", "minimization"],
+      "load": ["data-flow-mapping", "data-rights", "privacy-readiness"]
+    },
+    {
+      "id": "email",
+      "request": "Marketing email, newsletters, unsubscribe and suppression",
+      "keywords": ["newsletter", "unsubscribe", "marketing email", "can-spam", "email list"],
+      "load": ["email-compliance"]
+    },
+    {
+      "id": "minors-regulated-jurisdiction",
+      "request": "Children / age handling, regulated sectors (health, finance, education, legal, crypto, gambling), which markets and laws apply",
+      "keywords": ["children", "kids", "coppa", "age gate", "health", "finance", "fintech", "gambling", "crypto", "jurisdiction", "which countries"],
+      "load": ["regulated-domain-triggers", "minors-readiness", "jurisdiction-applicability"],
+      "note": "regulated-domain-triggers goes first and may stop ordinary work."
+    },
+    {
+      "id": "money",
+      "request": "Prices, checkout, payments, subscriptions, refunds, consumer-protection basics",
+      "keywords": ["checkout", "payments", "stripe", "subscription", "refund", "pricing", "billing", "consumer protection"],
+      "load": ["consumer-protection-readiness", "payments-readiness", "subscription-readiness"]
+    },
+    {
+      "id": "ai-features",
+      "request": "AI-powered application readiness: model calls, prompts, keys, disclosure, data sent to AI vendors",
+      "keywords": ["ai feature", "chatbot", "llm", "openai", "ai-powered", "prompt", "model api"],
+      "load": ["ai-features-readiness", "regulated-domain-triggers"]
+    },
+    {
+      "id": "user-content",
+      "request": "User-generated content: posts, comments, uploads, messaging, reporting and moderation hooks",
+      "keywords": ["user-generated", "comments", "uploads", "moderation", "report abuse", "ugc"],
+      "load": ["user-content-safety"]
+    },
+    {
+      "id": "admin",
+      "request": "Administrative systems: build or improve an admin, protect admin routes, audit destructive admin actions",
+      "keywords": ["admin", "dashboard", "back office", "operator", "audit log", "moderation queue"],
+      "load": ["admin-dashboard", "admin-authorization", "admin-audit-log"],
+      "note": "admin-dashboard builds a full admin tailored to the real app and its design system; admin-authorization protects it; admin-audit-log covers destructive actions."
+    },
+    {
+      "id": "review-a-change",
+      "request": "Review a pull request, branch or release for launch and privacy impact",
+      "keywords": ["pull request", "pr review", "branch", "release diff", "what changed"],
+      "load": ["compliance-diff"]
+    },
+    {
+      "id": "verify-fix",
+      "request": "Prove a fix worked; turn evidence into a scoped verdict",
+      "keywords": ["verify", "prove", "confirm fixed", "re-check", "verdict"],
+      "load": ["launch-verification"]
+    },
+    {
+      "id": "understand-site",
+      "request": "Figure out what this site or app actually is and does before changing it",
+      "keywords": ["what does this site do", "understand the project", "reconnaissance", "inventory"],
+      "load": ["site-reconnaissance"]
+    },
+    {
+      "id": "design-system",
+      "request": "Learn the project's design system before any visible change",
+      "keywords": ["design system", "tokens", "components", "match the design", "existing style"],
+      "load": ["design-system-reconnaissance"]
+    }
+  ]
+}

@@ -65,6 +65,10 @@ Small, zero-dependency Node scripts that exist only because they make a specific
 
 **Rule of thumb:** if a 150-line script makes a skill better, keep it. If we are building thousands of lines of infrastructure so a script can call an engine, stop.
 
+## Marketplace bundle
+
+The Skills CLI is the primary channel. For marketplaces that look for a single `SKILL.md`, `pnpm marketplace:bundle` builds `dist/agensi/ReadyVibe-Skills.zip`: the same 55 skills packaged as method documents behind one generated master router. The bundle is a build output (never committed, never a source of truth); the canonical skills stay where they are. See [`marketplace-distribution.md`](marketplace-distribution.md) and [ADR 0007](adr/0007-unified-marketplace-bundle.md).
+
 ## Releases
 
 The repository is the distributed product. A release is an annotated SemVer tag (`vX.Y.Z`) plus a GitHub Release, and users can pin installs with `npx skills add moh-obaida/ReadyVibe-Skills#vX.Y.Z`. [`docs/release-checklist.md`](release-checklist.md) is the procedure; patch, minor, and major mean what `CONTRIBUTING.md` says. Nothing is published to npm.
