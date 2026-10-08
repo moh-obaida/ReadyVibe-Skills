@@ -1,0 +1,98 @@
+name: publish-v1.0.1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - docs/releases/v1.0.1.md
+  workflow_dispatch:
+
+concurrency:
+  group: publish-v1.0.1
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: release checks (Node ${{ matrix.node }})
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright-core install --with-deps chromium
+      - name: Validate complete skills repo
+        run: CI=true pnpm check
+      - name: Validate individual marketplace ZIPs
+        run: pnpm marketplace:check
+      - name: Validate unified marketplace bundle
+        run: pnpm marketplace:bundle:check
+
+  publish:
+    name: tag and publish v1.0.1
+    needs: verify
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Confirm correct version and release notes
+        run: |
+          test "$(node -p "require('./package.json').version")" = "1.0.1"
+          test -s docs/releases/v1.0.1.md
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+      - name: Build unified release artifact
+        run: pnpm marketplace:bundle
+      - name: Create and push annotated release tag
+        run: |
+          git fetch origin --tags
+          if git rev-parse -q --verify "refs/tags/v1.0.1" >/dev/null; then
+            test "$(git rev-list -n 1 v1.0.1)" = "$GITHUB_SHA" || { echo "v1.0.1 tag points to a different commit"; exit 1; }
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git tag -a v1.0.1 -m "ReadyVibe-Skills v1.0.1"
+            git push origin refs/tags/v1.0.1
+          fi
+      - name: Verify real pinned Skills CLI installation from GitHub
+        run: node tools/verify-public-install.mjs "${{ github.repository }}#v1.0.1" --all --no-compare-local
+      - name: Publish release with the unified ZIP and validation report
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v1.0.1 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release v1.0.1 already exists; leaving it unchanged."
+          else
+            gh release create v1.0.1 \
+              dist/agensi/ReadyVibe-Skills.zip \
+              dist/agensi/bundle-report.json \
+              --repo "$GITHUB_REPOSITORY" \
+              --verify-tag \
+              --title "ReadyVibe-Skills v1.0.1" \
+              --notes-file docs/releases/v1.0.1.md \
+              --latest
+          fi

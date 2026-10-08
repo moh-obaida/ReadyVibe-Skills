@@ -4,7 +4,12 @@ All notable changes to ReadyVibe-Skills are recorded here. The format follows [K
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-08
+
 ### Added
+
+- Standalone marketplace ZIP packaging for all 55 public skills via `pnpm marketplace:build` or `pnpm marketplace:skill --skill <name>`. Archives retain their own scripts, references, and Apache-2.0 attribution. Includes listing worksheets, a manifest, structural tests, and CI validation.
+- Release-ready free distribution through individual Skills CLI installs and a unified marketplace bundle, without premium tiers, accounts, or proprietary gating.
 
 - Unified Agensi marketplace bundle: `pnpm marketplace:bundle` builds `dist/agensi/ReadyVibe-Skills.zip`, one top-level folder with exactly one master `SKILL.md` (`readyvibe-skills`) that routes to all public skills packaged as `modules/<category>/<name>/METHOD.md` with their scripts and references. `pnpm marketplace:bundle:check` validates without writing. Includes a generated catalog and routing guide, a checksum manifest, a reproducible archive, tests, a CI step, ADR 0007, and an editable listing draft (`docs/marketplace/agensi-listing.md`). The Skills CLI distribution is unchanged.
 
@@ -31,5 +36,6 @@ First stable release.
 - No ReadyVibe CLI, engine, runtime, account, service, or npm package exists or is required. The `@readyvibe` npm scope is reserved and unused.
 - Behavior of a real coding agent following these skills is not covered by the automated checks.
 
-[Unreleased]: https://github.com/moh-obaida/ReadyVibe-Skills/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/moh-obaida/ReadyVibe-Skills/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/moh-obaida/ReadyVibe-Skills/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/moh-obaida/ReadyVibe-Skills/releases/tag/v1.0.0

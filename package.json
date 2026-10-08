@@ -1,7 +1,7 @@
 {
   "name": "readyvibe-skills",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Production and launch skills for vibe-coded websites. Install with: npx skills add moh-obaida/ReadyVibe-Skills",
   "license": "Apache-2.0",
   "type": "module",
