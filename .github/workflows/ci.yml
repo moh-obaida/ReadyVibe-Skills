@@ -37,6 +37,8 @@ jobs:
       - run: pnpm sync:check
       # Skill quality, 40/12 ownership coverage, companions, secrets, and no-platform guards.
       - run: pnpm lint
+      # Every published skill must produce exactly one Agensi-compatible, self-contained ZIP.
+      - run: pnpm marketplace:check
       # Helper, lint, browser, and Skills CLI install tests. CI=true makes the CLI and browser tests mandatory (never skipped).
       - run: pnpm test
 
