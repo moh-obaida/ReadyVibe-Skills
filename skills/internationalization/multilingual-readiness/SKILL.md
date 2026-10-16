@@ -33,6 +33,7 @@ Companions: `design-system-reconnaissance`.
 3. **SEO signals per locale** (`node scripts/inspect-metadata.mjs --url <site>/<locale> --render`; paths relative to this skill's folder): unique titles/descriptions in the page's language; canonical points to the same-language URL (not everything to the default); reciprocal `hreflang` alternates including self-reference and `x-default`; sitemap lists locale URLs (optionally with `xhtml:link` alternates).
 4. **Translation completeness:** untranslated strings leaking (keys like `nav.home`, English in the middle of a translated page); fallbacks; pluralization/date/number/currency formatting per locale; text expansion breaking layouts; images with baked-in text.
 5. **Trust and legal pages per language:** privacy, terms, contact, refund, cookie notice exist in each supported language or the site states clearly which language governs and links to the version available. **Do not call the site "multilingual" if the privacy notice or checkout is not translated.**
+Legal-policy check: for each applicable privacy, Terms, cookie, and returns/refunds route, confirm the page exists in each supported language and that footer, signup, checkout, and consent links point to the matching locale. Keep cross-links and policy versions consistent; disclose absent translations. Do not machine-translate legal text into production without owner approval or imply that an unapproved translation is complete.
 6. **Forms and errors** translated, including validation messages, emails, and 404/500 pages.
 7. **Legal implication:** offering a language may imply a target market: record it (`jurisdiction-applicability`).
 
@@ -47,7 +48,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 **Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
-Set `lang`/`dir`, `hreflang`, per-locale canonicals and sitemap entries; fix switcher behavior and fallbacks; expose missing-key strings for the owner; link the legal pages that exist per language. Do not machine-translate legal pages or marketing copy into production without the owner's approval; mark drafts clearly if requested.
+Set `lang`/`dir`, `hreflang`, per-locale canonicals and sitemap entries; fix switcher behavior and fallbacks; expose missing-key strings for the owner; link the legal pages that exist per language. Implement policy routes with the site's current design system and navigation, preserve accessibility/mobile behavior, and verify translated page links and contacts. Do not machine-translate legal pages or marketing copy into production without the owner's approval; keep unapproved translations as clearly marked drafts.
 
 ## Must not claim
 

@@ -7,7 +7,7 @@ metadata:
   helpers: "audit-markup"
   launch-checks: "2"
   compliance-domains: "7,12"
-  references: "official-sources"
+  references: "official-sources,legal-templates/README,legal-templates/01-terms-of-service,legal-templates/04-returns-refunds-cancellations"
   companions: "user-content-safety,payments-readiness,subscription-readiness,consumer-protection-readiness,ai-features-readiness,policy-consistency,design-system-reconnaissance"
 ---
 
@@ -29,19 +29,19 @@ Companions: `user-content-safety`, `payments-readiness`, `subscription-readiness
 
 ## Inspect
 
-1. **Feature map** from recon: accounts and roles; user content and who sees it (`user-content-safety`); payments, subscriptions, trials, refunds (`payments-readiness`, `subscription-readiness`, `consumer-protection-readiness`); free vs paid tiers; API or automated access; AI-generated content (`ai-features-readiness`); third-party services users must accept; marketplace or multi-party flows; downloads/licensing (`legal-identity-notices`).
+1. **Inspect the real service:** use routes, rendered pages, account and content actions, backend/API paths, deployment configuration, checkout, and provider configuration. Code presence is SOURCE-INDICATED until live behavior is established. Map accounts and roles; user content and visibility (`user-content-safety`); payments, subscriptions, trials, refunds (`payments-readiness`, `subscription-readiness`, `consumer-protection-readiness`); free vs paid tiers; APIs; AI-generated content (`ai-features-readiness`); third-party services; marketplaces; and actual downloads/licensing (`legal-identity-notices`).
 2. **Existing text**, if any: compare each clause to features (a subscription clause with no billing code; refunds promised in the FAQ but absent from terms; account termination with no account system).
 3. **Owner facts required** (mark MISSING unless provided): legal entity and contact; governing law and venue; liability caps and disclaimers; fee amounts, billing cycle, taxes, refund/cancellation windows; acceptable-use enforcement; age minimum; notice/dispute process; effective date. Treat all of these as **owner or lawyer decisions**.
-4. **Draft only supported sections**, in plain language, tied to features: what the service is; accounts and security; acceptable use; user content and license grant *only if the owner states the license*; payments, renewal, cancellation, refunds *only with the owner's real terms*; termination; changes to terms; contact. Skip whole sections for features that do not exist.
+4. **Draft only supported sections**, in plain language, tied to features. Start from [the conditional Terms template](references/legal-templates/01-terms-of-service.md) and its [usage guide](references/legal-templates/README.md): what the service is; accounts and security; acceptable use; user content and license grant *only if the owner states the license*; payments, renewal, cancellation, and refunds *only with the owner's real terms*; termination; changes; and contact. Skip whole sections for features that do not exist. Do not generate a Terms page for a static informational site that makes no meaningful commitments.
 5. **Acceptance mechanics.** If terms bind users, check how they are presented: checkbox or "by signing up you agree" text next to the signup button, link to the actual page, and the terms/privacy links in the footer. Do not pre-tick consent boxes.
-6. **Reuse the site's shell** and place at `/terms` (`design-system-reconnaissance`, `legal-navigation`).
+6. **Implement, do not just suggest:** if a Terms page is appropriate, inspect and reuse the site's design system, typography, components, spacing, navigation, accessibility, and mobile conventions; create or update its established legal route and relevant footer/signup/checkout links. Coordinate with `legal-navigation`. Never overwrite owner-approved Terms without an appropriate review.
 
 ## Evidence that counts
 
 Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REVIEW REQUIRED. UNKNOWN is never a pass and never a failure.
 
 - A clause about a feature needs evidence the feature exists (a route, a billing integration, a content form).
-- Commercial terms (fees, refunds) are DECLARED by the owner; unsupported ones are `[[OWNER TO PROVIDE: …]]` placeholders.
+- Commercial terms (fees, refunds) are DECLARED by the owner; unsupported ones stay in a private draft/review report, not in a published page.
 - Whether terms are *enforceable* or *sufficient* is not observable. It is REVIEW REQUIRED.
 - **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
 
@@ -55,7 +55,7 @@ That terms are "legally binding", "enforceable", "comprehensive", "compliant wit
 
 ## Verify
 
-Every substantive clause maps to a real feature; every owner-only fact is a visible `[[OWNER TO PROVIDE: …]]` marker listed for the owner (`node scripts/audit-markup.mjs --url <site> --render`, path relative to this skill's folder, reports each as a HIGH `PLACEHOLDER_TEXT` finding: the page is not launch-ready until they are supplied); links resolve; signup/checkout reference the terms if they are meant to bind; the page renders in the site's design at desktop and 375px. Cross-check with `policy-consistency` and `subscription-readiness` (terms must agree with what checkout shows).
+Every substantive clause maps to a real feature; all `{{...}}`, `[[IF ...]]`, `[[END IF]]`, `[[REVIEW REQUIRED: ...]]`, and internal drafting instructions are absent from the public page. If one remains unresolved, keep the draft private and report **DRAFT — REVIEW REQUIRED**. Run `node scripts/audit-markup.mjs --url <site> --render`: the public page must have no `PLACEHOLDER_TEXT` finding. Verify links and contact destinations; signup/checkout reference the actual Terms if they are meant to bind; the page renders in the site's design at desktop and 375px. Cross-check with `policy-consistency`, `consumer-protection-readiness`, and `subscription-readiness` when relevant.
 
 ## Escalate
 

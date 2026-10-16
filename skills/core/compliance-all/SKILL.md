@@ -7,7 +7,7 @@ metadata:
   helpers: "observe-runtime,inventory-data-model"
   launch-checks: "1-8"
   compliance-domains: "1-12"
-  references: "official-sources"
+  references: "official-sources,legal-templates/README,legal-templates/01-terms-of-service,legal-templates/02-privacy-policy,legal-templates/03-cookie-policy,legal-templates/04-returns-refunds-cancellations"
   companions: "jurisdiction-applicability,site-reconnaissance,cookie-and-storage-audit,data-flow-mapping,policy-consistency,privacy-policy,terms-of-service,privacy-readiness,consent-management,analytics-privacy,third-party-privacy,email-compliance,minors-readiness,data-rights,consumer-protection-readiness,subscription-readiness,payments-readiness,wcag-readiness,web-security,security-headers,deployment-cleanup,regulated-domain-triggers,ai-features-readiness,legal-identity-notices,public-support,legal-navigation"
 ---
 
@@ -56,6 +56,22 @@ Start with domain 1, because it gates everything else.
 | Legal pages (launch checks 1 and 2) | privacy-policy, terms-of-service | privacy notice: nothing personal is collected, stored, or sent; terms: no accounts, user content, purchases, or commitments (see each skill's "No change is valid" section) |
 
 Do not invoke a specialist merely to find out that nothing exists. If recon already shows the surface is absent, record "not currently applicable, because …, recheck if …".
+
+### Draft and implement legal pages only when applicable
+
+The conditional source templates and their usage guide are in `references/legal-templates/`. Use them as drafting references after the shared inventory, and activate only the owning skills needed for this product:
+
+- Personal-data handling or a privacy page that no longer matches the product → `privacy-policy`, with `data-flow-mapping` and only the relevant privacy, vendor, rights, email, payment, analytics, AI, age, or cookie specialists.
+- Real service commitments, accounts, user content, or paid access that need Terms → `terms-of-service`; omit unsupported clauses.
+- Observed cookies/storage/trackers → `cookie-and-storage-audit`; use `consent-management` only for existing or evidence-justified controls. A template alone never warrants a banner or preference manager.
+- Physical goods, digital goods, booked services, marketplace sales, or paid subscriptions → `consumer-protection-readiness`; add `subscription-readiness` only when recurring billing exists. Keep cancellation of future renewal distinct from refund of an existing charge.
+- Once a page exists, `legal-navigation` checks and fixes routes and links. Use `multilingual-readiness` when the site actually supports multiple languages.
+
+Discover technical facts from routes, code, configuration, runtime, and provider evidence before asking the owner. Code presence is SOURCE-INDICATED until production behavior is established. Do not claim that data is not collected because browser testing did not show it. Ask only for unresolved owner decisions: the operator's real identity and contact, location where relevant, audience, actual purposes and commitments, refund/cancellation choices, and publication approval. Never infer the operator from a domain, username, repository owner, or brand.
+
+Use the templates' marker meanings exactly: `{{...}}` needs verified information or an approved decision; `[[IF ...]]` modules stay only when evidenced and relevant; `[[END IF]]` closes that module; `[[REVIEW REQUIRED: ...]]` records an unresolved operator or legal-review item. Resolve or remove every marker and drafting instruction before publication. If a consequential issue remains unresolved, leave a private **DRAFT — REVIEW REQUIRED** and report the missing decision; do not publish an incomplete policy or replace owner-approved legal text without an appropriate review.
+
+For any page being created or changed, inspect the existing design system first, use its components and conventions, add only appropriate routes and links, preserve accessibility and mobile behavior, and verify the published text against the actual controls and flows. Check internal links and contact destinations; verify language-specific routes and consistent links where multilingual support exists.
 
 ## Coordinate
 

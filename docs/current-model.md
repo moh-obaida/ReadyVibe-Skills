@@ -25,7 +25,7 @@ skills/<category>/<name>/SKILL.md      the product: one self-contained folder pe
 scripts/                canonical helper scripts (inspect-metadata, check-links, audit-markup,
                         audit-assets, scan-secrets, observe-runtime, inventory-data-model)
                         and their small lib/
-docs/references/        canonical shared references (official-sources, companion-methods)
+docs/references/        canonical shared references (official-sources, legal-templates/, companion-methods)
 tools/                  sync-skills.mjs (vendoring and generation), lint-skills.mjs (quality checks),
                         verify-public-install.mjs (checks the real GitHub remote and release tags)
 tests/                  helper tests, lint tests, installability tests
@@ -48,6 +48,8 @@ A **companion** is a skill whose method this skill may need to perform its own p
 
 Every non-bundle skill is operating method, not a checklist: **Activate when · Inspect · Evidence that counts · May change · Must not claim · Verify · Escalate · No change is valid when.** Bundles (`launch-all`, `compliance-all`, `discoverability-all`, `trust-all`, `quality-all`, `production-all`) are convenience skills that tell the agent to inspect, decide applicability, use the specialist skills and helpers, repair, verify, and summarize. There is no orchestration engine: the `SKILL.md` is the orchestration.
 
+The existing legal skills carry conditional Terms, Privacy, Cookie, and Returns/Refunds drafting references in `references/legal-templates/`. Canonical copies live under `docs/references/legal-templates/`; each skill names only the references it uses in `metadata.references`, and `pnpm sync` vendors those files into its package. This remains reference material for skills, not a legal-document generator or a compliance guarantee.
+
 The launch model is finite: **40 launch checks and 12 compliance domains**, each owned by a named skill (`skills/core/launch-all/references/launch-model.md`, `skills/core/compliance-all/references/compliance-domains.md`). The lint fails if one has no owner.
 
 ## Rules every skill follows
@@ -55,6 +57,7 @@ The launch model is finite: **40 launch checks and 12 compliance domains**, each
 - **Evidence language.** OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, REVIEW REQUIRED. Unknown is never a pass and never a failure. Suspicion is never reported as fact.
 - **Design first.** A skill that creates or changes visible UI first inspects the project's existing design system (`design-system-reconnaissance`) and builds from it. ReadyVibe never imposes its own look.
 - **Legal specifics are looked up, not remembered.** No legal database ships here. When a rule matters, the skill reads the current text at an official source while it runs (`docs/references/official-sources.md` lists starting points), cites it with the access date, separates fact from interpretation, and marks applicability REVIEW REQUIRED. If it cannot look it up, the answer is UNKNOWN. No skill claims compliance.
+- **Legal pages are conditional and evidence-led.** Skills can draft and implement project-specific legal pages using the bundled templates, but they publish no unresolved markers or unsupported claims. The templates are not a guarantee of legal compliance or a substitute for jurisdiction-specific legal advice.
 - **Fix what is safe; never fabricate.** No invented legal terms, addresses, retention periods, testimonials, FAQ answers, or metrics.
 - **Tailored, not templated.** Skills that build user-facing or operator-facing UI (`admin-dashboard`, `faq-readiness`, error pages, consent, legal pages) derive structure, vocabulary, and layout from the specific product and its design system, so two different sites get visibly different results.
 - **`.readyvibe/` is optional.** A skill may leave a short working note there (for example `context.md`). No skill requires it to exist, and it is not a protocol.

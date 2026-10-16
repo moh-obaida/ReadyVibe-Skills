@@ -7,7 +7,7 @@ metadata:
   helpers: "check-links,audit-markup"
   launch-checks: "1"
   compliance-domains: "2"
-  references: "official-sources"
+  references: "official-sources,legal-templates/README,legal-templates/02-privacy-policy,legal-templates/03-cookie-policy"
   companions: "data-flow-mapping,cookie-and-storage-audit,analytics-privacy,third-party-privacy,data-rights,email-compliance,minors-readiness,payments-readiness,policy-consistency,design-system-reconnaissance"
 ---
 
@@ -29,12 +29,12 @@ Companions: `data-flow-mapping`, `cookie-and-storage-audit`, `analytics-privacy`
 
 ## Inspect
 
-1. **Use existing evidence first**: `.readyvibe/context.md` (if present), `data-flow-mapping` (fields, recipients), `cookie-and-storage-audit` (cookies, storage, third parties), `analytics-privacy`, `data-rights` (deletion/export behavior), `email-compliance` (sender, marketing), `minors-readiness`, `payments-readiness`, `third-party-privacy`. If they have not run, run the ones that apply (or follow their entries in the companion methods if not installed); do not guess what the product does.
+1. **Use existing evidence first**: `.readyvibe/context.md` (if present), then trace frontend and backend forms/routes, auth, data models/API writes, hosting/CDN configuration, payment and authentication processors, analytics and AI integrations, logs, and runtime requests. Reuse `data-flow-mapping`, `cookie-and-storage-audit`, `analytics-privacy`, `data-rights`, `email-compliance`, `minors-readiness`, `payments-readiness`, and `third-party-privacy` when their surfaces exist. Code presence is SOURCE-INDICATED until production behavior is established; browser non-observation does not prove a server or vendor collects nothing.
 2. **Build a fact sheet** with an evidence label for every line:
 
    | Topic | What we know | Source |
    |---|---|---|
-   | Who we are | operator name/entity, address, contact | owner-supplied / site footer / **MISSING** |
+   | Who we are | actual operator name/entity, address, contact | **OWNER REQUIRED**; confirm with the owner. Never infer an operator from a domain, username, repository owner, or brand |
    | Data collected | fields per form/account/checkout; automatic data (IP, device, cookies) | observed / source |
    | Purposes | why each is collected | documented / inferred / **MISSING** |
    | Recipients | processors, analytics, payments, email, hosting, support | observed / source |
@@ -44,15 +44,15 @@ Companions: `data-flow-mapping`, `cookie-and-storage-audit`, `analytics-privacy`
    | Transfers | where vendors process data | **UNKNOWN** unless documented |
    | Children | audience and age handling | `minors-readiness` |
    | Cookies/trackers | inventory | `cookie-and-storage-audit` |
-3. **Decide what can be written**: statements you can support with the fact sheet. Everything else becomes a **visible, unmissable placeholder**, e.g. `[[OWNER TO PROVIDE: legal entity name and postal address]]`. Placeholders must fail loudly (an unfinished marker in the rendered page), not read like finished prose.
+3. **Use the conditional privacy template** at [references/legal-templates/02-privacy-policy.md](references/legal-templates/02-privacy-policy.md), and the [usage guide](references/legal-templates/README.md). Write only what the fact sheet supports. Classify each gap UNKNOWN or REVIEW REQUIRED; keep unresolved values and review notes in a private draft/report, not in a public page. A browser test alone cannot establish collection by hosting, a CDN, server logs, or processors.
 4. **Structure for the reader**, plain language, headings that match what visitors look for: who we are; what we collect and why; who we share it with; cookies and similar technologies; how long we keep it [gap]; your choices and rights (with the working contact route); children; changes to this notice; how to contact us. Reflect *this* product's actual features, not a full menu of clauses.
-5. **Match the site**: reuse the project's page shell and components (`design-system-reconnaissance`), add the page at a stable URL (`/privacy`), and link it from the footer and from every form that collects data.
+5. **Implement the page** when appropriate: inspect the project's design system, reuse its shell, typography, components, spacing, navigation and accessibility conventions, create/update the established privacy route, and link it from the footer and every data-collecting form. Preserve responsive behavior. Do not overwrite owner-approved legal text without an appropriate review.
 
 ## Evidence that counts
 
 Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REVIEW REQUIRED. UNKNOWN is never a pass and never a failure.
 
-- Every sentence in the notice that states a fact about the product needs a source in the fact sheet. If it does not have one, it is either a placeholder or it is cut.
+- Every sentence in the notice that states a fact about the product needs a source in the fact sheet. If it does not have one, it stays in the private draft/report as unresolved or is removed.
 - Vendor names come from observed requests or code, not from a template list of "typical" vendors.
 - Contact points must be real and working: verify the email/form exists (`public-support`).
 - **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.
@@ -69,7 +69,8 @@ That the notice "complies with GDPR/CCPA/…", "covers all requirements", or "is
 
 - Every observed cookie, vendor, and data field appears in the notice; nothing in the notice contradicts `policy-consistency` results.
 - All links resolve (`node scripts/check-links.mjs --url <site> --render`, path relative to this skill's folder); the page renders with the site's styling at desktop and 375px; a footer link and form links exist.
-- Placeholders are visible and enumerated in the reply as "the owner must supply: …". Run `node scripts/audit-markup.mjs --url <site> --render`: every remaining `[[OWNER TO PROVIDE: …]]` marker shows up as a HIGH `PLACEHOLDER_TEXT` finding. That is intended while the owner's facts are missing, and it means the page is **not launch-ready** until they are supplied; never remove a marker by guessing the fact.
+- The public page contains no `{{...}}`, `[[IF ...]]`, `[[END IF]]`, `[[REVIEW REQUIRED: ...]]`, or internal drafting markers. Run `node scripts/audit-markup.mjs --url <site> --render`; it must report no `PLACEHOLDER_TEXT` finding on the published page. If a consequential fact is unresolved, keep a private **DRAFT — REVIEW REQUIRED**, list the exact owner decision/legal review needed, and do not publish it or remove the marker by guessing.
+- Verify internal links and working contact destinations. If the page claims users can access, correct, export, delete, or opt out, exercise the actual corresponding control; policy wording alone is not proof. Check that every translated route/link is consistent when the site is multilingual.
 
 ## Escalate
 

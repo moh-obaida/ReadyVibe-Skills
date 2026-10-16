@@ -31,7 +31,7 @@ Companions: `design-system-reconnaissance`.
 1. **Inventory legal pages that exist** in routes/files: privacy, terms, cookies/tracker notice, refund/returns/cancellation, accessibility statement, acknowledgements/licenses, imprint/legal notice, contact/support. Note real URLs.
 2. **Inventory legal links** across rendered pages: footer (every page), signup and login forms ("By signing up you agree…"), checkout, newsletter forms, consent controls (link to the cookie/privacy notice), emails, app settings. Run `node scripts/check-links.mjs --url <site> --render` (paths relative to this skill's folder).
 3. **Compare:** for every link, does the page exist and resolve (200, not soft-404)? For every existing legal page, is it linked from the footer on all pages? Do acceptance flows link the *actual* terms/privacy pages? Is there text claiming agreement next to a button that does not link the terms?
-4. **Missing pages:** which *applicable* pages do not exist (per the launch model: privacy if personal data; terms if accounts/commerce; refund if selling)? Report to the owning skill; do not create a page yourself here.
+4. **Missing pages:** which *applicable* pages do not exist (privacy based on actual personal-data flows; Terms for actual service commitments, accounts, user content, or paid access; returns/refunds only for real sales or an applicable notice)? Report to the owning skill; do not create legal content yourself or force every page onto every site.
 5. **Placement and honesty:** links are visible and labeled plainly; no pre-checked "I agree" boxes; consent to marketing is separate from terms acceptance; cookie-preferences control is reachable after the first choice (`consent-management`).
 6. **Consistency:** link text and page titles agree; URLs are stable; multilingual sites link to the matching language version (`multilingual-readiness`).
 
@@ -46,7 +46,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 **Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
-Add footer and form links **only to pages that exist and are real**; fix wrong URLs; add a preferences link to reopen consent settings if such a control exists; add acceptance text with links near signup where the owner's terms exist; remove links to pages that will not exist (and report why) rather than leaving dead ones. Never create placeholder legal pages to make links resolve.
+Add footer, form, signup, and checkout links only to actual, reviewed pages; fix wrong URLs; add a preferences link only if the settings control works; add acceptance text with links near signup only when the owner has approved Terms; remove links to pages that will not exist rather than leaving dead ones. Before visible changes, inspect and reuse the website's design system, preserve responsive and accessible behavior, and check each contact destination. Never create placeholder legal pages to make links resolve or publish unresolved template markers. On multilingual sites, route each link to the matching language page and verify it resolves; do not imply translations are approved when they are not.
 
 ## Must not claim
 
@@ -54,7 +54,7 @@ Add footer and form links **only to pages that exist and are real**; fix wrong U
 
 ## Verify
 
-Re-run `check-links`: zero broken legal links; each existing legal page is linked from every page footer sampled; signup/checkout links open the actual documents; view at 375px to confirm the footer is reachable.
+Re-run `check-links`: zero broken legal links; each existing applicable legal page is linked from the relevant footers/forms; signup/checkout links open the actual approved documents; contact links work; view at 375px and keyboard-check to confirm navigation is reachable. For each offered locale, check the matching route or clearly disclosed language behavior.
 
 ## Escalate
 

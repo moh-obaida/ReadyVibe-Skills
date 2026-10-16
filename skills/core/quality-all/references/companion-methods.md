@@ -18,7 +18,7 @@ Labels, validation, and server-side checks; then submit each form on local or st
 At 375×812 and 768×1024: correct viewport meta, no horizontal overflow, working navigation, usable forms, scrollable tables, dialogs that fit, touch targets of at least about 24px, sticky bars that do not cover the action, and the main task completes.
 
 ### multilingual-readiness
-Locale routing, `html lang`, `hreflang` and per-locale canonicals, leaked translation keys, and legal and checkout pages in each offered language (or a clear note of which language governs).
+Locale routing, `html lang`, `hreflang` and per-locale canonicals, leaked translation keys, and applicable legal and checkout routes in each offered language. Link to the matching locale, keep policy versions/cross-links consistent, and disclose missing translations. Do not machine-translate legal text into production without owner approval.
 
 ### rtl-readiness
 `dir="rtl"`, logical CSS properties instead of left and right, mirrored directional icons only, correct bidi handling of mixed text, and script-appropriate typography. Do not mirror logos or media controls.

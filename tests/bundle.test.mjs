@@ -316,6 +316,21 @@ describe("validation rejects broken bundles", () => {
     writeFileSync(f, `${readFileSync(f, "utf8")}\n[gone](references/not-there.md)\n`);
     assert.ok((await problemsOf(dir)).some((p) => /broken relative link/.test(p)));
   });
+  test("legal drafting references preserve their intentional markers and unresolved links", async () => {
+    const dir = copyBundle();
+    const terms = join(dir, "modules/core/launch-all/references/legal-templates/01-terms-of-service.md");
+    const text = readFileSync(terms, "utf8");
+    assert.match(text, /\{\{LEGAL_OPERATOR_NAME\}\}/);
+    assert.match(text, /\[\[IF THE SERVICE HAS ACCOUNTS\]\]/);
+    assert.match(text, /\[Privacy Policy\]\(\{\{PRIVACY_POLICY_URL\}\}\)/);
+    assert.deepEqual(await problemsOf(dir), []);
+  });
+  test("unresolved placeholders outside drafting references are still rejected", async () => {
+    const dir = copyBundle();
+    const method = join(dir, "modules/core/launch-all/METHOD.md");
+    writeFileSync(method, `${readFileSync(method, "utf8")}\nOwner: {{UNRESOLVED_VALUE}}\n`);
+    assert.ok((await problemsOf(dir)).some((p) => /METHOD\.md: unresolved placeholder/.test(p)));
+  });
   test("a broken import", async () => {
     const dir = copyBundle();
     rmSync(join(dir, "modules/discoverability/seo-readiness/scripts/lib/html.mjs"));

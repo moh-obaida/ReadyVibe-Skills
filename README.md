@@ -93,6 +93,10 @@ The full models: [`launch-model.md`](skills/core/launch-all/references/launch-mo
 - **It will not invent.** No made-up legal terms, addresses, retention periods, testimonials, FAQ answers, or metrics.
 - **It says when to stop.** Regulated domains, exposed credentials, and genuinely unresolved legal facts are escalated to a human, in proportion to the real risk.
 
+### Project-specific legal pages
+
+The existing privacy, terms, consent, consumer-protection, and launch skills can now draft and implement appropriate Terms, Privacy, Cookie, and Returns/Refunds pages from conditional templates bundled with the relevant skills. They inspect actual routes, data flows, storage, providers, checkout, and account controls first; ask the owner only for facts or commitments the project cannot establish; and route jurisdiction-sensitive questions for current legal review. They do not force four pages or a cookie banner onto every site, publish unresolved template markers, or promise legal compliance. These are practical drafting references and inspection workflows, not a guarantee of legal compliance or a substitute for jurisdiction-specific legal advice.
+
 ## Bundled helpers
 
 Where an agent cannot reliably do a job by reading files, a skill carries a small zero-dependency Node script (Node 22 or newer) in its own folder. None call a model, and none need anything from this repository.

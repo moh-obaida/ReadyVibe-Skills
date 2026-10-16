@@ -12,7 +12,7 @@ This file contains only the entries for this skill's declared companions: `cooki
 List every form, field, and API route that receives personal data; where it is stored (schema); which vendors receive it. Produce a table of field, storage, recipients, and how it is deleted (or unknown). Trace three fields end to end.
 
 ### cookie-and-storage-audit
-In a fresh browser context, record cookies, localStorage, sessionStorage, and network requests before any interaction, then after reject and after accept. Classify each item as necessary, functional, analytics, advertising, embed, or unknown; unknown is not essential. Compare with the disclosure.
+In fresh browser contexts, record cookies, browser storage and network requests before and after interaction; identify route/state coverage. Classify from evidence and keep unknown items unknown. Browser non-observation does not prove server/CDN/vendor collection is absent. Compare the actual disclosures; a template does not justify a cookie banner or a separate Cookie Policy.
 
 ### email-compliance
 Classify emails as transactional or marketing. For marketing: sender identity, unsubscribe link that is not `#`, a working route, a state change (suppression flag or provider suppression), and a send path that excludes suppressed addresses. Test on staging with a test address; never send real email.
