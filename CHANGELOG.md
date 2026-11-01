@@ -4,11 +4,23 @@ All notable changes to ReadyVibe-Skills are recorded here. The format follows [K
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-01
+
 ### Added
 
-- Conditional Terms, Privacy, Cookie, and Returns/Refunds drafting templates integrated into the existing standalone legal and launch skills, with selective routing, project-evidence/owner-decision distinctions, private draft gates, design-system-aware page implementation, and behavior-based verification. Templates are vendored through each skill's declared references for Skills CLI installs.
-- Scenario coverage for product-aware policy selection, conditional clauses, unresolved markers, installed references, and unchanged companion fallback behavior.
+- Conditional Terms, Privacy, Cookie, and Returns/Refunds drafting templates integrated into the existing standalone legal and launch skills. They select pages from observed product behavior, separate project evidence from owner decisions, keep unresolved facts out of publishable drafts, and follow the project's existing design system when implementing pages.
+- Synthetic scenarios for product-aware policy selection, conditional clauses, unresolved markers, installed references, and companion fallback behavior.
 
+### Changed
+
+- The unified marketplace bundle carries intentional placeholders and unresolved policy links in legal drafting references while continuing to reject unresolved placeholders elsewhere.
+
+## [1.0.1] - 2026-10-08
+
+### Added
+
+- Standalone marketplace ZIP packaging for all 55 public skills via `pnpm marketplace:build` or `pnpm marketplace:skill --skill <name>`. Archives retain their own scripts, references, and Apache-2.0 attribution. Includes listing worksheets, a manifest, structural tests, and CI validation.
+- Release-ready free distribution through individual Skills CLI installs and a unified marketplace bundle, without premium tiers, accounts, or proprietary gating.
 - Unified Agensi marketplace bundle: `pnpm marketplace:bundle` builds `dist/agensi/ReadyVibe-Skills.zip`, one top-level folder with exactly one master `SKILL.md` (`readyvibe-skills`) that routes to all public skills packaged as `modules/<category>/<name>/METHOD.md` with their scripts and references. `pnpm marketplace:bundle:check` validates without writing. Includes a generated catalog and routing guide, a checksum manifest, a reproducible archive, tests, a CI step, ADR 0007, and an editable listing draft (`docs/marketplace/agensi-listing.md`). The Skills CLI distribution is unchanged.
 
 ## [1.0.0] - 2026-09-30
@@ -34,5 +46,7 @@ First stable release.
 - No ReadyVibe CLI, engine, runtime, account, service, or npm package exists or is required. The `@readyvibe` npm scope is reserved and unused.
 - Behavior of a real coding agent following these skills is not covered by the automated checks.
 
-[Unreleased]: https://github.com/moh-obaida/ReadyVibe-Skills/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/moh-obaida/ReadyVibe-Skills/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/moh-obaida/ReadyVibe-Skills/releases/tag/v1.1.0
+[1.0.1]: https://github.com/moh-obaida/ReadyVibe-Skills/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/moh-obaida/ReadyVibe-Skills/releases/tag/v1.0.0
