@@ -30,4 +30,4 @@ Replace starter titles ("Vite + React"), default favicons, and template names wi
 Search source, config, and built output for localhost and staging URLs, debug routes, source maps, test keys, test data, and dev fallbacks that fail open. Confirm production environment parity with the owner; never edit production settings.
 
 ### multilingual-readiness
-Locale routing, `html lang`, `hreflang` and per-locale canonicals, leaked translation keys, and legal and checkout pages in each offered language (or a clear note of which language governs).
+Locale routing, `html lang`, `hreflang` and per-locale canonicals, leaked translation keys, and applicable legal and checkout routes in each offered language. Link to the matching locale, keep policy versions/cross-links consistent, and disclose missing translations. Do not machine-translate legal text into production without owner approval.

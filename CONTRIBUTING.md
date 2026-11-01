@@ -43,10 +43,10 @@ A **companion** is a skill whose method your skill may need to perform its own p
 | Edit this (canonical) | Copies (generated or vendored: never edit) |
 |---|---|
 | `scripts/*.mjs`, `scripts/lib/*` | `skills/**/scripts/**` |
-| `docs/references/official-sources.md` and other shared references | `skills/**/references/<same name>.md` |
+| `docs/references/official-sources.md`, `docs/references/legal-templates/**`, and other shared references | `skills/**/references/<same path>.md` |
 | `docs/references/companion-methods.md` | `skills/**/references/companion-methods.md` (pruned per skill) |
 
-`npx skills add` copies only a skill's own folder, so any helper or shared reference a skill uses must be inside it. Skills declare what they need in `metadata.helpers` (names without `.mjs`) and `metadata.references`; `pnpm sync` copies them; `pnpm check` fails if any copy is missing, stale, or extra. The lint also fails if a skill names a helper it does not carry, runs a helper with a flag it does not accept, or cites a finding code no helper emits.
+`npx skills add` copies only a skill's own folder, so any helper or shared reference a skill uses must be inside it. Skills declare what they need in `metadata.helpers` (names without `.mjs`) and `metadata.references`; references may use a repository-relative path such as `legal-templates/02-privacy-policy`. `pnpm sync` copies them to the same relative path under the skill; `pnpm check` fails if a declared copy is missing or stale. The lint also fails if a skill names a helper it does not carry, runs a helper with a flag it does not accept, or cites a finding code no helper emits.
 
 ## Helpers
 
@@ -59,6 +59,10 @@ A skill that creates or changes visible UI must first inspect the project's exis
 ## Legal-source rule
 
 **No legal rules from memory.** Legal-sensitive skills declare `metadata.references: "official-sources"` and tell the agent to read the current text at an official source while running, cite it with the access date, separate the source from its interpretation, and mark applicability REVIEW REQUIRED. Keep legal-review recommendations proportional to a specific unresolved fact or risk. Do not add a legal database or jurisdiction packs.
+
+## Legal-template maintenance
+
+Keep the four supplied drafting templates and their usage guide canonical in `docs/references/legal-templates/`. Edit those source files once, declare only the needed relative paths in each relevant skill's `metadata.references`, and run `pnpm sync`; never hand-maintain skill copies. Preserve conditional modules and the meanings of `{{...}}`, `[[IF ...]]`, `[[END IF]]`, and `[[REVIEW REQUIRED: ...]]`. Skills must keep unresolved drafts private and must not publish markers or internal instructions. Templates are practical drafting references, not legal advice or a compliance guarantee.
 
 ## Adding a launch check or compliance domain
 

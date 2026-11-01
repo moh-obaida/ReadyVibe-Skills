@@ -6,7 +6,7 @@ metadata:
   kind: auditor
   launch-checks: "1,3,26"
   compliance-domains: "2"
-  references: "official-sources"
+  references: "official-sources,legal-templates/README,legal-templates/01-terms-of-service,legal-templates/02-privacy-policy,legal-templates/03-cookie-policy,legal-templates/04-returns-refunds-cancellations"
   companions: "cookie-and-storage-audit,data-flow-mapping,data-rights,email-compliance"
 ---
 
@@ -33,6 +33,7 @@ Companions: `cookie-and-storage-audit`, `data-flow-mapping`, `data-rights`, `ema
 3. **Compare, statement by statement.** Classify each: **matches** (behavior corroborates), **contradicted** (behavior shows the opposite), **incomplete** (behavior exists that the notice omits), **unverifiable** (cannot be checked; say why), **overclaims** (a compliance or security assertion no evidence can support: "fully GDPR compliant", "bank-level security", "your data is 100% private").
 4. **Reverse check.** For each observed vendor, field, cookie, and recipient, ask "is it disclosed?" Omissions are the mirror of contradictions.
 5. **Internal consistency.** Do the policy, banner, and terms disagree with each other (contact address, retention, controller name, dates)? Is the effective date sane? Do all links to the policy resolve?
+6. If a document is being drafted or refreshed, use the relevant conditional template in `references/legal-templates/` as a checklist for supported, product-specific sections; do not rewrite an owner-approved or lawyer-written document just to match the template. Compare final text to actual behavior, and report unresolved claims for a private draft/review rather than publishing template markers or internal instructions.
 
 ## Evidence that counts
 
@@ -52,6 +53,7 @@ Options, in order of preference; ask the owner which direction is intended when 
 - **Fix the statement** so it matches an observed fact the owner accepts (name the analytics vendor; remove "we don't use analytics").
 - Remove **overclaims** that no evidence supports (compliance badges, "military-grade").
 - Never insert new promises, retention periods, legal bases, or rights language; those come from the owner.
+- Implement only a specifically authorized correction or new page in the site's existing design system; preserve existing routes, language behavior, accessibility, and responsive conventions. Verify page links and each user-facing control the page describes.
 
 ## Must not claim
 

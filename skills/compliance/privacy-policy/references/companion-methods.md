@@ -15,7 +15,7 @@ Find the project's tokens (CSS variables, Tailwind config, theme files), reusabl
 List every form, field, and API route that receives personal data; where it is stored (schema); which vendors receive it. Produce a table of field, storage, recipients, and how it is deleted (or unknown). Trace three fields end to end.
 
 ### cookie-and-storage-audit
-In a fresh browser context, record cookies, localStorage, sessionStorage, and network requests before any interaction, then after reject and after accept. Classify each item as necessary, functional, analytics, advertising, embed, or unknown; unknown is not essential. Compare with the disclosure.
+In fresh browser contexts, record cookies, browser storage and network requests before and after interaction; identify route/state coverage. Classify from evidence and keep unknown items unknown. Browser non-observation does not prove server/CDN/vendor collection is absent. Compare the actual disclosures; a template does not justify a cookie banner or a separate Cookie Policy.
 
 ### analytics-privacy
 List analytics, advertising, replay, and tag-manager tools from source and network; when each fires; what personal data it receives (emails in URLs, identify calls, form capture); whether the notice names it. "Present in source" is not "fires before consent": prove timing at runtime.
@@ -24,7 +24,7 @@ List analytics, advertising, replay, and tag-manager tools from source and netwo
 List third-party hosts from network and source; what each receives (at least IP and page URL); whether it is necessary; whether it is disclosed; lower-exposure alternatives (self-hosted fonts, click-to-load embeds).
 
 ### policy-consistency
-Extract every checkable statement from the privacy notice, banner, terms, badges, and marketing copy. Compare each with observed behavior. Report contradictions, omissions, overclaims ("fully compliant"), and unverifiable statements.
+Extract checkable statements from privacy/cookie/returns notices, banner, Terms, badges, checkout and marketing copy. Compare each with actual behavior and report contradictions, omissions, overclaims and unverifiable statements with evidence labels. Use a bundled template only as a conditional drafting reference; do not rewrite owner-approved text just to match it. Verify links and described controls. Never publish unresolved markers or turn UNKNOWN into a claim.
 
 ### minors-readiness
 Compare the stated audience with the evident audience. Check age fields for real enforcement (server-side, no retry loophole), trackers on child-plausible pages, and public features. Any child-directed signal is review required.

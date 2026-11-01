@@ -9,7 +9,7 @@ These entries are the essentials, not the full skills. Every entry shares the sa
 This file contains only the entries for this skill's declared companions: `site-reconnaissance`, `design-system-reconnaissance`, `launch-verification`, `compliance-all`, `discoverability-all`, `trust-all`, `quality-all`, `production-all`, `regulated-domain-triggers`, `consumer-protection-readiness`, `payments-readiness`, `subscription-readiness`, `admin-authorization`, `admin-audit-log`, `admin-dashboard`.
 
 ### compliance-all
-Decide which compliance areas apply from evidence: personal data, cookies and trackers, marketing email, age or children, accounts and deletion, money, third-party vendors, regulated sector, operator identity. Compare what the site says with what it does. Look up legal specifics at official sources; never assert them from memory; never say "compliant". Report each area as not currently applicable, behavior verified, review required, or unknown.
+Decide which compliance areas apply from evidence: personal data, cookies and trackers, marketing email, age or children, accounts and deletion, money, third-party vendors, regulated sector, operator identity. Compare what the site says with what it does. Use the bundled conditional Terms, Privacy, Cookie, and Returns/Refunds references only for applicable pages, and route only to the relevant specialist method below. Discover project facts first; ask only for owner decisions that evidence cannot establish. Never infer the legal operator. Keep unresolved markers and consequential decisions in a private draft/review report, not on a public page. Look up legal specifics at official sources; never assert them from memory or say "compliant".
 
 ### discoverability-all
 Read rendered titles, descriptions, canonicals, robots.txt, sitemap.xml, noindex directives, social tags, and favicon. Check that they agree with the production origin and with each other: no localhost or staging hosts, no private routes in the sitemap, no noindex page listed, no robots block on listed pages.
@@ -33,7 +33,7 @@ Find the project's tokens (CSS variables, Tailwind config, theme files), reusabl
 Re-run the original check that exposed each problem, under the same conditions, plus one adjacent regression check. A fix without a re-check is unverified. Report a scoped verdict (not ready / ready with caveats / no blockers found in the areas verified), never a bare "ready".
 
 ### consumer-protection-readiness
-Trace one purchase from pricing to checkout to receipt: same price, currency, fees, and total. Check that trial, renewal, cancellation, and refund terms are shown at purchase and agree everywhere; merchant identity is findable; no fake urgency. Test mode on local or staging only.
+Trace one purchase from price to checkout and receipt. Classify physical goods, digital products/access, booked services, one-time purchases, subscriptions and marketplaces; use only matching modules from the bundled Returns/Refunds template. Keep cancellation of future renewal separate from refunds of past charges. Confirm seller/merchant-of-record identity with the owner and provider evidence. Never invent windows, fees, shipping/RMA steps, refund timing or business identity. Implement and verify an appropriate policy route in the site's design system; test provider flows only in local/staging test mode.
 
 ### regulated-domain-triggers
 Scan copy, fields, integrations, and features for health, finance and payments, children and education, legal or professional advice, crypto, gambling, restricted goods, biometrics, precise location, and automated decisions about people. Any signal means: tell the owner ordinary checks do not cover this and specialist review is needed; stop generic compliance work on that surface.
@@ -51,4 +51,4 @@ Privileged and destructive actions record who, what, on which object, and when, 
 Prefer provider-hosted checkout; secret keys stay server-side; compute amounts on the server; verify webhook signatures; confirm success and cancel URLs; exercise test mode on local or staging only. Never handle real card data.
 
 ### subscription-readiness
-Renewal, trial conversion, and cancellation are disclosed at purchase and actually work; subscription state follows the provider via webhooks; a failed renewal is handled. Test with the provider's test mode and clocks only.
+Renewal, trial conversion, and cancellation are disclosed at purchase and actually work; subscription state follows the provider via webhooks; a failed renewal is handled. Cancellation of future renewal is not a refund of an existing charge. Use only applicable Terms/refund modules; confirm commercial promises with the owner. Test with provider test mode and clocks only.

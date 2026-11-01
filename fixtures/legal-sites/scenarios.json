@@ -1,0 +1,71 @@
+[
+  {
+    "name": "static informational site",
+    "enabled": { "terms": [], "privacy": [], "cookie": [], "returns": [] },
+    "include": { "terms": [], "privacy": [], "cookie": [], "returns": [] },
+    "exclude": {
+      "terms": ["## Accounts", "## Purchases and pricing", "### Subscriptions", "## Marketplace interactions", "## AI-assisted features"],
+      "privacy": ["### Account information", "### Purchases and billing information"],
+      "cookie": ["### Analytics", "### Advertising and marketing"],
+      "returns": ["## Returning physical products", "## Digital products and one-time digital purchases", "## Subscriptions and recurring charges"]
+    }
+  },
+  {
+    "name": "account-based SaaS",
+    "enabled": {
+      "terms": ["THE SERVICE HAS ACCOUNTS"],
+      "privacy": ["ACCOUNTS_OR_AUTHENTICATION_EXIST"],
+      "cookie": [],
+      "returns": []
+    },
+    "include": { "terms": ["## Accounts"], "privacy": ["### Account information"], "cookie": [], "returns": [] },
+    "exclude": { "terms": ["## Purchases and pricing", "### Subscriptions"], "privacy": ["### Purchases and billing information"], "cookie": ["### Advertising and marketing"], "returns": ["## Returning physical products", "## Subscriptions and recurring charges"] }
+  },
+  {
+    "name": "subscription SaaS",
+    "enabled": {
+      "terms": ["THE SERVICE HAS ACCOUNTS", "THE SERVICE SELLS PRODUCTS, SERVICES OR PAID ACCESS", "SUBSCRIPTIONS OR RECURRING PAYMENTS ARE ACTUALLY OFFERED"],
+      "privacy": ["ACCOUNTS_OR_AUTHENTICATION_EXIST", "PAYMENT_DATA_IS_PROCESSED"],
+      "cookie": [],
+      "returns": ["SUBSCRIPTIONS_OR_RECURRING_BILLING_EXIST"]
+    },
+    "include": { "terms": ["## Accounts", "## Purchases and pricing", "### Subscriptions"], "privacy": ["### Account information", "### Purchases and billing information"], "cookie": [], "returns": ["## Subscriptions and recurring charges"] },
+    "exclude": { "terms": ["## Marketplace interactions"], "privacy": [], "cookie": ["### Advertising and marketing"], "returns": ["## Returning physical products", "## Digital products and one-time digital purchases"] },
+    "mustContain": { "returns": ["Cancellation does not by itself mean a charge already made will be refunded."] }
+  },
+  {
+    "name": "physical-product store",
+    "enabled": { "terms": ["THE SERVICE SELLS PRODUCTS, SERVICES OR PAID ACCESS"], "privacy": [], "cookie": [], "returns": ["PHYSICAL_PRODUCTS_ARE_SOLD"] },
+    "include": { "terms": ["## Purchases and pricing"], "privacy": [], "cookie": [], "returns": ["## Returning physical products"] },
+    "exclude": { "terms": ["### Subscriptions"], "privacy": [], "cookie": ["### Advertising and marketing"], "returns": ["## Digital products and one-time digital purchases", "## Subscriptions and recurring charges", "Include the return authorization number"] },
+    "mustContain": { "returns": ["APPROVED_VOLUNTARY_RETURN_WINDOW"] }
+  },
+  {
+    "name": "digital-product store",
+    "enabled": { "terms": ["THE SERVICE SELLS PRODUCTS, SERVICES OR PAID ACCESS"], "privacy": [], "cookie": [], "returns": ["DIGITAL_PRODUCTS_OR_ONE_TIME_DIGITAL_PURCHASES_ARE_SOLD"] },
+    "include": { "terms": ["## Purchases and pricing"], "privacy": [], "cookie": [], "returns": ["## Digital products and one-time digital purchases"] },
+    "exclude": { "terms": ["### Subscriptions"], "privacy": [], "cookie": ["### Advertising and marketing"], "returns": ["## Returning physical products", "## Subscriptions and recurring charges", "Return destination or collection process", "warehouse", "RMA"] },
+    "mustContain": { "returns": ["Never use a blanket \"all digital sales are final\" default."] }
+  },
+  {
+    "name": "analytics-enabled site",
+    "enabled": { "terms": [], "privacy": [], "cookie": ["ANALYTICS_TECHNOLOGIES_EXIST"], "returns": [] },
+    "include": { "terms": [], "privacy": [], "cookie": ["### Analytics"], "returns": [] },
+    "exclude": { "terms": [], "privacy": [], "cookie": ["### Advertising and marketing", "You can adjust your choices using"], "returns": [] },
+    "mustContain": { "cookie": ["Confirm whether and how consent is required"] }
+  },
+  {
+    "name": "site without non-essential trackers",
+    "enabled": { "terms": [], "privacy": [], "cookie": ["ESSENTIAL_TECHNOLOGIES_EXIST"], "returns": [] },
+    "include": { "terms": [], "privacy": [], "cookie": ["### Essential technologies"], "returns": [] },
+    "exclude": { "terms": [], "privacy": [], "cookie": ["### Analytics", "### Advertising and marketing", "You can adjust your choices using"], "returns": [] },
+    "expectedBanner": false
+  },
+  {
+    "name": "multilingual site",
+    "enabled": { "terms": [], "privacy": [], "cookie": [], "returns": [] },
+    "include": { "terms": [], "privacy": [], "cookie": [], "returns": [] },
+    "exclude": { "terms": [], "privacy": [], "cookie": [], "returns": [] },
+    "locales": ["en", "ar"]
+  }
+]

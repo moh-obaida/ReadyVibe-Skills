@@ -500,12 +500,16 @@ export async function validateBundleDir(bundle, { expected } = {}) {
     const rel = relative(bundle, f).split(sep).join("/");
     const text = await readFile(f, "utf8");
     const dir = dirname(f);
-    if (/\{\{[A-Z_]+\}\}/.test(text)) bad(`${rel}: unresolved placeholder`);
+    // These files are explicitly drafting references, not consumer-facing policy pages. Their
+    // substitution markers must travel intact so the installed skills can resolve them per project.
+    const legalTemplateReference = /^modules\/[^/]+\/[^/]+\/references\/legal-templates\/.+\.md$/.test(rel);
+    if (!legalTemplateReference && /\{\{[A-Z_]+\}\}/.test(text)) bad(`${rel}: unresolved placeholder`);
     if (/@readyvibe\//.test(text)) bad(`${rel}: refers to a ReadyVibe package`);
     if (rel.endsWith(".md")) {
       for (const m of text.matchAll(LINK_RE)) {
         const target = m[1];
         if (/^[a-z][a-z0-9+.-]*:/i.test(target) || target.startsWith("#")) continue;
+        if (legalTemplateReference && target.includes("{{")) continue;
         const path = decodeURIComponent(target.split("#")[0].split("?")[0]);
         if (!path) continue;
         const abs = resolve(dir, path);

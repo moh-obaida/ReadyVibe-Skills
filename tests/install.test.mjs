@@ -3,7 +3,7 @@
 // Locally, if the Skills CLI cannot be fetched (offline) these tests are skipped. In CI they must run:
 // a skills repository that cannot test its own distribution mechanism should fail.
 import assert from "node:assert/strict";
-import { cpSync, existsSync, mkdtempSync, readdirSync } from "node:fs";
+import { cpSync, existsSync, mkdtempSync, readFileSync, readdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { describe, test } from "node:test";
@@ -46,12 +46,24 @@ describe("npx skills add", () => {
     assert.deepEqual([...listing.names].sort(), [...allNames].sort());
   });
 
-  for (const name of ["launch-all", "privacy-policy", "admin-dashboard", "consent-management"]) {
+  for (const name of ["launch-all", "compliance-all", "privacy-policy", "terms-of-service", "consumer-protection-readiness", "subscription-readiness", "policy-consistency", "admin-dashboard", "consent-management"]) {
     test(`${name} works when it is the ONLY skill installed`, { skip }, async () => {
       const { project, skillsDir } = await installAlone(fakeRepo, name);
       assert.deepEqual(readdirSync(skillsDir), [name], "exactly one skill must be installed");
       const dir = join(skillsDir, name);
       const { helpers } = assertSelfContained(name, dir, { allNames, siblingsAbsentIn: skillsDir });
+      const installedSkill = readFileSync(join(dir, "SKILL.md"), "utf8");
+      const references = installedSkill.match(/^\s+references: "([^"]*)"/m)?.[1].split(",") ?? [];
+      const legalReferences = references.filter((ref) => ref.startsWith("legal-templates/"));
+      if (["launch-all", "compliance-all", "privacy-policy", "terms-of-service", "consumer-protection-readiness", "subscription-readiness", "policy-consistency", "consent-management"].includes(name)) {
+        assert.ok(legalReferences.length, `${name} declares legal template references`);
+        for (const ref of legalReferences) {
+          const installedRef = join(dir, "references", `${ref}.md`);
+          const canonicalRef = join(root, "docs", "references", `${ref}.md`);
+          assert.ok(existsSync(installedRef), `installed ${name} carries references/${ref}.md`);
+          assert.ok(readFileSync(installedRef).equals(readFileSync(canonicalRef)), `${name} carries the current ${ref}.md`);
+        }
+      }
       await assertHelpersStart(name, dir, helpers, project);
     });
   }

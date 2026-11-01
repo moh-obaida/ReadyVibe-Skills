@@ -149,5 +149,5 @@ if (check) {
     console.error(`${problems} vendored file problem(s). Run: node tools/sync-skills.mjs`);
     process.exit(1);
   }
-  console.log("vendored helpers are in sync");
+  console.log("vendored helpers, references, and companion fallbacks are in sync");
 } else console.log(`synced: ${copied} file(s) copied`);

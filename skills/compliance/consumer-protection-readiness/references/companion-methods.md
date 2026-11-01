@@ -15,4 +15,4 @@ Find the project's tokens (CSS variables, Tailwind config, theme files), reusabl
 Prefer provider-hosted checkout; secret keys stay server-side; compute amounts on the server; verify webhook signatures; confirm success and cancel URLs; exercise test mode on local or staging only. Never handle real card data.
 
 ### subscription-readiness
-Renewal, trial conversion, and cancellation are disclosed at purchase and actually work; subscription state follows the provider via webhooks; a failed renewal is handled. Test with the provider's test mode and clocks only.
+Renewal, trial conversion, and cancellation are disclosed at purchase and actually work; subscription state follows the provider via webhooks; a failed renewal is handled. Cancellation of future renewal is not a refund of an existing charge. Use only applicable Terms/refund modules; confirm commercial promises with the owner. Test with provider test mode and clocks only.

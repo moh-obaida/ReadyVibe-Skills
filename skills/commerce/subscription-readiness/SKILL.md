@@ -6,7 +6,7 @@ metadata:
   kind: specialist
   compliance-domains: "7"
   launch-checks: "2,35"
-  references: "official-sources"
+  references: "official-sources,legal-templates/README,legal-templates/01-terms-of-service,legal-templates/04-returns-refunds-cancellations"
   companions: "design-system-reconnaissance"
 ---
 
@@ -32,7 +32,7 @@ Companions: `design-system-reconnaissance`.
 3. **Cancellation:** a working path that is at least as easy as signup, reachable while logged in without contacting support (billing portal or in-app button); cancellation takes effect at period end or immediately as stated; confirmation shown and emailed; access after cancel behaves as promised; what happens to data (`data-rights`).
 4. **Failed payments and dunning:** what the user sees; grace period; emails (transactional); access handling; recovery path.
 5. **Changes and reminders:** price change communication process; renewal reminders if promised; trial-ending reminders if promised; the promised emails actually exist and send (`email-compliance` for transactional vs marketing).
-6. **Refund policy consistency:** the same policy across FAQ, checkout, terms, and support text; refunds mechanically possible (provider settings and admin capability).
+6. **Refund policy consistency:** the same policy across FAQ, checkout, Terms, and support text; refunds mechanically possible (provider settings and admin capability). Use the applicable subscription sections of [the Terms template](references/legal-templates/01-terms-of-service.md) and [returns/refunds template](references/legal-templates/04-returns-refunds-cancellations.md) only as drafting references. State verified billing behavior separately from owner-approved renewal/refund commitments. Cancelling future renewal does not itself refund an existing charge; never add physical-return steps to SaaS access.
 7. **Webhook/state sync:** subscription status in the app follows the provider (canceled, past_due, paused); an "active" flag not updated on cancel is a launch bug (`payments-readiness`).
 8. **Exercise in test mode on local/staging** (never live): subscribe with a trial, verify conversion configuration, cancel via the UI, simulate failed renewal (provider test clocks/cards), and confirm state and emails. Fast-forward using the provider's test-clock tools where available.
 
@@ -48,7 +48,7 @@ Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REV
 
 **Design first.** Before creating or changing anything visible, inspect the project's existing design system (`design-system-reconnaissance`) and build from its tokens and components, by the component ladder: reuse, compose, extend, and only then create a matching component. Never impose a ReadyVibe look on the user's site.
 
-Make displayed renewal/trial/price statements match the real configuration; surface cancellation and renewal info near the buy button and in confirmation emails/receipts using **owner-provided** wording; fix a broken cancel route or portal link; sync subscription state from webhooks; add renewal/trial reminders only if the owner wants them. Do not create plans/prices in the provider, invent refund or cancellation windows, or hide the cancel path.
+Make displayed renewal/trial/price statements match the real configuration; surface cancellation and renewal info near the buy button and in confirmation emails/receipts using **owner-provided** wording; fix a broken cancel route or portal link; sync subscription state from webhooks; add renewal/trial reminders only if the owner wants them. If the relevant policy needs implementation, inspect and reuse the existing design system, update the established route and links, preserve mobile/accessibility behavior, and verify the actual cancellation action agrees with the text. Do not create plans/prices in the provider, invent refund or cancellation windows, or hide the cancel path. Keep unresolved markers and decisions private; never publish them.
 
 ## Must not claim
 

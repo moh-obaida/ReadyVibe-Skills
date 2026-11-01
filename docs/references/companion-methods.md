@@ -12,7 +12,7 @@ These entries are the essentials, not the full skills. Every entry shares the sa
 Establish what the product is (framework, routes, audience, accounts, payments, email, analytics, forms, third parties, deployment) from the repository and running site. Mark each launch check as applies, not applicable (with the observed reason), or unknown. Inspect what applies, fix what is safe, verify each fix by re-checking the original evidence, and report READY / FIXED / BLOCKERS / REVIEW REQUIRED / UNVERIFIED / NEXT ACTION, with the single highest-value next step.
 
 ### compliance-all
-Decide which compliance areas apply from evidence: personal data, cookies and trackers, marketing email, age or children, accounts and deletion, money, third-party vendors, regulated sector, operator identity. Compare what the site says with what it does. Look up legal specifics at official sources; never assert them from memory; never say "compliant". Report each area as not currently applicable, behavior verified, review required, or unknown.
+Decide which compliance areas apply from evidence: personal data, cookies and trackers, marketing email, age or children, accounts and deletion, money, third-party vendors, regulated sector, operator identity. Compare what the site says with what it does. Use the bundled conditional Terms, Privacy, Cookie, and Returns/Refunds references only for applicable pages, and route only to the relevant specialist method below. Discover project facts first; ask only for owner decisions that evidence cannot establish. Never infer the legal operator. Keep unresolved markers and consequential decisions in a private draft/review report, not on a public page. Look up legal specifics at official sources; never assert them from memory or say "compliant".
 
 ### discoverability-all
 Read rendered titles, descriptions, canonicals, robots.txt, sitemap.xml, noindex directives, social tags, and favicon. Check that they agree with the production origin and with each other: no localhost or staging hosts, no private routes in the sitemap, no noindex page listed, no robots block on listed pages.
@@ -49,10 +49,10 @@ List every form, field, and API route that receives personal data; where it is s
 Check minimization (is each field used), personal data in URLs, logs, client storage, and public API responses, access scoping per user, and retention signals. Prove exposure by requesting as a second test user before claiming a leak.
 
 ### cookie-and-storage-audit
-In a fresh browser context, record cookies, localStorage, sessionStorage, and network requests before any interaction, then after reject and after accept. Classify each item as necessary, functional, analytics, advertising, embed, or unknown; unknown is not essential. Compare with the disclosure.
+In fresh browser contexts, record cookies, browser storage and network requests before and after interaction; identify route/state coverage. Classify from evidence and keep unknown items unknown. Browser non-observation does not prove server/CDN/vendor collection is absent. Compare the actual disclosures; a template does not justify a cookie banner or a separate Cookie Policy.
 
 ### consent-management
-Inventory what loads before any choice. Decide from an official source whether a choice is applicable; if not verifiable, it is review required. Test reject, accept, and withdraw against requests and cookies, including after reload. Fix by gating the scripts, not by hiding the banner. Add no control if nothing needs gating.
+Inventory what loads before any choice. Decide from an official source whether a choice is applicable; if not verifiable, it is review required. Test reject, accept, and withdraw against requests and cookies, including after reload. Fix by gating the scripts, not by hiding the banner. Add no control if nothing needs gating; a template alone never justifies a banner or preference manager. If a Cookie Policy is appropriate, use only evidenced sections and verify the described control actually works.
 
 ### analytics-privacy
 List analytics, advertising, replay, and tag-manager tools from source and network; when each fires; what personal data it receives (emails in URLs, identify calls, form capture); whether the notice names it. "Present in source" is not "fires before consent": prove timing at runtime.
@@ -61,13 +61,13 @@ List analytics, advertising, replay, and tag-manager tools from source and netwo
 List third-party hosts from network and source; what each receives (at least IP and page URL); whether it is necessary; whether it is disclosed; lower-exposure alternatives (self-hosted fonts, click-to-load embeds).
 
 ### privacy-policy
-Build a fact sheet: data collected, purposes, recipients, retention, how rights are exercised, operator identity and contact. Write only statements the facts support; use visible placeholders for owner facts; link the page from the footer and every data-collecting form.
+Inspect frontend/backend flows, account and form routes, data models, hosting/CDN, authentication, payment, analytics, AI, email and logging integrations. Separate OBSERVED and SOURCE-INDICATED facts from UNKNOWN collection; browser non-observation does not prove servers or processors collect nothing. Use the bundled conditional Privacy template, confirm the actual operator/contact and purposes with the owner, and do not invent retention, legal bases, transfers, safeguards or controls. Keep consequential gaps in a private DRAFT — REVIEW REQUIRED. Implement the page using the site's design system and real route; verify links, contacts and any access/export/deletion/opt-out control the text describes. No unresolved markers or internal notes may be published.
 
 ### terms-of-service
-Map real features (accounts, user content, payments, subscriptions) to clauses. Owner facts (entity, governing law, liability, fees, refunds) stay visible placeholders. Do not copy another company's terms or invent legal choices.
+Use the bundled conditional Terms template only for real service commitments, accounts, user content or paid access. Map each clause to verified behavior; omit absent modules. A static informational site with no meaningful commitments may need no Terms page. Confirm operator identity, contacts, commercial promises and publication approval with the owner; jurisdiction-sensitive provisions need current legal review. Implement an appropriate page in the existing design system, and verify acceptance links and real account/billing behavior. Keep unresolved choices private; never publish template markers, internal instructions or invented clauses, and do not overwrite approved Terms without review.
 
 ### policy-consistency
-Extract every checkable statement from the privacy notice, banner, terms, badges, and marketing copy. Compare each with observed behavior. Report contradictions, omissions, overclaims ("fully compliant"), and unverifiable statements.
+Extract checkable statements from privacy/cookie/returns notices, banner, Terms, badges, checkout and marketing copy. Compare each with actual behavior and report contradictions, omissions, overclaims and unverifiable statements with evidence labels. Use a bundled template only as a conditional drafting reference; do not rewrite owner-approved text just to match it. Verify links and described controls. Never publish unresolved markers or turn UNKNOWN into a claim.
 
 ### minors-readiness
 Compare the stated audience with the evident audience. Check age fields for real enforcement (server-side, no retry loophole), trackers on child-plausible pages, and public features. Any child-directed signal is review required.
@@ -88,7 +88,7 @@ Where user content appears and to whom; a reporting route that reaches someone; 
 Record markets as declared, inferred (with the signal), or unknown. Look up the relevant regulator or legislation at official sources at run time and cite it; never state which laws apply from memory. Unresolved applicability is review required.
 
 ### consumer-protection-readiness
-Trace one purchase from pricing to checkout to receipt: same price, currency, fees, and total. Check that trial, renewal, cancellation, and refund terms are shown at purchase and agree everywhere; merchant identity is findable; no fake urgency. Test mode on local or staging only.
+Trace one purchase from price to checkout and receipt. Classify physical goods, digital products/access, booked services, one-time purchases, subscriptions and marketplaces; use only matching modules from the bundled Returns/Refunds template. Keep cancellation of future renewal separate from refunds of past charges. Confirm seller/merchant-of-record identity with the owner and provider evidence. Never invent windows, fees, shipping/RMA steps, refund timing or business identity. Implement and verify an appropriate policy route in the site's design system; test provider flows only in local/staging test mode.
 
 ### regulated-domain-triggers
 Scan copy, fields, integrations, and features for health, finance and payments, children and education, legal or professional advice, crypto, gambling, restricted goods, biometrics, precise location, and automated decisions about people. Any signal means: tell the owner ordinary checks do not cover this and specialist review is needed; stop generic compliance work on that surface.
@@ -145,7 +145,7 @@ Replace starter titles ("Vite + React"), default favicons, and template names wi
 Contact routes exist, work, and agree across footer, contact page, and legal pages; no placeholder addresses; promised routes (privacy requests, refunds, abuse) exist. Never invent an address, phone, or response time.
 
 ### legal-navigation
-Footer, signup, and checkout link to legal pages that exist and resolve. Missing pages are reported to their owning lane; do not create empty placeholder pages to satisfy links.
+Check applicable privacy, Terms, cookie and returns/refunds links in footer, forms, signup and checkout; they must lead to real reviewed pages. Route missing content to its owner skill. Reuse the design system, check contact destinations, keyboard/mobile behavior and language-matched links. Do not create empty placeholder pages or link a preference control that does not work.
 
 ### performance-readiness
 Look for oversized images and scripts, render-blocking scripts, many third-party origins, unsized images, and font waste. Fix obvious waste; report sizes before and after; make no score promises.
@@ -178,7 +178,7 @@ Privileged and destructive actions record who, what, on which object, and when, 
 ## Internationalization
 
 ### multilingual-readiness
-Locale routing, `html lang`, `hreflang` and per-locale canonicals, leaked translation keys, and legal and checkout pages in each offered language (or a clear note of which language governs).
+Locale routing, `html lang`, `hreflang` and per-locale canonicals, leaked translation keys, and applicable legal and checkout routes in each offered language. Link to the matching locale, keep policy versions/cross-links consistent, and disclose missing translations. Do not machine-translate legal text into production without owner approval.
 
 ### rtl-readiness
 `dir="rtl"`, logical CSS properties instead of left and right, mirrored directional icons only, correct bidi handling of mixed text, and script-appropriate typography. Do not mirror logos or media controls.
@@ -189,4 +189,4 @@ Locale routing, `html lang`, `hreflang` and per-locale canonicals, leaked transl
 Prefer provider-hosted checkout; secret keys stay server-side; compute amounts on the server; verify webhook signatures; confirm success and cancel URLs; exercise test mode on local or staging only. Never handle real card data.
 
 ### subscription-readiness
-Renewal, trial conversion, and cancellation are disclosed at purchase and actually work; subscription state follows the provider via webhooks; a failed renewal is handled. Test with the provider's test mode and clocks only.
+Renewal, trial conversion, and cancellation are disclosed at purchase and actually work; subscription state follows the provider via webhooks; a failed renewal is handled. Cancellation of future renewal is not a refund of an existing charge. Use only applicable Terms/refund modules; confirm commercial promises with the owner. Test with provider test mode and clocks only.

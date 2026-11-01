@@ -37,7 +37,7 @@ Visitors and regulators both expect a real operator behind a site, and asset lic
 
 Label each claim OBSERVED, SOURCE-INDICATED, DECLARED, INFERRED, UNKNOWN, or REVIEW REQUIRED. UNKNOWN is never a pass and never a failure.
 
-- Identity facts are DECLARED by the owner; look them up in project files, not on the web for a guessed entity.
+- Confirm legal-operator identity with the owner; project files can corroborate it but do not establish it. Never infer the operator from branding, a domain, username, repository ownership, or billing-provider names.
 - A license file found in a package is SOURCE-INDICATED; whether usage complies is REVIEW REQUIRED.
 - Image reverse-search is not proof of license status; report as UNKNOWN unless the owner has documentation.
 - **Legal specifics: never from memory.** When a rule, deadline, threshold, or required wording matters, read the current text or guidance at an official source while you run (start from [references/official-sources.md](references/official-sources.md)), cite the source and access date, and treat applicability to this business as REVIEW REQUIRED. If you cannot look it up, the answer is UNKNOWN.

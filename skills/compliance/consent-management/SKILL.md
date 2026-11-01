@@ -7,7 +7,7 @@ metadata:
   launch-checks: "4"
   compliance-domains: "3"
   helpers: "observe-runtime"
-  references: "official-sources"
+  references: "official-sources,legal-templates/README,legal-templates/03-cookie-policy"
   companions: "cookie-and-storage-audit,design-system-reconnaissance"
 ---
 
@@ -32,6 +32,7 @@ Companions: `cookie-and-storage-audit`, `design-system-reconnaissance`.
 1. **Inventory and timing.** Use the inventory from `cookie-and-storage-audit`; if none exists, run `node scripts/observe-runtime.mjs --url <site>` and read the `initial` snapshot (paths relative to this skill's folder).
 2. **Applicability.** Read `.readyvibe/context.md` if present. If a rule decides whether gating is needed, look up the current requirement at an official source while you run (`references/official-sources.md`), cite it with the access date, and treat whether it applies to this business as REVIEW REQUIRED. Record: markets (DECLARED/INFERRED/UNKNOWN), the source you read and what it says about these technologies. **If you could not consult a source, applicability stays UNKNOWN / REVIEW REQUIRED**; do not supply it from memory. You can still verify behavior.
 3. **The control, if one exists.** Read the implementation: where the choice is stored, what reads it, which scripts are gated and how (conditional loading vs. only hiding UI), whether default state is "off" for optional technologies, whether reject is as easy as accept (same screen, similar prominence, no pre-ticked boxes), whether the choice can be revisited.
+   If a separate Cookie Policy is justified, use only the applicable modules from [the conditional template](references/legal-templates/03-cookie-policy.md) and its [usage guide](references/legal-templates/README.md). The template is not evidence that a banner, preferences manager, or any cookie exists.
 4. **Behavior, in a fresh browser context per path.** Write a steps file (a JSON array) and run `node scripts/observe-runtime.mjs --url <site> --steps consent-reject.json --settle 2000`. Use the button labels the first run printed ("Consent-like UI detected: ... buttons [...]"):
 
    ```json
@@ -67,6 +68,7 @@ Only when **requirements are sufficiently known** (an official source you read t
 - Fix persistence and reload behavior of an existing choice.
 - Fix parity of reject vs accept in an existing control's markup/styles, in the project's design system (`design-system-reconnaissance`).
 - Add a control **only if** gating is applicable or the owner requires it, using the project's components, with reject as prominent as accept, and a way to change the choice later.
+- Never add a cookie banner solely because a template or policy route exists. Do not claim a preferences manager exists unless the working control and its effect are verified.
 
 Never invent categories or purposes you did not verify; never pre-tick optional categories.
 
@@ -77,6 +79,8 @@ Never invent categories or purposes you did not verify; never pre-tick optional 
 ## Verify
 
 Re-run the full timeline after any change, on desktop and 375px: load → reject → reload → accept → withdraw → reload. Expected: nothing optional before a choice (where gating applies); nothing optional after reject or withdraw; the intended technology after accept; the choice persists. A fix is verified only when the `CHOICE_NOT_HONORED` / `TRACKING_BEFORE_INTERACTION` findings clear or are explained.
+
+If this work edits or creates a Cookie Policy, publish no unresolved `{{...}}`, `[[IF ...]]`, `[[END IF]]`, `[[REVIEW REQUIRED: ...]]`, or internal drafting notes. Verify the policy against the observed inventory and the actual consent/preferences control; if owner or legal decisions remain, keep the draft private and report **DRAFT — REVIEW REQUIRED**.
 
 ## Escalate
 

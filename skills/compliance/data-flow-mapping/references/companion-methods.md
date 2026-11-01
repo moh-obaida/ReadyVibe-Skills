@@ -9,4 +9,4 @@ These entries are the essentials, not the full skills. Every entry shares the sa
 This file contains only the entries for this skill's declared companions: `cookie-and-storage-audit`.
 
 ### cookie-and-storage-audit
-In a fresh browser context, record cookies, localStorage, sessionStorage, and network requests before any interaction, then after reject and after accept. Classify each item as necessary, functional, analytics, advertising, embed, or unknown; unknown is not essential. Compare with the disclosure.
+In fresh browser contexts, record cookies, browser storage and network requests before and after interaction; identify route/state coverage. Classify from evidence and keep unknown items unknown. Browser non-observation does not prove server/CDN/vendor collection is absent. Compare the actual disclosures; a template does not justify a cookie banner or a separate Cookie Policy.

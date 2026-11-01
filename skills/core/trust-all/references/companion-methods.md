@@ -30,4 +30,4 @@ Replace starter titles ("Vite + React"), default favicons, and template names wi
 Contact routes exist, work, and agree across footer, contact page, and legal pages; no placeholder addresses; promised routes (privacy requests, refunds, abuse) exist. Never invent an address, phone, or response time.
 
 ### legal-navigation
-Footer, signup, and checkout link to legal pages that exist and resolve. Missing pages are reported to their owning lane; do not create empty placeholder pages to satisfy links.
+Check applicable privacy, Terms, cookie and returns/refunds links in footer, forms, signup and checkout; they must lead to real reviewed pages. Route missing content to its owner skill. Reuse the design system, check contact destinations, keyboard/mobile behavior and language-matched links. Do not create empty placeholder pages or link a preference control that does not work.

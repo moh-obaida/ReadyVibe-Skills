@@ -6,6 +6,7 @@ metadata:
   kind: bundle
   launch-checks: "1-40"
   helpers: "inspect-metadata,check-links,audit-markup,audit-assets,scan-secrets,observe-runtime"
+  references: "legal-templates/README,legal-templates/01-terms-of-service,legal-templates/02-privacy-policy,legal-templates/03-cookie-policy,legal-templates/04-returns-refunds-cancellations"
   companions: "site-reconnaissance,design-system-reconnaissance,launch-verification,compliance-all,discoverability-all,trust-all,quality-all,production-all,regulated-domain-triggers,consumer-protection-readiness,payments-readiness,subscription-readiness,admin-authorization,admin-audit-log,admin-dashboard"
 ---
 
@@ -16,6 +17,8 @@ metadata:
 **Consider broadly. Activate selectively. Verify deeply.**
 
 The canonical scope is the 40-check launch model in [references/launch-model.md](references/launch-model.md), plus the 12 conditional compliance domains handled through `compliance-all`. Read the model once at the start. Every check gets a disposition; not every check gets work. **It never runs all 55 skills.** A typical run is recon, one shared sweep, and only the handful of lanes that apply and show a real concern; everything else is recorded as not applicable (with the reason) or unknown.
+
+The drafting references for applicable Terms, Privacy, Cookie, and Returns/Refunds documents travel with this skill under `references/legal-templates/`. They are conditional source material, not four required pages. Read only the template that fits the observed product, then route drafting and implementation to its owning specialist. Never publish template markers, drafting notes, or unresolved owner/legal decisions.
 
 ## Activate when
 
@@ -96,11 +99,27 @@ Activate a specialist when **both** hold: its check applies, and the sweep or re
 | Alt text, headings, keyboard, contrast, motion, mobile layout | `quality-all` |
 | Forms, unsubscribe, secrets, headers, staging artifacts, performance | `production-all` |
 | Money changes hands (prices, checkout, subscriptions) | `compliance-all` (its consumer-protection domain runs `consumer-protection-readiness`, `payments-readiness`, and `subscription-readiness` as they apply) |
+| A privacy, terms, cookie, or returns/refunds page is missing, inaccurate, outdated, or linked from a real flow | Route selectively through `compliance-all`: `privacy-policy` for verified personal-data flows; `terms-of-service` for actual accounts, user content, paid access, or service commitments; `cookie-and-storage-audit` and then `consent-management` only when actual technologies or controls warrant it; `consumer-protection-readiness` for real sales, with `subscription-readiness` only for recurring billing. Use `legal-navigation` after the applicable page exists. |
 | Admin or operator routes exist | `admin-authorization` (and `admin-audit-log` if destructive actions exist) |
 | Operators have tasks nobody can perform (submissions, privacy requests, moderation, users, refunds) and the owner wants an admin | `admin-dashboard` (builds or improves one from the real app) |
 | Health, finance, education, minors, legal, crypto, gambling, AI features | `regulated-domain-triggers` first; it may stop ordinary work |
 
 Prefer the family bundles over invoking many specialists yourself: a bundle runs one shared sweep for its family and selects within it. **Installed skills are preferred over inline fallbacks**, because they are deeper.
+
+#### Legal-page decisions and selective routing
+
+Use recon, repository evidence, and the exercised site to establish the product name/canonical URL, actual features and controls, configured providers, languages, and observed storage or network behavior. Source presence alone is SOURCE-INDICATED; it does not prove a feature operates in production. A browser test that sees no event does not establish that servers, hosting, a CDN, or a processor collect nothing.
+
+Classify remaining inputs before drafting:
+
+- **AUTO:** discoverable from reliable project or runtime evidence, such as routes, authentication and account actions, checkout and configured billing, forms, analytics, AI calls, cookie/storage behavior, and third-party integrations.
+- **AUTO → OWNER CONFIRMATION:** product promises and purposes; retention/deletion practices; provider roles and contractual arrangements; renewal, cancellation, fulfillment, and refund commitments.
+- **OWNER REQUIRED:** actual legal operator identity, working legal/privacy/support contacts, relevant business location, intended audience, voluntary commercial commitments, and approval/publication date. Never infer the operator from a domain, username, repository owner, or brand.
+- **LEGAL REVIEW WHEN RELEVANT:** applicable requirements, transfer safeguards, children's privacy, consumer cancellation rights, arbitration, governing law, liability limits, and other jurisdiction-sensitive terms. Consult current official sources; do not resolve applicability from memory.
+
+For a static informational site with no meaningful commitments, do not invent account, purchase, subscription, advertising, or arbitration clauses. Do not create a refund page for a site that sells nothing. A separate Cookie Policy is conditional on observed technologies and whether a separate notice is appropriate; its existence never justifies a cookie banner. If consequential inputs remain unresolved, prepare a private draft and review report, ask only for the missing owner decision, and keep the public page unpublished until resolved. Preserve existing owner-approved text unless the owner authorizes a reviewed change.
+
+When a legal page is appropriate, the owner specialist must implement it using the site's existing routes, design system, typography, components, spacing, navigation, accessibility, and responsive conventions. Verify the actual page, internal links, contact destinations, acceptance controls, account/privacy actions, and relevant checkout or consent behavior against the published wording. On multilingual sites, verify the corresponding policy routes and links in each supported language; do not ship unapproved machine-translated legal text.
 
 **If a bundle or specialist is not installed, do not stop and do not skip the lane.** Every skill has a minimum method in [references/companion-methods.md](references/companion-methods.md). Follow that entry, use the helpers in this skill's `scripts/`, and label the lane *inline, reduced depth* in the report. A launch review with only `launch-all` installed is real but shallower than one with the specialists: say which lanes ran inline, and suggest installing the full set (`npx skills add moh-obaida/ReadyVibe-Skills --all`) when depth matters (privacy, consent, admin, accessibility).
 

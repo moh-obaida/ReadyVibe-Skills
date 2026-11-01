@@ -10,7 +10,7 @@ Your AI coding agent built a site that *looks* finished. These skills teach that
 ## Quick start
 
 ```bash
-npx skills add moh-obaida/ReadyVibe-Skills 
+npx skills add moh-obaida/ReadyVibe-Skills
 ```
 
 Then, in your coding agent, inside your project:
@@ -40,7 +40,7 @@ Add `--agent <name>` (for example `--agent claude-code`) to install for one agen
 Skills are instructions your agent runs, so pin an install to a release if you do not want it to change underneath you:
 
 ```bash
-npx skills add moh-obaida/ReadyVibe-Skills#v1.0.1 
+npx skills add moh-obaida/ReadyVibe-Skills#v1.0.1
 ```
 
 The pinned form (`#v1.0.0`, a tag, or a full commit SHA) was verified end to end against the `v1.0.1` release: listing, isolated installs, the default install layout, and `--all`. See the [releases](https://github.com/moh-obaida/ReadyVibe-Skills/releases) and the [CHANGELOG](CHANGELOG.md).
@@ -92,6 +92,10 @@ The full models: [`launch-model.md`](skills/core/launch-all/references/launch-mo
 - **Legal specifics are looked up, not remembered.** No skill carries a legal database. When a rule matters, the skill reads the current text at an official source, cites it, separates the source from its interpretation, and marks applicability *review required*. If it cannot look it up, the answer is *unknown*. Starting points are in [`official-sources.md`](docs/references/official-sources.md).
 - **It will not invent.** No made-up legal terms, addresses, retention periods, testimonials, FAQ answers, or metrics.
 - **It says when to stop.** Regulated domains, exposed credentials, and genuinely unresolved legal facts are escalated to a human, in proportion to the real risk.
+
+### Project-specific legal pages
+
+The existing privacy, terms, consent, consumer-protection, and launch skills can now draft and implement appropriate Terms, Privacy, Cookie, and Returns/Refunds pages from conditional templates bundled with the relevant skills. They inspect actual routes, data flows, storage, providers, checkout, and account controls first; ask the owner only for facts or commitments the project cannot establish; and route jurisdiction-sensitive questions for current legal review. They do not force four pages or a cookie banner onto every site, publish unresolved template markers, or promise legal compliance. These are practical drafting references and inspection workflows, not a guarantee of legal compliance or a substitute for jurisdiction-specific legal advice.
 
 ## Bundled helpers
 
